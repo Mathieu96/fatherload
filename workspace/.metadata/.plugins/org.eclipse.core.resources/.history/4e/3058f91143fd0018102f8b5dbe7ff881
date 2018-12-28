@@ -1,0 +1,20 @@
+/*
+ * graphics_main.c
+ *
+ *  Created on: Dec 11, 2018
+ *      Author: nds
+ */
+
+#include "graphics_main.h"
+
+void init_background3(){
+	VRAM_A_CR = VRAM_ENABLE | VRAM_A_MAIN_BG;
+	REG_DISPCNT = MODE_5_2D | DISPLAY_BG3_ACTIVE;
+	BGCTRL[3] = BG_MAP_BASE(0) | BgSize_B16_512x512;
+	int i, j;
+	for(i = 0; i < 512; i++){
+		u16 color = ARGB(1,i%32, i%15, i%12);
+		for(j = 0; j < 512; j++)
+			BG_BMP_RAM(0)[i*512 + j] = color;
+	}
+}

@@ -1,0 +1,1 @@
+FONDS.o: FONDS.s

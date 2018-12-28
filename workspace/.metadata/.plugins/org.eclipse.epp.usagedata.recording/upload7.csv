@@ -1,0 +1,301 @@
+what,kind,bundleId,bundleVersion,description,time
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordNext",1544539456525
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordNext",1544539456850
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordNext",1544539457218
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.wordNext",1544539459319
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.wordNext",1544539459557
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.wordNext",1544539459824
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.wordNext",1544539460041
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539461496
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539462464
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539465381
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539470681
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.lineStart",1544539472783
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.edit.paste",1544539473603
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539474673
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.wordPrevious",1544539475422
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.wordPrevious",1544539475651
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.wordNext",1544539475958
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539480111
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539480299
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539480537
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539480788
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539482110
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539482263
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539482469
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539482652
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539482828
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539483016
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539483249
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539483476
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539483695
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539483914
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539484102
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539484281
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539485250
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539485454
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539485627
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539485772
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539486000
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.lineEnd",1544539486856
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.lineStart",1544539487360
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.lineEnd",1544539488774
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.save",1544539490202
+error,log,,,"Error: IOException",1544539490205
+error,log,,,"Error: IOException",1544539490235
+error,log,,,"Error: IOException",1544539490238
+error,log,,,"Error: IOException",1544539491473
+error,log,,,"Error: IOException",1544539491548
+error,log,,,"Error: IOException",1544539491553
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordNext",1544539492175
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539493947
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539510842
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.edit.paste",1544539512666
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.lineEnd",1544539515000
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.save",1544539516465
+error,log,,,"Error: IOException",1544539516473
+error,log,,,"Error: IOException",1544539516504
+error,log,,,"Error: IOException",1544539516508
+error,log,,,"Error: IOException",1544539517664
+error,log,,,"Error: IOException",1544539517747
+error,log,,,"Error: IOException",1544539517752
+activated,view,org.eclipse.ui.console,3.5.0.v20100526,"org.eclipse.ui.console.ConsoleView",1544539518952
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539521068
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.save",1544539524380
+error,log,,,"Error: IOException",1544539525022
+error,log,,,"Error: IOException",1544539525069
+error,log,,,"Error: IOException",1544539525073
+error,log,,,"Error: IOException",1544539526289
+error,log,,,"Error: IOException",1544539526349
+error,log,,,"Error: IOException",1544539526353
+activated,view,org.eclipse.ui.navigator.resources,3.4.200.I20100601-0800,"org.eclipse.ui.navigator.ProjectExplorer",1544539528175
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539528902
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539532622
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539549670
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539551846
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539556347
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.edit.paste",1544539558505
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539559088
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539559299
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539559772
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordPrevious",1544539560181
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordNext",1544539560465
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.save",1544539561384
+error,log,,,"Error: IOException",1544539561390
+error,log,,,"Error: IOException",1544539561425
+error,log,,,"Error: IOException",1544539561428
+error,log,,,"Error: IOException",1544539562787
+error,log,,,"Error: IOException",1544539562836
+error,log,,,"Error: IOException",1544539562840
+activated,view,org.eclipse.ui.navigator.resources,3.4.200.I20100601-0800,"org.eclipse.ui.navigator.ProjectExplorer",1544539563753
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539564463
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539598853
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539603398
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539603982
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.lineStart",1544539606219
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.lineStart",1544539610984
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.edit.delete",1544539611592
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.edit.delete",1544539611746
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.lineEnd",1544539615784
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.lineStart",1544539618724
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.lineStart",1544539619190
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.lineEnd",1544539621232
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.save",1544539622807
+error,log,,,"Error: IOException",1544539622813
+error,log,,,"Error: IOException",1544539622836
+error,log,,,"Error: IOException",1544539622839
+error,log,,,"Error: IOException",1544539624156
+error,log,,,"Error: IOException",1544539624215
+error,log,,,"Error: IOException",1544539624221
+activated,view,org.eclipse.ui.navigator.resources,3.4.200.I20100601-0800,"org.eclipse.ui.navigator.ProjectExplorer",1544539626210
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539626913
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539631404
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539632716
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.save",1544539637538
+error,log,,,"Error: IOException",1544539637954
+error,log,,,"Error: IOException",1544539638004
+error,log,,,"Error: IOException",1544539638007
+error,log,,,"Error: IOException",1544539638853
+error,log,,,"Error: IOException",1544539638907
+error,log,,,"Error: IOException",1544539638912
+activated,view,org.eclipse.ui.navigator.resources,3.4.200.I20100601-0800,"org.eclipse.ui.navigator.ProjectExplorer",1544539640106
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539640824
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539650742
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539699589
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539876183
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539879198
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539879762
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539879953
+activated,editor,org.eclipse.ui.editors,3.6.0.v20100520-0800,"org.eclipse.ui.DefaultTextEditor",1544539880155
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.save",1544539885480
+error,log,,,"Error: IOException",1544539885488
+error,log,,,"Error: IOException",1544539885523
+error,log,,,"Error: IOException",1544539885527
+error,log,,,"Error: IOException",1544539888163
+error,log,,,"Error: IOException",1544539888172
+error,log,,,"Error: IOException",1544539888177
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539891089
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539891820
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539894394
+activated,editor,org.eclipse.ui.editors,3.6.0.v20100520-0800,"org.eclipse.ui.DefaultTextEditor",1544539895439
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539896229
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539897975
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539901440
+closed,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539901440
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.close",1544539901454
+opened,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539906591
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539906659
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539909401
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordNext",1544539910854
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.save",1544539912843
+error,log,,,"Error: IOException",1544539912848
+error,log,,,"Error: IOException",1544539912872
+error,log,,,"Error: IOException",1544539912876
+error,log,,,"Error: IOException",1544539914300
+error,log,,,"Error: IOException",1544539914344
+error,log,,,"Error: IOException",1544539914347
+activated,view,org.eclipse.ui.navigator.resources,3.4.200.I20100601-0800,"org.eclipse.ui.navigator.ProjectExplorer",1544539915907
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539916728
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539921872
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539923326
+activated,editor,org.eclipse.ui.editors,3.6.0.v20100520-0800,"org.eclipse.ui.DefaultTextEditor",1544539925099
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539926943
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539930820
+activated,editor,org.eclipse.ui.editors,3.6.0.v20100520-0800,"org.eclipse.ui.DefaultTextEditor",1544539934158
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.save",1544539936991
+error,log,,,"Error: IOException",1544539936998
+error,log,,,"Error: IOException",1544539937048
+error,log,,,"Error: IOException",1544539937052
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539938834
+error,log,,,"Error: IOException",1544539939759
+error,log,,,"Error: IOException",1544539939767
+error,log,,,"Error: IOException",1544539939773
+activated,view,org.eclipse.ui.navigator.resources,3.4.200.I20100601-0800,"org.eclipse.ui.navigator.ProjectExplorer",1544539947548
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539948411
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539950305
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539951811
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.save",1544539954027
+error,log,,,"Error: IOException",1544539954435
+error,log,,,"Error: IOException",1544539954561
+error,log,,,"Error: IOException",1544539954567
+error,log,,,"Error: IOException",1544539955465
+error,log,,,"Error: IOException",1544539955509
+error,log,,,"Error: IOException",1544539955512
+activated,view,org.eclipse.ui.navigator.resources,3.4.200.I20100601-0800,"org.eclipse.ui.navigator.ProjectExplorer",1544539957023
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539957804
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544539961398
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544539963463
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.edit.paste",1544539967281
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544540046760
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544540466308
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544540472574
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544540473525
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544540474895
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544540475761
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.lineEnd",1544540484217
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.lineEnd",1544540490302
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.lineEnd",1544540494046
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.lineEnd",1544540496159
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.edit.delete",1544540500496
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.save",1544540516853
+error,log,,,"Error: IOException",1544540516860
+error,log,,,"Error: IOException",1544540516882
+error,log,,,"Error: IOException",1544540516886
+error,log,,,"Error: IOException",1544540518268
+error,log,,,"Error: IOException",1544540518339
+error,log,,,"Error: IOException",1544540518344
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.save",1544540521860
+error,log,,,"Error: IOException",1544540521866
+error,log,,,"Error: IOException",1544540521928
+error,log,,,"Error: IOException",1544540521932
+error,log,,,"Error: IOException",1544540523296
+error,log,,,"Error: IOException",1544540523333
+error,log,,,"Error: IOException",1544540523339
+activated,view,org.eclipse.ui.navigator.resources,3.4.200.I20100601-0800,"org.eclipse.ui.navigator.ProjectExplorer",1544540525135
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544540525975
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544540534489
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544540536191
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.edit.delete",1544540537216
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.save",1544540542328
+error,log,,,"Error: IOException",1544540542341
+error,log,,,"Error: IOException",1544540542373
+error,log,,,"Error: IOException",1544540542377
+error,log,,,"Error: IOException",1544540543797
+error,log,,,"Error: IOException",1544540543852
+error,log,,,"Error: IOException",1544540543856
+activated,view,org.eclipse.ui.navigator.resources,3.4.200.I20100601-0800,"org.eclipse.ui.navigator.ProjectExplorer",1544540544700
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544540546645
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544540556977
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544540559461
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.edit.delete",1544540568297
+error,log,,,"Error: IOException",1544540569857
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.save",1544540569862
+error,log,,,"Error: IOException",1544540569891
+error,log,,,"Error: IOException",1544540569895
+error,log,,,"Error: IOException",1544540571270
+error,log,,,"Error: IOException",1544540571316
+error,log,,,"Error: IOException",1544540571321
+activated,view,org.eclipse.ui.navigator.resources,3.4.200.I20100601-0800,"org.eclipse.ui.navigator.ProjectExplorer",1544540573012
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544540573754
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544540579159
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544540580441
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.save",1544540585374
+error,log,,,"Error: IOException",1544540585711
+error,log,,,"Error: IOException",1544540585788
+error,log,,,"Error: IOException",1544540585802
+error,log,,,"Error: IOException",1544540586832
+error,log,,,"Error: IOException",1544540586880
+error,log,,,"Error: IOException",1544540586884
+activated,view,org.eclipse.ui.navigator.resources,3.4.200.I20100601-0800,"org.eclipse.ui.navigator.ProjectExplorer",1544540587934
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544540590776
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544540594870
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544540596366
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.edit.delete",1544540597140
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.save",1544540601860
+error,log,,,"Error: IOException",1544540601862
+error,log,,,"Error: IOException",1544540601932
+error,log,,,"Error: IOException",1544540601935
+error,log,,,"Error: IOException",1544540603345
+error,log,,,"Error: IOException",1544540603391
+error,log,,,"Error: IOException",1544540603395
+activated,view,org.eclipse.ui.navigator.resources,3.4.200.I20100601-0800,"org.eclipse.ui.navigator.ProjectExplorer",1544540604929
+deactivated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544540605643
+activated,workbench,org.eclipse.ui.workbench,3.6.0.I20100603-1100,"",1544540609093
+activated,editor,org.eclipse.cdt.ui,5.2.0.201006141710,"org.eclipse.cdt.ui.editor.CEditor",1544540610562
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.edit.cut",1544540617312
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.lineStart",1544540618363
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.lineStart",1544540618552
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.lineStart",1544540619648
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.lineEnd",1544540622215
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.edit.paste",1544540623169
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.lineEnd",1544540654383
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.lineEnd",1544540657380
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.lineStart",1544540657617
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.lineStart",1544540659848
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.lineStart",1544540660272
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.edit.copy",1544540662287
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.lineEnd",1544540663531
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.edit.paste",1544540664406
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordNext",1544540665579
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordNext",1544540665777
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.goto.wordNext",1544540665942
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.wordNext",1544540666885
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.wordNext",1544540667073
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.wordNext",1544540667249
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.wordPrevious",1544540687557
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.wordPrevious",1544540688129
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.edit.copy",1544540688845
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.wordNext",1544540689679
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.wordNext",1544540689865
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.wordNext",1544540690035
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.wordNext",1544540690182
+executed,command,org.eclipse.ui.workbench.texteditor,3.6.0.v20100520-0800,"org.eclipse.ui.edit.text.select.wordNext",1544540690537
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.edit.paste",1544540692485
+executed,command,org.eclipse.ui,3.6.0.I20100603-1100,"org.eclipse.ui.file.save",1544540695363
+error,log,,,"Error: IOException",1544540695370
+error,log,,,"Error: IOException",1544540695398
+error,log,,,"Error: IOException",1544540695402
+error,log,,,"Error: IOException",1544540696744
+error,log,,,"Error: IOException",1544540696788
+error,log,,,"Error: IOException",1544540696792
+activated,view,org.eclipse.ui.navigator.resources,3.4.200.I20100601-0800,"org.eclipse.ui.navigator.ProjectExplorer",1544540698983
