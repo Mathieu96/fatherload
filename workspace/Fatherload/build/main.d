@@ -50,7 +50,10 @@ main.o: /home/nds/files/fatherload/workspace/Fatherload/source/main.c \
   /home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/background.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/ball.h
+  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerRight.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerLeft.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerRight-ConvertImage.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerLeft-ConvertImage.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -154,4 +157,10 @@ main.o: /home/nds/files/fatherload/workspace/Fatherload/source/main.c \
 
 /home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/ball.h:
+/home/nds/files/fatherload/workspace/Fatherload/build/PlayerRight.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/PlayerLeft.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/PlayerRight-ConvertImage.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/PlayerLeft-ConvertImage.h:

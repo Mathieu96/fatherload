@@ -6,62 +6,91 @@
 #include <nds.h>
 #include <stdio.h>
 #include "graphics_main.h"
-#include "ball.h"
 
-u16* gfx;
+u16 *gfx_right, *gfx_left;
 
-void configureSprites() {
-	//Set up memory bank to work in sprite mode (offset since we are using VRAM A for backgrounds)
-	VRAM_B_CR = VRAM_ENABLE | VRAM_B_MAIN_SPRITE_0x06400000;
+u8 emptyTile[64] = {
+		0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0
+};
 
-	//Initialize sprite manager and the engine
-	oamInit(&oamMain, SpriteMapping_1D_32, false);
-
-	//Allocate space for the graphic to show in the sprite
-	gfx = oamAllocateGfx(&oamMain, SpriteSize_32x32, SpriteColorFormat_256Color);
-
-	//Copy data for the graphic (palette and bitmap)
-	swiCopy(ballPal, SPRITE_PALETTE, ballPalLen/2);
-	swiCopy(ballTiles, gfx, ballTilesLen/2);
-}
-
-
-int main(void) {
+int main(void){
+	srand(time(NULL));
 	init_background3();
-	int x = 0; int y = 0;
+	int player_x = 0; int player_y = 192/2 + 10; int screen_x = 0; int screen_y = 0;
+	int isLeft = 0;
+//	Objects_coord diamond[DIAMOND_NUMBER];
+
+//	setObjects(&diamond);
+
 	u16 keys;
-	configureSprites();
+	configureSprites(&gfx_right, &gfx_left);
 
     while(1){
     	scanKeys();
     	keys = keysHeld();
-    	if((keys & KEY_DOWN) && (y < 512 - 192 - 32))
-    		y++;
-    	if((keys & KEY_UP) && (y > 0))
-    		y--;
-    	if((keys & KEY_RIGHT) && (x < 512 - 256 - 32))
-    		x++;
-    	if((keys & KEY_LEFT) && (x > 0))
-    		x--;
+    	if((keys & KEY_DOWN) && (screen_y < 512 - 192)){
+    		screen_y+=2;
+    		player_y++;
+    	}
+    	if((keys & KEY_UP) && (screen_y > 0)){
+    		screen_y-=2;
+    		player_y--;
+    	}
+    	if((keys & KEY_RIGHT) && (screen_x < 512 - 256 - 32)){
+    		isLeft = 0;
+    		screen_x++;
+    		player_x++;
+    	}
+    	if((keys & KEY_LEFT) && (screen_x > 0)){
+    		isLeft = 1;
+    		screen_x--;
+    		player_x--;
+    	}
 
-    	oamSet(&oamMain, 	// oam handler
-    		0,				// Number of sprite
-    		x, y,			// Coordinates
-    		0,				// Priority
-    		0,				// Palette to use
-    		SpriteSize_32x32,			// Sprite size
-    		SpriteColorFormat_256Color,	// Color format
-    		gfx,			// Loaded graphic to display
-    		-1,				// Affine rotation to use (-1 none)
-    		false,			// Double size if rotating
-    		false,			// Hide this sprite
-    		false, false,	// Horizontal or vertical flip
-    		false			// Mosaic
-    		);
-    	REG_BG0HOFS = x;
-    	REG_BG0VOFS = y;
-		oamUpdate(&oamMain);
+    	REG_BG0HOFS = screen_x;
+    	REG_BG0VOFS = screen_y;
 		swiWaitForVBlank();
+
+		if(!isLeft){
+			oamSet(&oamMain, 	// oam handler
+				0,				// Number of sprite
+				player_x, player_y,			// Coordinates
+				0,				// Priority
+				0,				// Palette to use
+				SpriteSize_32x32,			// Sprite size
+				SpriteColorFormat_256Color,	// Color format
+				gfx_right,			// Loaded graphic to display
+				-1,				// Affine rotation to use (-1 none)
+				false,			// Double size if rotating
+				false,			// Hide this sprite
+				false, false,	// Horizontal or vertical flip
+				false			// Mosaic
+				);
+		}
+		else{
+			oamSet(&oamMain, 	// oam handler
+				0,				// Number of sprite
+				player_x, player_y,			// Coordinates
+				0,				// Priority
+				0,				// Palette to use
+				SpriteSize_32x32,			// Sprite size
+				SpriteColorFormat_256Color,	// Color format
+				gfx_left,			// Loaded graphic to display
+				-1,				// Affine rotation to use (-1 none)
+				false,			// Double size if rotating
+				false,			// Hide this sprite
+				false, false,	// Horizontal or vertical flip
+				false			// Mosaic
+				);
+		}
+		oamUpdate(&oamMain);
 		//shifting horizontally from left to right
 /*		for(i=0; i<=512-256; i++){
 			swiWaitForVBlank();
