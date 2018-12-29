@@ -30,9 +30,9 @@ void configureSprites(u16 **gfx1, u16 **gfx2) {
 	*gfx2 = oamAllocateGfx(&oamMain, SpriteSize_32x32, SpriteColorFormat_256Color);
 
 	//Copy data for the graphic (palette and bitmap)
-	dmaCopy(PlayerLeft_ConvertImagePal, SPRITE_PALETTE, PlayerLeft_ConvertImagePalLen);
-	dmaCopy(PlayerRight_ConvertImageTiles, *gfx1, PlayerRight_ConvertImageTilesLen);
-	dmaCopy(PlayerLeft_ConvertImageTiles, *gfx2, PlayerLeft_ConvertImageTilesLen);
+	dmaCopy(PlayerHorizontalPal, SPRITE_PALETTE, PlayerHorizontalPalLen);
+	dmaCopy(PlayerHorizontalTiles, *gfx1, PlayerHorizontalTilesLen);
+	dmaCopy(PlayerVerticalTiles, *gfx2, PlayerVerticalTilesLen);
 }
 
 
@@ -69,8 +69,8 @@ void setObjects(Objects_coord **diamond){
 	diamond_pic = oamAllocateGfx(&oamMain, SpriteSize_32x32, SpriteColorFormat_256Color);
 
 	//Copy data for the graphic (palette and bitmap)
-	swiCopy(PlayerRight_ConvertImagePal, SPRITE_PALETTE, PlayerRight_ConvertImagePalLen/2);
-	dmaCopy(PlayerRight_ConvertImageTiles, diamond_pic, PlayerRight_ConvertImageTilesLen/2);
+	dmaCopy(diamondPal, SPRITE_PALETTE, diamondPalLen);
+	dmaCopy(diamondTiles, diamond_pic, diamondTilesLen);
 
 	for(i = 0; i < DIAMOND_NUMBER; i++){
 		diamond[i]->x = rand()%(512-128) + 128;

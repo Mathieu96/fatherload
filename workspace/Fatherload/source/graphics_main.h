@@ -11,10 +11,9 @@
 #include <nds.h>
 #include "background.h"
 #include "FONDS.h"
-#include "PlayerRight.h"
-#include "PlayerLeft.h"
-#include "PlayerRight-ConvertImage.h"
-#include "PlayerLeft-ConvertImage.h"
+#include "diamond.h"
+#include "PlayerHorizontal.h"
+#include "PlayerVertical.h"
 
 #define DIAMOND_NUMBER 16
 

@@ -51,10 +51,9 @@ graphics_main.o:  \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/background.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerRight.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerLeft.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerRight-ConvertImage.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerLeft-ConvertImage.h
+  /home/nds/files/fatherload/workspace/Fatherload/build/diamond.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerHorizontal.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerVertical.h
 
 /home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.h:
 
@@ -158,10 +157,8 @@ graphics_main.o:  \
 
 /home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/PlayerRight.h:
+/home/nds/files/fatherload/workspace/Fatherload/build/diamond.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/PlayerLeft.h:
+/home/nds/files/fatherload/workspace/Fatherload/build/PlayerHorizontal.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/PlayerRight-ConvertImage.h:
-
-/home/nds/files/fatherload/workspace/Fatherload/build/PlayerLeft-ConvertImage.h:
+/home/nds/files/fatherload/workspace/Fatherload/build/PlayerVertical.h:
