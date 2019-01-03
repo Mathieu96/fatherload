@@ -99,7 +99,7 @@ int main(void){
 		REG_BG2VOFS = screen_y;
 		REG_BG0HOFS = screen_x;
 		REG_BG0VOFS = screen_y;
-		//printf("REG_BG2HOFS: %d, screen_x: %d, REG_BG2VOFS: %d, y: %d\n",REG_BG2HOFS, screen_x, REG_BG2VOFS, screen_y);
+		printf("REG_BG2HOFS: %d, screen_x: %d, REG_BG2VOFS: %d, y: %d\n"REG_BG2HOFS, screen_x, REG_BG2VOFS, screen_y);
 
 		switch(orientation){
 		case RIGHT:

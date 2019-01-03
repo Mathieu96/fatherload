@@ -122,7 +122,7 @@ void update_state(){
 	if(player_y + screen_y > 112 + 16){
 		int base = (((player_y + screen_y)>255)?2:0) + (player_x + screen_x)/256;
 		int x = ((player_x + screen_x)%256)/8;
-		int y = ((player_y + 2 + screen_y)%256)/8;
+		int y = ((player_y + screen_y)%256)/8;
 //		printf("BASE found: %d, y: %d and x: %d.\n", base, y, x);
 		if(orientation == UP || orientation == DOWN){
 			for(i = y; i < y + 2; i++){

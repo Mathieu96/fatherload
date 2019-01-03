@@ -119,10 +119,10 @@ void setObjects(){
 void update_state(){
 	int i;
 
-	if(player_y + screen_y > 112 + 16){
-		int base = (((player_y + screen_y)>255)?2:0) + (player_x + screen_x)/256;
-		int x = ((player_x + screen_x)%256)/8;
-		int y = ((player_y + 2 + screen_y)%256)/8;
+	if(player_y + REG_BG2VOFS > 112 + 16){
+		int base = (((player_y + REG_BG2VOFS)>255)?2:0) + (player_x + REG_BG2HOFS)/256;
+		int x = ((player_x + REG_BG2HOFS)%256)/8;
+		int y = ((player_y + REG_BG2VOFS)%256)/8;
 //		printf("BASE found: %d, y: %d and x: %d.\n", base, y, x);
 		if(orientation == UP || orientation == DOWN){
 			for(i = y; i < y + 2; i++){
@@ -147,12 +147,12 @@ void update_state(){
 	}
 
 	for(i = 0; i < DIAMOND_NUMBER; i++){
-		if(!diamond[i].isTook && ((player_x + screen_x) == diamond[i].x &&
-				(player_y + screen_y) == diamond[i].y)){
+		if(!diamond[i].isTook && ((player_x + REG_BG2HOFS) == diamond[i].x &&
+				(player_y + REG_BG2VOFS) == diamond[i].y)){
 			diamond[i].isTook = 1;
 			oamSet(&oamMain, 	// oam handler
 								OFFSET_DIAMOND_SPRITE + i,				// Number of sprite
-								diamond[i].x - screen_x, diamond[i].y - screen_y,			// Coordinates
+								diamond[i].x - REG_BG2HOFS, diamond[i].y - REG_BG2VOFS,			// Coordinates
 								0,				// Priority
 								2,				// Palette to use
 								SpriteSize_16x16,			// Sprite size
@@ -167,12 +167,12 @@ void update_state(){
 		}
 
 		if(!diamond[i].isTook){
-			if(((diamond[i].x >  - 32) && (diamond[i].x < screen_x + 256)) &&
-					((diamond[i].y > screen_y - 32) && (diamond[i].y < screen_y + 192))){
+			if(((diamond[i].x >  - 32) && (diamond[i].x < REG_BG2HOFS + 256)) &&
+					((diamond[i].y > REG_BG2VOFS - 32) && (diamond[i].y < REG_BG2VOFS + 192))){
 
 				oamSet(&oamMain, 	// oam handler
 					OFFSET_DIAMOND_SPRITE + i,				// Number of sprite
-					diamond[i].x - screen_x, diamond[i].y - screen_y,			// Coordinates
+					diamond[i].x - REG_BG2HOFS, diamond[i].y - REG_BG2VOFS,			// Coordinates
 					0,				// Priority
 					2,				// Palette to use
 					SpriteSize_16x16,			// Sprite size
@@ -188,7 +188,7 @@ void update_state(){
 			else{
 				oamSet(&oamMain, 	// oam handler
 					OFFSET_DIAMOND_SPRITE + i,				// Number of sprite
-					diamond[i].x - screen_x, diamond[i].y - screen_y,			// Coordinates
+					diamond[i].x - REG_BG2HOFS, diamond[i].y - REG_BG2VOFS,			// Coordinates
 					0,				// Priority
 					2,				// Palette to use
 					SpriteSize_16x16,			// Sprite size
