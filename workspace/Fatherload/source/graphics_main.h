@@ -9,7 +9,6 @@
 #define GRAPHICS_MAIN_H_
 
 #include <nds.h>
-#include "background.h"
 #include "FONDS.h"
 #include "diamond.h"
 #include "PlayerHorizontal.h"
@@ -21,28 +20,36 @@
 
 // specification for the diamond objects
 #define DIAMOND_NUMBER 16
-#define DIAMOND_WIDTH 32
-#define DIAMOND_HEIGTH 32
+#define SPRITE_WIDTH 32
+#define SPRITE_HEIGTH 32
 
 typedef struct{
 	int x;
 	int y;
+	char isTook;
 } Objects_coord;
 
-u16* diamond_pic;
+typedef enum {UP, DOWN, LEFT, RIGHT} dir;
+
+extern u16* diamond_pic;
 
 extern u16 *gfx_horizontal, *gfx_vertical;
 
+extern dir orientation;
+
 extern int player_x, player_y, screen_x, screen_y;
 
+extern int diamond_id[DIAMOND_NUMBER];
+
 extern Objects_coord diamond[DIAMOND_NUMBER];
-// Initialization of the background 3, ext. rotoscale mode
-void init_background2();
+
+// Initialization of the backgrounds
+void init_main_background();
 
 void configureSprites();
 
 void setObjects();
 
-void printDiamond();
+void update_state();
 
 #endif /* GRAPHICS_MAIN_H_ */

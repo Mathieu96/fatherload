@@ -48,11 +48,15 @@ main.o: /home/nds/files/fatherload/workspace/Fatherload/source/main.c \
   /opt/devkitPro/libnds/include/nds/system.h \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
   /home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/background.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/diamond.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/PlayerHorizontal.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerVertical.h
+  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerVertical.h \
+  /home/nds/files/fatherload/workspace/Fatherload/source/P_Audio.h \
+  /opt/devkitPro/libnds/include/maxmod9.h \
+  /opt/devkitPro/libnds/include/mm_types.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/soundbank.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/soundbank_bin.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -152,8 +156,6 @@ main.o: /home/nds/files/fatherload/workspace/Fatherload/source/main.c \
 
 /home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/background.h:
-
 /home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/build/diamond.h:
@@ -161,3 +163,13 @@ main.o: /home/nds/files/fatherload/workspace/Fatherload/source/main.c \
 /home/nds/files/fatherload/workspace/Fatherload/build/PlayerHorizontal.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/build/PlayerVertical.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/source/P_Audio.h:
+
+/opt/devkitPro/libnds/include/maxmod9.h:
+
+/opt/devkitPro/libnds/include/mm_types.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/soundbank.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/soundbank_bin.h:

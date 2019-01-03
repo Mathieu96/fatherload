@@ -49,7 +49,6 @@ graphics_main.o:  \
   /opt/devkitPro/libnds/include/nds/arm9/sprite.h \
   /opt/devkitPro/libnds/include/nds/system.h \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/background.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/diamond.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/PlayerHorizontal.h \
@@ -152,8 +151,6 @@ graphics_main.o:  \
 /opt/devkitPro/libnds/include/nds/system.h:
 
 /opt/devkitPro/libnds/include/nds/arm9/decompress.h:
-
-/home/nds/files/fatherload/workspace/Fatherload/build/background.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h:
 

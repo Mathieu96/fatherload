@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="310" key="DIALOG_WIDTH"/>
-		<item value="172" key="DIALOG_Y_ORIGIN"/>
-		<item value="430" key="DIALOG_HEIGHT"/>
-		<item value="806" key="DIALOG_X_ORIGIN"/>
+		<item value="312" key="DIALOG_WIDTH"/>
+		<item value="117" key="DIALOG_Y_ORIGIN"/>
+		<item value="435" key="DIALOG_HEIGHT"/>
+		<item value="1326" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Sans|10.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
@@ -13,10 +13,16 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="SPRITE" key="selection"/>
+		<item value="TILE" key="selection"/>
 		<list key="findhistory">
-			<item value="sprite"/>
-			<item value="bgScrollTable"/>
+			<item value="tile"/>
+			<item value="display_char"/>
+			<item value="display_"/>
+			<item value="VRAM_C_SUB"/>
+			<item value="screen"/>
+			<item value="VRAM_F"/>
+			<item value="sprite_palette"/>
+			<item value="palette"/>
 		</list>
 		<list key="replacehistory">
 		</list>
