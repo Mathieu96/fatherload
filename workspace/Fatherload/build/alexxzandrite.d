@@ -1,0 +1,1 @@
+alexxzandrite.o: alexxzandrite.s

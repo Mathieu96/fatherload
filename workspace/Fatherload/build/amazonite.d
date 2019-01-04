@@ -1,0 +1,1 @@
+amazonite.o: amazonite.s

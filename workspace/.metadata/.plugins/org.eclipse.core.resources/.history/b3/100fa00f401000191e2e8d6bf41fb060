@@ -1,0 +1,5 @@
+#ifndef FATHERLOAD_DEFINES_H_
+#define FATHERLOAD_DEFINES_H_
+
+#include <nds.h>
+#include <string.h>

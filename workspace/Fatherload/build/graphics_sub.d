@@ -1,6 +1,7 @@
 graphics_sub.o:  \
  /home/nds/files/fatherload/workspace/Fatherload/source/graphics_sub.c \
   /home/nds/files/fatherload/workspace/Fatherload/source/graphics_sub.h \
+  /home/nds/files/fatherload/workspace/Fatherload/source/fatherload_defines.h \
   /opt/devkitPro/libnds/include/nds.h \
   /opt/devkitPro/libnds/include/nds/libversion.h \
   /opt/devkitPro/libnds/include/nds/ndstypes.h \
@@ -53,6 +54,8 @@ graphics_sub.o:  \
   /home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.h
 
 /home/nds/files/fatherload/workspace/Fatherload/source/graphics_sub.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/source/fatherload_defines.h:
 
 /opt/devkitPro/libnds/include/nds.h:
 

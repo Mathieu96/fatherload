@@ -12,7 +12,7 @@ void init_sub_background(){
 	VRAM_C_CR = VRAM_ENABLE | VRAM_C_SUB_BG;
 
 	// Init BG3
-	BGCTRL_SUB[3] = BG_MAP_BASE(0) | BgSize_B8_256x256;
+	BGCTRL_SUB[3] = BG_MAP_BASE(0) | BgSize_B8_128x128;
 
 	dmaCopy(controlsPal, BG_PALETTE_SUB, controlsPalLen);
 	dmaCopy(controlsBitmap, BG_MAP_RAM_SUB(0), controlsBitmapLen);

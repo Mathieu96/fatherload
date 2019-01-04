@@ -51,6 +51,15 @@ P_Audio.o:  \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
   /opt/devkitPro/libnds/include/maxmod9.h \
   /opt/devkitPro/libnds/include/mm_types.h \
+  /home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.h \
+  /home/nds/files/fatherload/workspace/Fatherload/source/fatherload_defines.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/diamond.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerHorizontal.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerVertical.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/amazonite.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/bronze.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/alexxzandrite.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/soundbank.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/soundbank_bin.h
 
@@ -155,6 +164,24 @@ P_Audio.o:  \
 /opt/devkitPro/libnds/include/maxmod9.h:
 
 /opt/devkitPro/libnds/include/mm_types.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/source/fatherload_defines.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/diamond.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/PlayerHorizontal.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/PlayerVertical.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/amazonite.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/bronze.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/alexxzandrite.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/build/soundbank.h:
 

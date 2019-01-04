@@ -8,8 +8,7 @@
 #ifndef GRAPHICS_MAIN_H_
 #define GRAPHICS_MAIN_H_
 
-#include <nds.h>
-#include <string.h>
+#include "fatherload_defines.h"
 #include "controls.h"
 #include "graphics_main.h"
 
