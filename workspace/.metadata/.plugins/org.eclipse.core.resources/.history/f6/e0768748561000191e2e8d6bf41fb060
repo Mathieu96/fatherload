@@ -215,9 +215,9 @@ int main(void){
 			}
 
 			update_state();
-			swiWaitForVBlank();
-			swiWaitForVBlank();
-			swiWaitForVBlank();
+//			swiWaitForVBlank();
+//			swiWaitForVBlank();
+//			swiWaitForVBlank();
 			oamUpdate(&oamMain);
 			if(mineral_count == MINERAL_NUMBER)
 				break;
