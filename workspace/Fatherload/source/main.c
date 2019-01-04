@@ -7,19 +7,22 @@
 #include <stdio.h>
 #include "graphics_main.h"
 #include "P_Audio.h"
+#include "graphics_sub.h"
 
 int player_x = 128; int player_y = 112; int screen_x = 128; int screen_y = 0;
 
-int diamond_id[DIAMOND_NUMBER];
+int diamond_count = 0;
 
-Objects_coord diamond[DIAMOND_NUMBER];
+Objects_coord mineral[DIAMOND_NUMBER];
 
 dir orientation;
 
 u16 *gfx_horizontal, *gfx_vertical, *diamond_pic;
 
 int main(void){
+	srand(time(NULL));
 	init_main_background();
+	init_sub_background();
 
 	orientation = RIGHT;
 
@@ -31,10 +34,10 @@ int main(void){
 //	Audio_Init();
 //	Audio_PlayMusic();
 
-	consoleDemoInit();
-
     while(1){
     	scanKeys();
+		touchPosition touch;
+
     	keys = keysHeld();
     	switch(keys){
     	case KEY_DOWN:
@@ -70,35 +73,47 @@ int main(void){
         	}
         	break;
     	}
-    	/*
-    	if((keys & KEY_DOWN) && (screen_y < 512 - 192)){
-    		orientation = DOWN;
-    		screen_y +=3;
-    		if(player_y < 152)
-    			player_y++;
+    	if(keys & KEY_TOUCH){
+			touchRead(&touch);
+			if(((touch.py >= 0) && (touch.py < 70)) && (touch.px >= 85) && (touch.px <= 165)){
+	        	if(screen_y > 0){
+	        		orientation = UP;
+	    			screen_y -=3;
+	    			if(player_y > 112)
+	    				player_y--;
+	        	}
+			}
+			if(((touch.py >= 120) && (touch.py < 192)) && (touch.px >= 85) && (touch.px <= 165)){
+	        	if(screen_y < 512 - 192){
+	        		orientation = DOWN;
+	        		screen_y +=3;
+	        		if(player_y < 168)
+	        			player_y++;
+	        	}
+			}
+			if(((touch.py >= 45) && (touch.py < 120)) && (touch.px >= 3) && (touch.px <= 70)){
+	        	if(screen_x > 0){
+	        		orientation = LEFT;
+	        		screen_x--;
+	        		if(player_x > 0)
+	        			player_x--;
+	        	}
+			}
+			if(((touch.py >= 45) && (touch.py < 120)) && (touch.px >= 185) && (touch.px <= 253)){
+	        	if(screen_x < 512 - 256){
+	        		orientation = RIGHT;
+	        		screen_x++;
+	        		if(player_x < 256-16)
+	        			player_x++;
+	        	}
+			}
+
     	}
-    	if((keys & KEY_UP) && (screen_y > 0)){
-    		orientation = UP;
-			screen_y -=3;
-			if(player_y > 96)
-				player_y--;
-    	}
-    	if((keys & KEY_RIGHT) && (screen_x < 512 - 256 - 32)){
-    		orientation = RIGHT;
-    		screen_x++;
-    		player_x++;
-    	}
-    	if((keys & KEY_LEFT) && (screen_x > 0)){
-    		orientation = LEFT;
-    		screen_x--;
-    		player_x--;
-    	}
-    	*/
 		swiWaitForVBlank();
+		REG_BG3HOFS = screen_x;
+		REG_BG3VOFS = screen_y;
 		REG_BG2HOFS = screen_x;
 		REG_BG2VOFS = screen_y;
-		REG_BG0HOFS = screen_x;
-		REG_BG0VOFS = screen_y;
 		//printf("REG_BG2HOFS: %d, screen_x: %d, REG_BG2VOFS: %d, y: %d\n",REG_BG2HOFS, screen_x, REG_BG2VOFS, screen_y);
 
 		switch(orientation){

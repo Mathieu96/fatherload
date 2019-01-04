@@ -45,8 +45,8 @@ void init_main_background(){
 	VRAM_A_CR = VRAM_ENABLE | VRAM_A_MAIN_BG;
 	VRAM_B_CR = VRAM_ENABLE | VRAM_B_MAIN_BG;
 
-	// Init BG0
-	BGCTRL[0] = BG_COLOR_256 | BG_MAP_BASE(0) | BG_TILE_BASE(1) | BG_64x64;
+	// Init BG2
+	BGCTRL[2] = BG_COLOR_256 | BG_MAP_BASE(0) | BG_TILE_BASE(1) | BG_64x64;
 	dmaCopy(emptyTile, (u8*)BG_TILE_RAM(1), 64);
 	dmaCopy(fondTile, (u8*)BG_TILE_RAM(1) + 1*64, 64);
 	dmaCopy(endTile, (u8*)BG_TILE_RAM(1) + 2*64, 64);
@@ -72,7 +72,7 @@ void init_main_background(){
 	}
 
 	// Init background 2
-	BGCTRL[2] = BG_COLOR_256 | BG_MAP_BASE(4) | BG_TILE_BASE(2) | BG_64x64;
+	BGCTRL[3] = BG_COLOR_256 | BG_MAP_BASE(4) | BG_TILE_BASE(2) | BG_64x64;
 	dmaCopy(FONDSTiles, BG_TILE_RAM(2), FONDSTilesLen);
 
 	for(i=0; i<32; i++){
@@ -107,30 +107,31 @@ void configureSprites() {
 
 void setObjects(){
 	int i;
-
 	for(i = 0; i < DIAMOND_NUMBER; i++){
-		diamond[i].x = (rand()%512);
-		diamond[i].y = (rand()%(512-128-32-8))+ 128;
-		// isTook = 0 when not took, 1 if the player took it
-		diamond[i].isTook = 0;
+		mineral[i].x = (rand()%512);
+		mineral[i].y = (rand()%(512-128-16-8))+ 128;
+		// isTook = 0 when not took, 1 when the player took it
+		mineral[i].isTook = 0;
+		strcpy(mineral[i].type,"diamond");
 	}
 }
 
 void update_state(){
 	int i;
+	int position_y = player_y + screen_y;
+	int position_x = player_x + screen_x;
 
-	if(player_y + screen_y > 112 + 16){
-		int base = (((player_y + screen_y)>255)?2:0) + (player_x + screen_x)/256;
-		int x = ((player_x + screen_x)%256)/8;
-		int y = ((player_y + 2 + screen_y)%256)/8;
-//		printf("BASE found: %d, y: %d and x: %d.\n", base, y, x);
+	if(position_y > 112 + 15){
+		int base = (((position_y)>255)?2:0) + (position_x)/256;
+		int x = ((position_x)%256)/8;
+		int y = ((position_y)%256)/8;
 		if(orientation == UP || orientation == DOWN){
 			for(i = y; i < y + 2; i++){
 				if(i > 31)
 					break;
 				BG_MAP_RAM(base)[i*32 + x] = 1;
 				BG_MAP_RAM(base)[i*32 + x + 1] = 1;
-//				BG_MAP_RAM(base)[i*32 + x + 2] = 1;
+//				BG_MAP_RAM(base)[i*32 + x + 2] = 1; //for 32*32 sprite
 //				BG_MAP_RAM(base)[i*32 + x + 3] = 1;
 			}
 		}
@@ -140,19 +141,22 @@ void update_state(){
 					break;
 				BG_MAP_RAM(base)[y*32 + i] = 1;
 				BG_MAP_RAM(base)[(y + 1)*32 + i] = 1;
-//				BG_MAP_RAM(base)[(y + 2)*32 + i] = 1;
+//				BG_MAP_RAM(base)[(y + 2)*32 + i] = 1; //for 32*32 sprite
 //				BG_MAP_RAM(base)[(y + 3)*32 + i] = 1;
 			}
 		}
 	}
 
 	for(i = 0; i < DIAMOND_NUMBER; i++){
-		if(!diamond[i].isTook && ((player_x + screen_x) == diamond[i].x &&
-				(player_y + screen_y) == diamond[i].y)){
-			diamond[i].isTook = 1;
+		if(!mineral[i].isTook && (
+		(((position_y - mineral[i].y > 0) ? (position_y - mineral[i].y):(mineral[i].y - position_y)) < 16) //abs(diamond.y - position_y) < 16
+		&& (((position_x - mineral[i].x > 0) ? (position_x - mineral[i].x):(mineral[i].x - position_x)) < 16) // abs(diamond.x - position_x) < 16
+		)){
+			diamond_count++;
+			mineral[i].isTook = 1;
 			oamSet(&oamMain, 	// oam handler
 								OFFSET_DIAMOND_SPRITE + i,				// Number of sprite
-								diamond[i].x - screen_x, diamond[i].y - screen_y,			// Coordinates
+								mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
 								0,				// Priority
 								2,				// Palette to use
 								SpriteSize_16x16,			// Sprite size
@@ -166,13 +170,13 @@ void update_state(){
 								);
 		}
 
-		if(!diamond[i].isTook){
-			if(((diamond[i].x >  - 32) && (diamond[i].x < screen_x + 256)) &&
-					((diamond[i].y > screen_y - 32) && (diamond[i].y < screen_y + 192))){
+		if(!mineral[i].isTook){
+			if(((mineral[i].x >  - 16) && (mineral[i].x < screen_x + 256)) &&
+					((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
 
 				oamSet(&oamMain, 	// oam handler
 					OFFSET_DIAMOND_SPRITE + i,				// Number of sprite
-					diamond[i].x - screen_x, diamond[i].y - screen_y,			// Coordinates
+					mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
 					0,				// Priority
 					2,				// Palette to use
 					SpriteSize_16x16,			// Sprite size
@@ -188,7 +192,7 @@ void update_state(){
 			else{
 				oamSet(&oamMain, 	// oam handler
 					OFFSET_DIAMOND_SPRITE + i,				// Number of sprite
-					diamond[i].x - screen_x, diamond[i].y - screen_y,			// Coordinates
+					mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
 					0,				// Priority
 					2,				// Palette to use
 					SpriteSize_16x16,			// Sprite size

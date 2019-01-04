@@ -1,0 +1,28 @@
+
+//{{BLOCK(controls_left)
+
+//======================================================================
+//
+//	controls_left, 72x80@8, 
+//	+ palette 16 entries, not compressed
+//	+ 90 tiles not compressed
+//	Total size: 32 + 5760 = 5792
+//
+//	Time-stamp: 2019-01-03, 23:25:05
+//	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
+//	( http://www.coranac.com/projects/#grit )
+//
+//======================================================================
+
+#ifndef GRIT_CONTROLS_LEFT_H
+#define GRIT_CONTROLS_LEFT_H
+
+#define controls_leftTilesLen 5760
+extern const unsigned int controls_leftTiles[1440];
+
+#define controls_leftPalLen 32
+extern const unsigned short controls_leftPal[16];
+
+#endif // GRIT_CONTROLS_LEFT_H
+
+//}}BLOCK(controls_left)

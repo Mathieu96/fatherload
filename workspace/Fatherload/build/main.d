@@ -56,7 +56,8 @@ main.o: /home/nds/files/fatherload/workspace/Fatherload/source/main.c \
   /opt/devkitPro/libnds/include/maxmod9.h \
   /opt/devkitPro/libnds/include/mm_types.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/soundbank.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/soundbank_bin.h
+  /home/nds/files/fatherload/workspace/Fatherload/build/soundbank_bin.h \
+  /home/nds/files/fatherload/workspace/Fatherload/source/graphics_sub.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -173,3 +174,5 @@ main.o: /home/nds/files/fatherload/workspace/Fatherload/source/main.c \
 /home/nds/files/fatherload/workspace/Fatherload/build/soundbank.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/build/soundbank_bin.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/source/graphics_sub.h:
