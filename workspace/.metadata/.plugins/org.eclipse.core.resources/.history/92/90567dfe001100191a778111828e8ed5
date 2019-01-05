@@ -151,7 +151,7 @@ int main(void){
 						false			// Mosaic
 					);
 					oamUpdate(&oamMain);
-					swiDelay(15000000); // Delay to avoid going back out of start mode right after
+					swiDelay(20000000);
 				}
 				else{
 					mmResume();
@@ -172,7 +172,7 @@ int main(void){
 					oamUpdate(&oamMain);
 					release_start_display();
 					start_pressed = 0;
-					swiDelay(15000000); // Delay to avoid going back into start mode right after
+					swiDelay(10000000);
 					irqEnable(IRQ_TIMER0);
 				}
 			}

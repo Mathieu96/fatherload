@@ -132,9 +132,9 @@ int main(void){
 			case KEY_START:
 				if(!start_pressed && !start_pressed){
 					irqDisable(IRQ_TIMER0);
+					load_start_display();
 					mmPause();
 					Audio_PlaySoundEX(SFX_TIRE_SCREECH);
-					load_start_display();
 					start_pressed = 1;
 					oamSet(&oamMain, 	// oam handler
 						PLAYER_SPRITE_ID,				// Number of sprite
@@ -149,12 +149,17 @@ int main(void){
 						true,			// Hide this sprite
 						false, false,	// Horizontal or vertical flip
 						false			// Mosaic
-					);
+						);
+					swiWaitForVBlank();
+					swiDelay(20000000);
 					oamUpdate(&oamMain);
-					swiDelay(15000000); // Delay to avoid going back out of start mode right after
 				}
 				else{
 					mmResume();
+					start_pressed = 0;
+					release_start_display();
+					irqEnable(IRQ_TIMER0);
+					start_pressed = 0;
 					oamSet(&oamMain, 	// oam handler
 						PLAYER_SPRITE_ID,				// Number of sprite
 						player_x, player_y,			// Coordinates
@@ -168,12 +173,10 @@ int main(void){
 						false,			// Hide this sprite
 						false, false,	// Horizontal or vertical flip
 						false			// Mosaic
-					);
+						);
+					swiWaitForVBlank();
+					swiDelay(20000000);
 					oamUpdate(&oamMain);
-					release_start_display();
-					start_pressed = 0;
-					swiDelay(15000000); // Delay to avoid going back into start mode right after
-					irqEnable(IRQ_TIMER0);
 				}
 			}
 			if(!start_pressed){

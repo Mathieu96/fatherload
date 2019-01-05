@@ -599,7 +599,7 @@ void print_start(){
 	BG_MAP_RAM(9)[9*32 + 24] = 1;
 	BG_MAP_RAM(9)[10*32 + 24] = 1;
 	BG_MAP_RAM(9)[11*32 + 24] = 1;
-	BG_MAP_RAM(9)[12*32 + 24] = 1;
+	BG_MAP_RAM(9)[11*32 + 23] = 1;
 	BG_MAP_RAM(9)[12*32 + 22] = 1;
 	BG_MAP_RAM(9)[12*32 + 23] = 1;
 

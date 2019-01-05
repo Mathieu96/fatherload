@@ -3,16 +3,8 @@
 
 make 
 cp: cannot stat `/home/nds/files/fatherload/workspace/Fatherload/build/../precompiled/*': No such file or directory
-grit /home/nds/files/fatherload/workspace/Fatherload/data/numbers.png -fts -onumbers
-numbers.s
-arm-eabi-gcc -MMD -MP -MF /home/nds/files/fatherload/workspace/Fatherload/build/numbers.d -g -Wall -O0 -march=armv5te -mtune=arm946e-s -fomit-frame-pointer -ffast-math -mthumb -mthumb-interwork -I/home/nds/files/fatherload/workspace/Fatherload/include -I/opt/devkitPro/libnds/include -I/opt/devkitPro/libnds/include -I/home/nds/files/fatherload/workspace/Fatherload/build -DARM9 -x assembler-with-cpp -g -mthumb -mthumb-interwork -c numbers.s -o numbers.o
-graphics_sub.c
-arm-eabi-gcc -MMD -MP -MF /home/nds/files/fatherload/workspace/Fatherload/build/graphics_sub.d -g -Wall -O0 -march=armv5te -mtune=arm946e-s -fomit-frame-pointer -ffast-math -mthumb -mthumb-interwork -I/home/nds/files/fatherload/workspace/Fatherload/include -I/opt/devkitPro/libnds/include -I/opt/devkitPro/libnds/include -I/home/nds/files/fatherload/workspace/Fatherload/build -DARM9 -c /home/nds/files/fatherload/workspace/Fatherload/source/graphics_sub.c -o graphics_sub.o
-/home/nds/files/fatherload/workspace/Fatherload/source/main.c: In function 'main':
-main.c
-/home/nds/files/fatherload/workspace/Fatherload/source/main.c:54: warning: large integer implicitly truncated to unsigned type
-arm-eabi-gcc -MMD -MP -MF /home/nds/files/fatherload/workspace/Fatherload/build/main.d -g -Wall -O0 -march=armv5te -mtune=arm946e-s -fomit-frame-pointer -ffast-math -mthumb -mthumb-interwork -I/home/nds/files/fatherload/workspace/Fatherload/include -I/opt/devkitPro/libnds/include -I/opt/devkitPro/libnds/include -I/home/nds/files/fatherload/workspace/Fatherload/build -DARM9 -c /home/nds/files/fatherload/workspace/Fatherload/source/main.c -o main.o
-/home/nds/files/fatherload/workspace/Fatherload/source/main.c:50: warning: unused variable 'restart'
+graphics_main.c
+arm-eabi-gcc -MMD -MP -MF /home/nds/files/fatherload/workspace/Fatherload/build/graphics_main.d -g -Wall -O0 -march=armv5te -mtune=arm946e-s -fomit-frame-pointer -ffast-math -mthumb -mthumb-interwork -I/home/nds/files/fatherload/workspace/Fatherload/include -I/opt/devkitPro/libnds/include -I/opt/devkitPro/libnds/include -I/home/nds/files/fatherload/workspace/Fatherload/build -DARM9 -c /home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.c -o graphics_main.o
 linking Fatherload.elf
 built ... Fatherload.arm9
 

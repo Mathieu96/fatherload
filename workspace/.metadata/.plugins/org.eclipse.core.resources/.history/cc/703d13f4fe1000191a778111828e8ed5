@@ -515,34 +515,12 @@ void load_start_display(){
 			BG_MAP_RAM(9)[i*32 + j] = 3;
 		}
 	}
-	hide_objects();
 	print_start();
-}
-
-void hide_objects(){
-	int i;
-	for(i = 0; i < MINERAL_NUMBER; i++){
-		if(!mineral[i].isTook){
-			oamSet(&oamMain, 	// oam handler
-				OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-				mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
-				0,				// Priority
-				2,				// Palette to use
-				SpriteSize_16x16,			// Sprite size
-				SpriteColorFormat_16Color,	// Color format
-				alexxzandrite_pic,			// Loaded graphic to display
-				-1,				// Affine rotation to use (-1 none)
-				false,			// Double size if rotating
-				true,			// Hide this sprite
-				false, false,	// Horizontal or vertical flip
-				false			// Mosaic
-				);
-		}
-	}
 }
 
 void print_start(){
 	int i;
+	irqDisable(IRQ_TIMER0);
 
 	// Drawing S
 	BG_MAP_RAM(9)[9*32 + 5] = 1;
@@ -599,7 +577,7 @@ void print_start(){
 	BG_MAP_RAM(9)[9*32 + 24] = 1;
 	BG_MAP_RAM(9)[10*32 + 24] = 1;
 	BG_MAP_RAM(9)[11*32 + 24] = 1;
-	BG_MAP_RAM(9)[12*32 + 24] = 1;
+	BG_MAP_RAM(9)[11*32 + 23] = 1;
 	BG_MAP_RAM(9)[12*32 + 22] = 1;
 	BG_MAP_RAM(9)[12*32 + 23] = 1;
 
