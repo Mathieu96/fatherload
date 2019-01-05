@@ -25,5 +25,3 @@ extern const unsigned int numbersTiles[5632];
 extern const unsigned short numbersPal[2];
 
 #endif // GRIT_NUMBERS_H
-
-//}}BLOCK(numbers)

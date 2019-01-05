@@ -53,6 +53,12 @@ P_Audio.o:  \
   /opt/devkitPro/libnds/include/mm_types.h \
   /home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.h \
   /home/nds/files/fatherload/workspace/Fatherload/source/fatherload_defines.h \
+  /home/nds/files/fatherload/workspace/Fatherload/source/graphics_sub.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/controls.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/numbers.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/numbers_small.h \
+  /home/nds/files/fatherload/workspace/Fatherload/source/game.h \
+  /home/nds/files/fatherload/workspace/Fatherload/source/timer_game.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/diamond.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/PlayerHorizontal.h \
@@ -169,6 +175,18 @@ P_Audio.o:  \
 /home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/source/fatherload_defines.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/source/graphics_sub.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/controls.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/numbers.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/numbers_small.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/source/game.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/source/timer_game.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h:
 

@@ -3,8 +3,8 @@
 
 make 
 cp: cannot stat `/home/nds/files/fatherload/workspace/Fatherload/build/../precompiled/*': No such file or directory
-graphics_main.c
-arm-eabi-gcc -MMD -MP -MF /home/nds/files/fatherload/workspace/Fatherload/build/graphics_main.d -g -Wall -O0 -march=armv5te -mtune=arm946e-s -fomit-frame-pointer -ffast-math -mthumb -mthumb-interwork -I/home/nds/files/fatherload/workspace/Fatherload/include -I/opt/devkitPro/libnds/include -I/opt/devkitPro/libnds/include -I/home/nds/files/fatherload/workspace/Fatherload/build -DARM9 -c /home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.c -o graphics_main.o
+main.c
+arm-eabi-gcc -MMD -MP -MF /home/nds/files/fatherload/workspace/Fatherload/build/main.d -g -Wall -O0 -march=armv5te -mtune=arm946e-s -fomit-frame-pointer -ffast-math -mthumb -mthumb-interwork -I/home/nds/files/fatherload/workspace/Fatherload/include -I/opt/devkitPro/libnds/include -I/opt/devkitPro/libnds/include -I/home/nds/files/fatherload/workspace/Fatherload/build -DARM9 -c /home/nds/files/fatherload/workspace/Fatherload/source/main.c -o main.o
 linking Fatherload.elf
 built ... Fatherload.arm9
 

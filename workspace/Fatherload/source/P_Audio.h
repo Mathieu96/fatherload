@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _P_AUDIO_H
+#define _P_AUDIO_H
 
 #include <nds.h>
 #include <maxmod9.h>
@@ -10,3 +11,5 @@
 void Audio_Init();
 void Audio_PlaySoundEX(int i);
 void Audio_PlayMusic();
+
+#endif

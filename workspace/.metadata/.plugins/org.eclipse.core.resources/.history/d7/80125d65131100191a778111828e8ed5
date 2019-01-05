@@ -1,0 +1,26 @@
+/*
+ * graphics_main.c
+ *
+ *  Created on: Dec 11, 2018
+ *      Author: nds
+ */
+
+#include "game.h"
+#include "P_Audio.h"
+
+void player_move_right(){
+
+}
+
+void player_move_left(){
+
+}
+
+void player_move_down(){
+
+}
+
+
+void player_move_up(){
+
+}

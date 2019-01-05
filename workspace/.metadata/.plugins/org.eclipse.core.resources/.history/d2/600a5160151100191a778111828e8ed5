@@ -1,0 +1,106 @@
+/*
+ * graphics_main.c
+ *
+ *  Created on: Dec 11, 2018
+ *      Author: nds
+ */
+
+#include "game.h"
+
+int player_x = 128; int player_y = 112; int screen_x = 128; int screen_y = 0;
+
+int mineral_count = 0;
+
+Objects_coord *mineral;
+
+dir orientation;
+
+u16 *gfx_horizontal, *gfx_vertical, *diamond_pic, *amazonite_pic, *bronze_pic, *alexxzandrite_pic;
+
+int start_pressed = 0;
+
+void init_game(){
+	mineral = (Objects_coord *) malloc(MINERAL_NUMBER * sizeof(Objects_coord));
+
+	Audio_Init();
+	Audio_PlayMusic();
+
+	config_main_background();
+//	consoleDemoInit();
+	init_sub_background();
+	int restart = 0;
+
+	orientation = RIGHT;
+
+	TIMER_DATA(0) = TIMER_FREQ(100);
+	TIMER0_CR = TIMER_ENABLE | TIMER_DIV_64 | TIMER_IRQ_REQ;
+	irqSet(IRQ_TIMER0, timer0_ISR);
+
+	configureSprites();
+}
+
+void start_game(){
+	player_x = 128;
+	player_y = 112;
+	screen_x = 128;
+	screen_y = 0;
+	mineral_count = 0;
+	oamSet(&oamMain, 	// oam handler
+		PLAYER_SPRITE_ID,				// Number of sprite
+		player_x, player_y,			// Coordinates
+		0,				// Priority
+		0,				// Palette to use
+		SpriteSize_16x16,			// Sprite size
+		SpriteColorFormat_16Color,	// Color format
+		gfx_horizontal,			// Loaded graphic to display
+		-1,				// Affine rotation to use (-1 none)
+		false,			// Double size if rotating
+		false,			// Hide this sprite
+		false, false,	// Horizontal or vertical flip
+		false			// Mosaic
+		);
+	oamUpdate(&oamMain);
+	// set the starting backgrounds
+	init_main_bg();
+
+	//set the objects coordinates
+	setObjects();
+	irqEnable(IRQ_TIMER0);
+	printDigitSmall(0, 16, 1);
+	printDigitSmall(1, 18, 1);
+	printDigitSmall(2, 20, 1);
+	printDigitSmall(3, 22, 1);
+	printDigitSmall(4, 24, 1);
+	printDigitSmall(5, 26, 1);
+	printDigitSmall(6, 28, 1);
+	printDigitSmall(7, 30, 1);
+}
+
+void player_move_right(){
+
+}
+
+void player_move_left(){
+
+}
+
+void player_move_down(){
+	if(screen_y < 512 - 192 && !start_pressed){
+		Audio_PlaySoundEX(SFX_BULLDOZER);
+		orientation = DOWN;
+		screen_y ++;
+		if(player_y < 168)
+			player_y++;
+	}
+}
+
+
+void player_move_up(){
+	if(screen_y > 0  && !start_pressed){
+		Audio_PlaySoundEX(SFX_BULLDOZER);
+		orientation = UP;
+		screen_y --;
+		if(player_y > 112)
+			player_y--;
+	}
+}

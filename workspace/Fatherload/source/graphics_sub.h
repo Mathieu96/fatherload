@@ -10,13 +10,15 @@
 
 #include "fatherload_defines.h"
 #include "controls.h"
-#include "graphics_main.h"
 #include "numbers.h"
+#include "numbers_small.h"
 
 // Initialization of the backgrounds
 void init_sub_background();
 
 void printDigit(int number, int x, int y);
+
+void printDigitSmall(int number, int x, int y);
 
 void updateChronoDisp(int min, int sec, int msec);
 

@@ -10,6 +10,11 @@
 
 #include <nds.h>
 #include <string.h>
+#include "P_Audio.h"
+#include "graphics_main.h"
+#include "graphics_sub.h"
+#include "game.h"
+#include "timer_game.h"
 
 // define sprite IDs
 #define PLAYER_SPRITE_ID 0
@@ -42,6 +47,10 @@ extern dir orientation;
 extern int player_x, player_y, screen_x, screen_y;
 
 extern int mineral_count;
+
+extern int min, sec, msec;
+
+extern int start_pressed;
 
 extern Objects_coord *mineral;
 

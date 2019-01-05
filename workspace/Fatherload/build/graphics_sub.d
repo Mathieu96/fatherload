@@ -50,7 +50,9 @@ graphics_sub.o:  \
   /opt/devkitPro/libnds/include/nds/arm9/sprite.h \
   /opt/devkitPro/libnds/include/nds/system.h \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/controls.h \
+  /home/nds/files/fatherload/workspace/Fatherload/source/P_Audio.h \
+  /opt/devkitPro/libnds/include/maxmod9.h \
+  /opt/devkitPro/libnds/include/mm_types.h \
   /home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/diamond.h \
@@ -60,7 +62,13 @@ graphics_sub.o:  \
   /home/nds/files/fatherload/workspace/Fatherload/build/bronze.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/alexxzandrite.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/Game-Over.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/numbers.h
+  /home/nds/files/fatherload/workspace/Fatherload/build/soundbank.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/soundbank_bin.h \
+  /home/nds/files/fatherload/workspace/Fatherload/source/game.h \
+  /home/nds/files/fatherload/workspace/Fatherload/source/timer_game.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/controls.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/numbers.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/numbers_small.h
 
 /home/nds/files/fatherload/workspace/Fatherload/source/graphics_sub.h:
 
@@ -162,7 +170,11 @@ graphics_sub.o:  \
 
 /opt/devkitPro/libnds/include/nds/arm9/decompress.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/controls.h:
+/home/nds/files/fatherload/workspace/Fatherload/source/P_Audio.h:
+
+/opt/devkitPro/libnds/include/maxmod9.h:
+
+/opt/devkitPro/libnds/include/mm_types.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.h:
 
@@ -182,4 +194,16 @@ graphics_sub.o:  \
 
 /home/nds/files/fatherload/workspace/Fatherload/build/Game-Over.h:
 
+/home/nds/files/fatherload/workspace/Fatherload/build/soundbank.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/soundbank_bin.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/source/game.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/source/timer_game.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/controls.h:
+
 /home/nds/files/fatherload/workspace/Fatherload/build/numbers.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/numbers_small.h:
