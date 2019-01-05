@@ -52,12 +52,14 @@ u8 troubleTile[64] = {
 	254,254,0,0,254,254,0,0
 };
 
-void init_main_background(){
-	int i, j;
-
-	REG_DISPCNT = MODE_0_2D | DISPLAY_BG1_ACTIVE | DISPLAY_BG2_ACTIVE | DISPLAY_BG3_ACTIVE;
+void config_main_background(){
+	REG_DISPCNT = MODE_0_2D | DISPLAY_BG0_ACTIVE | DISPLAY_BG1_ACTIVE | DISPLAY_BG2_ACTIVE | DISPLAY_BG3_ACTIVE;
 	VRAM_A_CR = VRAM_ENABLE | VRAM_A_MAIN_BG;
 	VRAM_B_CR = VRAM_ENABLE | VRAM_B_MAIN_BG;
+
+	// Init BG0
+	BGCTRL[3] = BG_COLOR_256 | BG_MAP_BASE(10) | BG_TILE_BASE(10) | BG_32x32;
+	dmaCopy(Game_OverTiles, BG_TILE_RAM(16), Game_OverTilesLen);
 
 	// Init BG1
 	BGCTRL[1] = BG_COLOR_256 | BG_MAP_BASE(9) | BG_TILE_BASE(1) | BG_32x32;
@@ -73,12 +75,21 @@ void init_main_background(){
 	BG_PALETTE[254] = ARGB16(1,15,15,15);
 	BG_PALETTE[255] = ARGB16(1,21,17,12);
 
+	// Init background 3
+	BGCTRL[3] = BG_COLOR_256 | BG_MAP_BASE(4) | BG_TILE_BASE(2) | BG_64x64;
+	dmaCopy(FONDSTiles, BG_TILE_RAM(2), FONDSTilesLen);
+}
+
+void init_main_bg(){
+	int i,j;
+	// init the map of BG1
 	for(i = 0; i < 24; i++){
 		for(j = 0; j < 32; j++){
 			BG_MAP_RAM(9)[i*32 + j] = 0;
 		}
 	}
 
+	// Init map of BG2
 	for(i = 0; i < 32; i++){
 		for(j = 0; j < 32; j++){
 			BG_MAP_RAM(0)[i*32 + j] = 0;
@@ -88,15 +99,11 @@ void init_main_background(){
 		}
 	}
 
-
+	// Init Map of BG2
 	for(i = 0; i < 32; i++){
 		BG_MAP_RAM(2)[31*32 + i] = 2;
 		BG_MAP_RAM(3)[31*32 + i] = 2;
 	}
-
-	// Init background 3
-	BGCTRL[3] = BG_COLOR_256 | BG_MAP_BASE(4) | BG_TILE_BASE(2) | BG_64x64;
-	dmaCopy(FONDSTiles, BG_TILE_RAM(2), FONDSTilesLen);
 
 	for(i=0; i<32; i++){
 		dmaCopy(&FONDSMap[i*64], &BG_MAP_RAM(4)[i*32], 64);
@@ -104,6 +111,7 @@ void init_main_background(){
 		dmaCopy(&FONDSMap[(i + 32)*64], &BG_MAP_RAM(6)[i*32], 64);
 		dmaCopy(&FONDSMap[(i + 32)*64 + 32], &BG_MAP_RAM(7)[i*32], 64);
 	}
+
 }
 
 void configureSprites() {
@@ -140,7 +148,6 @@ void configureSprites() {
 	// alexxzandrite
 	dmaCopy(alexxzandritePal, &SPRITE_PALETTE[5*16], alexxzandritePalLen);
 	dmaCopy(alexxzandriteTiles, alexxzandrite_pic, alexxzandriteTilesLen);
-
 }
 
 
@@ -190,7 +197,6 @@ void update_state(){
 		int base = (((position_y)>255)?2:0) + (position_x)/256;
 		int x = ((position_x)%256)/8;
 		int y = ((position_y)%256)/8;
-		printf("x = %d, y = %d\n", x, y);
 		if(orientation == UP || orientation == DOWN){
 			for(i = y; i < y + 2; i++){
 				if(i > 31){
@@ -499,7 +505,7 @@ void check_alexxzandrite(int position_x, int position_y){
 
 
 void restart_display(){
-
+	dmaCopy(Game_OverMap, BG_MAP_RAM(10), Game_OverMapLen);
 }
 
 void load_start_display(){
@@ -507,7 +513,6 @@ void load_start_display(){
 	for(i = 0; i < 24; i++){
 		for(j = 0; j < 32; j++){
 			BG_MAP_RAM(9)[i*32 + j] = 3;
-			BG_MAP_RAM(10)[i*32 + j] = 3;
 		}
 	}
 	print_start();
@@ -589,7 +594,7 @@ void release_start_display(){
 	for(i = 0; i < 24; i++){
 		for(j = 0; j < 32; j++){
 			BG_MAP_RAM(9)[i*32 + j] = 0;
-			BG_MAP_RAM(10)[i*32 + j] = 0;
 		}
 	}
 }
+

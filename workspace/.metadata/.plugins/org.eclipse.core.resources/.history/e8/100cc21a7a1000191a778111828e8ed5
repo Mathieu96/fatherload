@@ -1,0 +1,23 @@
+/*
+ * graphics_main.h
+ *
+ *  Created on: Dec 11, 2018
+ *      Author: nds
+ */
+
+#ifndef GRAPHICS_MAIN_H_
+#define GRAPHICS_MAIN_H_
+
+#include "fatherload_defines.h"
+#include "controls.h"
+#include "graphics_main.h"
+#include "numbers.h"
+
+// Initialization of the backgrounds
+void init_sub_background();
+
+void printDigit(u16* map, int number, int x, int y);
+
+void updateChronoDisp(u16* map,int min, int sec, int msec);
+
+#endif /* GRAPHICS_MAIN_H_ */

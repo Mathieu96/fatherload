@@ -16,9 +16,12 @@
 #include "amazonite.h"
 #include "bronze.h"
 #include "alexxzandrite.h"
+#include "Game-Over.h"
 
 // Initialization of the backgrounds
-void init_main_background();
+void config_main_background();
+
+void init_main_bg();
 
 void configureSprites();
 

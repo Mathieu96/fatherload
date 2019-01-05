@@ -57,6 +57,7 @@ graphics_main.o:  \
   /home/nds/files/fatherload/workspace/Fatherload/build/amazonite.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/bronze.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/alexxzandrite.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/Game-Over.h \
   /home/nds/files/fatherload/workspace/Fatherload/source/P_Audio.h \
   /opt/devkitPro/libnds/include/maxmod9.h \
   /opt/devkitPro/libnds/include/mm_types.h \
@@ -176,6 +177,8 @@ graphics_main.o:  \
 /home/nds/files/fatherload/workspace/Fatherload/build/bronze.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/build/alexxzandrite.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/Game-Over.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/source/P_Audio.h:
 

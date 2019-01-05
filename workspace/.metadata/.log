@@ -15170,3 +15170,38 @@ org.eclipse.osgi.framework.internal.core.AbstractBundle$BundleStatusException
 	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:147)
 	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:242)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SESSION 2019-01-04 22:36:30.509 -----------------------------------------------
+eclipse.buildId=I20100608-0911
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os linux -ws gtk -arch x86 -product org.eclipse.epp.package.cpp.product -data /home/nds/files/fatherload/workspace -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-01-04 22:36:32.342
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!SESSION 2019-01-05 00:05:41.012 -----------------------------------------------
+eclipse.buildId=I20100608-0911
+java.version=1.6.0_21
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os linux -ws gtk -arch x86 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-01-05 00:05:49.804
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY unknown 8 1 2019-01-05 00:34:00.060
+!MESSAGE 
+
+!ENTRY unknown 8 1 2019-01-05 00:34:00.066
+!MESSAGE 
+
+!ENTRY unknown 8 1 2019-01-05 00:34:00.075
+!MESSAGE 
+
+!ENTRY unknown 8 1 2019-01-05 00:34:00.080
+!MESSAGE 
+
+!ENTRY unknown 8 1 2019-01-05 00:34:00.088
+!MESSAGE 

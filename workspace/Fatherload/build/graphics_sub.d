@@ -51,7 +51,16 @@ graphics_sub.o:  \
   /opt/devkitPro/libnds/include/nds/system.h \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/controls.h \
-  /home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.h
+  /home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/diamond.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerHorizontal.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerVertical.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/amazonite.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/bronze.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/alexxzandrite.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/Game-Over.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/numbers.h
 
 /home/nds/files/fatherload/workspace/Fatherload/source/graphics_sub.h:
 
@@ -156,3 +165,21 @@ graphics_sub.o:  \
 /home/nds/files/fatherload/workspace/Fatherload/build/controls.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/diamond.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/PlayerHorizontal.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/PlayerVertical.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/amazonite.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/bronze.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/alexxzandrite.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/Game-Over.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/numbers.h:
