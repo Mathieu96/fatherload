@@ -2,15 +2,17 @@
 **** Build of configuration Debug for project Fatherload ****
 
 make 
-make[1]: Warning: File `timer_game.d' has modification time 6.4e+04 s in the future
+make: Warning: File `Makefile' has modification time 6.2e+04 s in the future
+make[1]: Warning: File `timer_game.d' has modification time 6.7e+04 s in the future
 cp: cannot stat `/home/nds/files/fatherload/workspace/Fatherload/build/../precompiled/*': No such file or directory
-main.c
-arm-eabi-gcc -MMD -MP -MF /home/nds/files/fatherload/workspace/Fatherload/build/main.d -g -Wall -O0 -march=armv5te -mtune=arm946e-s -fomit-frame-pointer -ffast-math -mthumb -mthumb-interwork -I/home/nds/files/fatherload/workspace/Fatherload/include -I/opt/devkitPro/libnds/include -I/opt/devkitPro/libnds/include -I/home/nds/files/fatherload/workspace/Fatherload/build -DARM9 -c /home/nds/files/fatherload/workspace/Fatherload/source/main.c -o main.o
+graphics_sub.c
+arm-eabi-gcc -MMD -MP -MF /home/nds/files/fatherload/workspace/Fatherload/build/graphics_sub.d -g -Wall -O0 -march=armv5te -mtune=arm946e-s -fomit-frame-pointer -ffast-math -mthumb -mthumb-interwork -I/home/nds/files/fatherload/workspace/Fatherload/include -I/opt/devkitPro/libnds/include -I/opt/devkitPro/libnds/include -I/home/nds/files/fatherload/workspace/Fatherload/build -DARM9 -c /home/nds/files/fatherload/workspace/Fatherload/source/graphics_sub.c -o graphics_sub.o
 make[1]: warning:  Clock skew detected.  Your build may be incomplete.
 linking Fatherload.elf
 built ... Fatherload.arm9
 
 ndstool -c /home/nds/files/fatherload/workspace/Fatherload/Fatherload.nds -9 /home/nds/files/fatherload/workspace/Fatherload/Fatherload.arm9 -b /opt/devkitPro/libnds/icon.bmp "Fatherload;www.devkitpro.org;www.drunkencoders.com" 
+make: warning:  Clock skew detected.  Your build may be incomplete.
 Nintendo DS rom tool 1.40 - Apr 13 2009
 by Rafael Vuijk, Dave Murphy, Alexei Karpenko
 built ... Fatherload.nds

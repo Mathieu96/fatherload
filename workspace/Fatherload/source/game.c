@@ -133,7 +133,7 @@ void player_pressed_start(){
 			false			// Mosaic
 		);
 		oamUpdate(&oamMain);
-		swiDelay(15000000); // Delay to avoid going back out of start mode right after
+		swiDelay(11000000); // Delay to avoid going back out of start mode right after
 	}
 	else{
 		mmResume();
@@ -154,7 +154,7 @@ void player_pressed_start(){
 		oamUpdate(&oamMain);
 		release_start_display();
 		start_pressed = 0;
-		swiDelay(15000000); // Delay to avoid going back into start mode right after
+		swiDelay(11000000); // Delay to avoid going back into start mode right after
 		irqEnable(IRQ_TIMER0);
 	}
 }
