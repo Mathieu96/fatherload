@@ -7,7 +7,7 @@
 
 #include "game.h"
 
-int player_x; int player_y; int screen_x; int screen_y;
+int player_x = 128; int player_y = 112; int screen_x = 128; int screen_y = 0;
 
 int mineral_count = 0;
 
@@ -67,6 +67,7 @@ void start_game(){
 	//set the objects coordinates
 	setObjects();
 	irqEnable(IRQ_TIMER0);
+	score_player = 123456;
 	score_update();
 }
 

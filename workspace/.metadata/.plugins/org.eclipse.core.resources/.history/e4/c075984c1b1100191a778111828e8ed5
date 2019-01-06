@@ -22,6 +22,4 @@ void printDigitSmall(int number, int x, int y);
 
 void updateChronoDisp(int min, int sec, int msec);
 
-void score_update();
-
 #endif /* GRAPHICS_MAIN_H_ */

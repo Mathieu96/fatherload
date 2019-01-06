@@ -92,14 +92,3 @@ void updateChronoDisp(int min, int sec, int msec){
 	printDigit((int)(msec%100)/10, 24, 16);
 	printDigit((int)msec%10, 28, 16);
 }
-
-void score_update(){
-	int i, x;
-	x = 14;
-	int temp = score_player;
-	for(i = 10000000; i > 0; i /= 10){
-		x += 2;
-		printDigitSmall(temp / i, x, 1);
-		temp = temp % i;
-	}
-}

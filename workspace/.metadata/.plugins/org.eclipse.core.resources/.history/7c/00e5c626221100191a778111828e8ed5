@@ -57,6 +57,9 @@ int main(void){
 					score_update();
 				}
 
+				int position_y = player_y + screen_y;
+				int position_x = player_x + screen_x;
+
 				swiWaitForVBlank(); // slow down the game
 				oamUpdate(&oamMain);
 				// Show the time since the game began

@@ -250,12 +250,8 @@ void check_diamond(int position_x, int position_y){
 		&& (((position_x - mineral[i].x > 0) ? (position_x - mineral[i].x):(mineral[i].x - position_x)) < 16) // abs(diamond.x - position_x) < 16
 		)){
 			mineral_count++;
-			if(score_player < 999999){
-				score_player += DIAMOND_SCORE;
-				if(score_player > 999999)
-					score_player = 999999;
-				score_changed = 1;
-			}
+			score_player = DIAMOND_SCORE;
+			score_changed = 1;
 			Audio_PlaySoundEX(SFX_COIN_PICKUP);
 			mineral[i].isTook = 1;
 			oamSet(&oamMain, 	// oam handler
@@ -321,12 +317,8 @@ void check_amazonite(int position_x, int position_y){
 		&& (((position_x - mineral[i].x > 0) ? (position_x - mineral[i].x):(mineral[i].x - position_x)) < 16) // abs(diamond.x - position_x) < 16
 		)){
 			mineral_count++;
-			if(score_player < 999999){
-				score_player += AMAZONITE_SCORE;
-				if(score_player > 999999)
-					score_player = 999999;
-				score_changed = 1;
-			}
+			score_player = AMAZONITE_SCORE;
+			score_changed = 1;
 			Audio_PlaySoundEX(SFX_COIN_PICKUP);
 			mineral[i].isTook = 1;
 			oamSet(&oamMain, 	// oam handler
@@ -392,12 +384,8 @@ void check_bronze(int position_x, int position_y){
 		&& (((position_x - mineral[i].x > 0) ? (position_x - mineral[i].x):(mineral[i].x - position_x)) < 16) // abs(diamond.x - position_x) < 16
 		)){
 			mineral_count++;
-			if(score_player < 999999){
-				score_player += BRONZE_SCORE;
-				if(score_player > 999999)
-					score_player = 999999;
-				score_changed = 1;
-			}
+			score_player = BRONZE_SCORE;
+			score_changed = 1;
 			Audio_PlaySoundEX(SFX_COIN_PICKUP);
 			mineral[i].isTook = 1;
 			oamSet(&oamMain, 	// oam handler
@@ -464,12 +452,8 @@ void check_alexxzandrite(int position_x, int position_y){
 		&& (((position_x - mineral[i].x > 0) ? (position_x - mineral[i].x):(mineral[i].x - position_x)) < 16) // abs(diamond.x - position_x) < 16
 		)){
 			mineral_count++;
-			if(score_player < 999999){
-				score_player += ALEXXZANDRITE_SCORE;
-				if(score_player > 999999)
-					score_player = 999999;
-				score_changed = 1;
-			}
+			score_player = ALEXXZANDRITE_SCORE;
+			score_changed = 1;
 			Audio_PlaySoundEX(SFX_COIN_PICKUP);
 			mineral[i].isTook = 1;
 			oamSet(&oamMain, 	// oam handler

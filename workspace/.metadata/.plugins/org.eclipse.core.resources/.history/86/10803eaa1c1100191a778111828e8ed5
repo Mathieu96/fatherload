@@ -52,11 +52,6 @@ int main(void){
 				update_game();
 				// Update the drilled path
 				update_state();
-
-				if(score_changed){
-					score_update();
-				}
-
 				swiWaitForVBlank(); // slow down the game
 				oamUpdate(&oamMain);
 				// Show the time since the game began

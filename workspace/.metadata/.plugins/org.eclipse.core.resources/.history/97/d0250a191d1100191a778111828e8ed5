@@ -7,7 +7,7 @@
 
 #include "game.h"
 
-int player_x; int player_y; int screen_x; int screen_y;
+int player_x = 128; int player_y = 112; int screen_x = 128; int screen_y = 0;
 
 int mineral_count = 0;
 
@@ -44,8 +44,6 @@ void start_game(){
 	screen_x = 128;
 	screen_y = 0;
 	mineral_count = 0;
-	score_player = 0;
-
 	oamSet(&oamMain, 	// oam handler
 		PLAYER_SPRITE_ID,				// Number of sprite
 		player_x, player_y,			// Coordinates
@@ -67,7 +65,14 @@ void start_game(){
 	//set the objects coordinates
 	setObjects();
 	irqEnable(IRQ_TIMER0);
-	score_update();
+	printDigitSmall(0, 16, 1);
+	printDigitSmall(1, 18, 1);
+	printDigitSmall(2, 20, 1);
+	printDigitSmall(3, 22, 1);
+	printDigitSmall(4, 24, 1);
+	printDigitSmall(5, 26, 1);
+	printDigitSmall(6, 28, 1);
+	printDigitSmall(7, 30, 1);
 }
 
 void player_move_right(){

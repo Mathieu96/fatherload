@@ -57,7 +57,14 @@ int main(void){
 					score_update();
 				}
 
-				swiWaitForVBlank(); // slow down the game
+				int position_y = player_y + screen_y;
+				int position_x = player_x + screen_x;
+
+				int base = (((position_y)>255)?2:0) + (position_x)/256;
+				int x = ((position_x)%256)/8;
+				int y = ((position_y)%256)/8;
+				if((BG_MAP_RAM(base)[y*32 + x] == 0 && BG_MAP_RAM(base)[y*32 + x + 1] == 0))
+					swiWaitForVBlank(); // slow down the game
 				oamUpdate(&oamMain);
 				// Show the time since the game began
 				updateChronoDisp(min, sec, msec);
