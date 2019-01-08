@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;Fatherload/audio/Tire screech.wav&apos; to &apos;Tire_screech.wav&apos;" description="Rename resource &apos;Tire screech.wav&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="audio/Tire screech.wav" name="Tire_screech.wav" stamp="1546623230838" updateReferences="true"/>
-</session>
