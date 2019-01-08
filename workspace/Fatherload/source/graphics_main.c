@@ -163,33 +163,33 @@ void initMinerals(){
 		mineral[i].x = (rand()%512);
 		mineral[i].y = (rand()%(512-384-16-8)) + 384;
 		// isDrilled = 0 when not took, 1 when the player took it
-		mineral[i].isDrilled = 0;
-		strcpy(mineral[i].type,"diamond");
+		mineral[i].isDrilled = false;
+		mineral[i].type = DIAMOND;
 	}
 	// Generate the amazonite
 	for(i = N_DIAMOND; i < N_DIAMOND + N_AMAZONITE; i++){
 			mineral[i].x = (rand()%512);
 			mineral[i].y = (rand()%(512-256-16-8))+ 256;
 			// isDrilled = 0 when not took, 1 when the player took it
-			mineral[i].isDrilled = 0;
-			strcpy(mineral[i].type,"amazonite");
+			mineral[i].isDrilled = false;
+			mineral[i].type = AMAZONITE;
 	}
 	// Generate the bronzes
 	for(i = N_DIAMOND + N_AMAZONITE; i < N_DIAMOND + N_AMAZONITE + N_BRONZE; i++){
 			mineral[i].x = (rand()%512);
 			mineral[i].y = (rand()%(512-128-16-8)) + 128;
 			// isDrilled = 0 when not took, 1 when the player took it
-			mineral[i].isDrilled = 0;
-			strcpy(mineral[i].type,"bronze");
+			mineral[i].isDrilled = false;
+			mineral[i].type = BRONZE;
 	}
 	// Generate the alexxzandrites
 	for(i = N_DIAMOND + N_AMAZONITE + N_BRONZE;
-			i < N_DIAMOND + N_AMAZONITE + N_BRONZE + N_ALEXANDRITE; i++){
+			i < N_DIAMOND + N_AMAZONITE + N_BRONZE + N_ALEXXZANDRITE; i++){
 			mineral[i].x = (rand()%512);
 			mineral[i].y = (rand()%(512-384-16-8))+ 384;
 			// isDrilled = 0 when not took, 1 when the player took it
-			mineral[i].isDrilled = 0;
-			strcpy(mineral[i].type,"bronze");
+			mineral[i].isDrilled = false;
+			mineral[i].type = ALEXXZANDRITE;
 	}
 }
 

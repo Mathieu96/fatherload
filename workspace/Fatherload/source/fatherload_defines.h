@@ -10,11 +10,13 @@
 
 #include <nds.h>
 #include <string.h>
+#include <stdbool.h>
 #include "P_Audio.h"
 #include "graphics_main.h"
 #include "graphics_sub.h"
 #include "game.h"
 #include "timer_game.h"
+
 
 // define sprite IDs
 #define PLAYER_SPRITE_ID 0
@@ -30,8 +32,8 @@
 #define N_DIAMOND 10
 #define N_AMAZONITE 20
 #define N_BRONZE 40
-#define N_ALEXANDRITE 5
-#define N_TOT_MINERALS (N_DIAMOND + N_AMAZONITE + N_BRONZE + N_ALEXANDRITE)
+#define N_ALEXXZANDRITE 5
+#define N_TOT_MINERALS (N_DIAMOND + N_AMAZONITE + N_BRONZE + N_ALEXXZANDRITE)
 
 // palettes numbers
 #define PLAYER_HPAL 0
@@ -44,11 +46,13 @@
 #define SPRITE_WIDTH 32
 #define SPRITE_HEIGTH 32
 
+typedef enum {DIRT, DRILLED, DIAMOND, AMAZONITE, BRONZE, ALEXXZANDRITE} mineralType;
+
 typedef struct{
 	int x;
 	int y;
-	int isDrilled;
-	char type[20];
+	bool isDrilled;
+	mineralType type;
 } Objects_coord;
 
 typedef enum {UP, DOWN, LEFT, RIGHT} dir;
