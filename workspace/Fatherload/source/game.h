@@ -9,6 +9,7 @@
 #define GAME_H_
 
 #include "fatherload_defines.h"
+#include "mineral.h"
 
 void init_game();
 
@@ -30,12 +31,6 @@ void player_pressed_touchscreen();
 
 void update_game();
 
-void check_alexxzandrite(int position_x, int position_y);
 
-void check_amazonite(int position_x, int position_y);
-
-void check_diamond(int position_x, int position_y);
-
-void check_bronze(int position_x, int position_y);
 
 #endif /* GRAPHICS_MAIN_H_ */

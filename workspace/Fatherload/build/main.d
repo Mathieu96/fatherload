@@ -68,6 +68,7 @@ main.o:  \
   /home/nds/files/workspace/fatherload/workspace/Fatherload/build/numbers.h \
   /home/nds/files/workspace/fatherload/workspace/Fatherload/build/numbers_small.h \
   /home/nds/files/workspace/fatherload/workspace/Fatherload/source/game.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/source/mineral.h \
   /home/nds/files/workspace/fatherload/workspace/Fatherload/source/timer_game.h
 
 /home/nds/files/workspace/fatherload/workspace/Fatherload/source/fatherload_defines.h:
@@ -205,5 +206,7 @@ main.o:  \
 /home/nds/files/workspace/fatherload/workspace/Fatherload/build/numbers_small.h:
 
 /home/nds/files/workspace/fatherload/workspace/Fatherload/source/game.h:
+
+/home/nds/files/workspace/fatherload/workspace/Fatherload/source/mineral.h:
 
 /home/nds/files/workspace/fatherload/workspace/Fatherload/source/timer_game.h:

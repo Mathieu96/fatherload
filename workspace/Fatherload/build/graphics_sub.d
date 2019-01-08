@@ -65,6 +65,7 @@ graphics_sub.o:  \
   /home/nds/files/workspace/fatherload/workspace/Fatherload/build/soundbank.h \
   /home/nds/files/workspace/fatherload/workspace/Fatherload/build/soundbank_bin.h \
   /home/nds/files/workspace/fatherload/workspace/Fatherload/source/game.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/source/mineral.h \
   /home/nds/files/workspace/fatherload/workspace/Fatherload/source/timer_game.h \
   /home/nds/files/workspace/fatherload/workspace/Fatherload/build/controls.h \
   /home/nds/files/workspace/fatherload/workspace/Fatherload/build/numbers.h \
@@ -199,6 +200,8 @@ graphics_sub.o:  \
 /home/nds/files/workspace/fatherload/workspace/Fatherload/build/soundbank_bin.h:
 
 /home/nds/files/workspace/fatherload/workspace/Fatherload/source/game.h:
+
+/home/nds/files/workspace/fatherload/workspace/Fatherload/source/mineral.h:
 
 /home/nds/files/workspace/fatherload/workspace/Fatherload/source/timer_game.h:
 

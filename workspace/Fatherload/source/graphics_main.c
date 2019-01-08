@@ -155,46 +155,6 @@ void configureSprites() {
 	dmaCopy(alexxzandriteTiles, alexxzandrite_pic, alexxzandriteTilesLen);
 }
 
-
-void initMinerals(){
-	int i;
-	// Generate the diamonds, deep on the map
-	for(i = 0; i < N_DIAMOND; i++){
-		mineral[i].x = (rand()%512);
-		mineral[i].y = (rand()%(512-384-16-8)) + 384;
-		// isDrilled = 0 when not took, 1 when the player took it
-		mineral[i].isDrilled = false;
-		mineral[i].type = DIAMOND;
-	}
-	// Generate the amazonite
-	for(i = N_DIAMOND; i < N_DIAMOND + N_AMAZONITE; i++){
-			mineral[i].x = (rand()%512);
-			mineral[i].y = (rand()%(512-256-16-8))+ 256;
-			// isDrilled = 0 when not took, 1 when the player took it
-			mineral[i].isDrilled = false;
-			mineral[i].type = AMAZONITE;
-	}
-	// Generate the bronzes
-	for(i = N_DIAMOND + N_AMAZONITE; i < N_DIAMOND + N_AMAZONITE + N_BRONZE; i++){
-			mineral[i].x = (rand()%512);
-			mineral[i].y = (rand()%(512-128-16-8)) + 128;
-			// isDrilled = 0 when not took, 1 when the player took it
-			mineral[i].isDrilled = false;
-			mineral[i].type = BRONZE;
-	}
-	// Generate the alexxzandrites
-	for(i = N_DIAMOND + N_AMAZONITE + N_BRONZE;
-			i < N_DIAMOND + N_AMAZONITE + N_BRONZE + N_ALEXXZANDRITE; i++){
-			mineral[i].x = (rand()%512);
-			mineral[i].y = (rand()%(512-384-16-8))+ 384;
-			// isDrilled = 0 when not took, 1 when the player took it
-			mineral[i].isDrilled = false;
-			mineral[i].type = ALEXXZANDRITE;
-	}
-}
-
-
-
 void restart_display(){
 	dmaCopy(Game_OverMap, BG_MAP_RAM(10), Game_OverMapLen);
 }
@@ -206,34 +166,10 @@ void load_start_display(){
 			BG_MAP_RAM(9)[i*32 + j] = 3;
 		}
 	}
-	hide_objects();
+	hide_all_minerals();
 	print_start();
 }
 
-void hide_objects(){
-	int i;
-	for(i = 0; i < N_TOT_MINERALS; i++){
-		if(!mineral[i].isDrilled){
-			//update_sprite(u16* gfx, int spriteID, int hide, int paletteNum, int x, int y)
-			update_sprite(NULL, OFFSET_MINERAL_SPRITE + i,
-				1, 0, 0, 0, mineral[i].x - screen_x, mineral[i].y - screen_y);
-			/*oamSet(&oamMain, 	// oam handler
-				OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-				mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
-				0,				// Priority
-				2,				// Palette to use
-				SpriteSize_16x16,			// Sprite size
-				SpriteColorFormat_16Color,	// Color format
-				alexandrite_pic,			// Loaded graphic to display, don't care here because we hide the sprite
-				-1,				// Affine rotation to use (-1 none)
-				false,			// Double size if rotating
-				true,			// Hide this sprite
-				false, false,	// Horizontal or vertical flip
-				false			// Mosaic
-				);*/
-		}
-	}
-}
 
 void print_start(){
 	int i;
