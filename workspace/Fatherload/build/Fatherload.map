@@ -227,31 +227,31 @@ Linker script and memory map
  .text          0x02000380        0x0 numbers_small.o
  .text          0x02000380        0x0 PlayerHorizontal.o
  .text          0x02000380        0x0 PlayerVertical.o
- .text          0x02000380      0x634 game.o
+ .text          0x02000380     0x1344 game.o
+                0x020011a0                check_bronze
                 0x0200058c                player_move_up
                 0x02000848                update_game
                 0x020005dc                player_pressed_start
                 0x020003e4                start_game
+                0x02000c80                check_diamond
                 0x020004e4                player_move_left
                 0x02000534                player_move_down
+                0x02001430                check_alexxzandrite
+                0x020009b4                update_state
                 0x02000380                init_game
+                0x02000f10                check_amazonite
                 0x020006e4                player_pressed_touchscreen
                 0x02000494                player_move_right
- .text          0x020009b4     0x180c graphics_main.o
-                0x020018b0                check_bronze
-                0x020009b4                config_main_background
-                0x02000ca0                configureSprites
+ .text          0x020016c4      0xafc graphics_main.o
+                0x020016c4                config_main_background
+                0x020019b0                configureSprites
                 0x02001dd4                restart_display
-                0x02000b10                init_main_bg
-                0x02001390                check_diamond
+                0x02001820                init_main_bg
                 0x02001ee4                print_start
                 0x02001e40                hide_objects
                 0x02001df4                load_start_display
-                0x02001b40                check_alexxzandrite
-                0x020010c4                update_state
+                0x02001b64                initMinerals
                 0x0200217c                release_start_display
-                0x02001620                check_amazonite
-                0x02000e54                setObjects
  .text          0x020021c0      0x3ec graphics_sub.o
                 0x0200254c                score_update
                 0x020023f0                updateChronoDisp
@@ -1572,122 +1572,122 @@ Linker script and memory map
                 0x000002a8       0x28 /opt/devkitPro/devkitARM/lib/gcc/arm-eabi/4.3.3/thumb/crtn.o
 
 .debug_pubnames
-                0x00000000      0xfc5
+                0x00000000      0xfc7
  *(.debug_pubnames)
  .debug_pubnames
-                0x00000000      0x1ca game.o
+                0x00000000      0x22a game.o
  .debug_pubnames
-                0x000001ca      0x15f graphics_main.o
+                0x0000022a      0x101 graphics_main.o
  .debug_pubnames
-                0x00000329       0x82 graphics_sub.o
+                0x0000032b       0x82 graphics_sub.o
  .debug_pubnames
-                0x000003ab       0x1b main.o
+                0x000003ad       0x1b main.o
  .debug_pubnames
-                0x000003c6       0x4b P_Audio.o
+                0x000003c8       0x4b P_Audio.o
  .debug_pubnames
-                0x00000411       0x3a timer_game.o
+                0x00000413       0x3a timer_game.o
  .debug_pubnames
-                0x0000044b       0x2d /opt/devkitPro/libnds/lib/libnds9.a(initSystem.o)
+                0x0000044d       0x2d /opt/devkitPro/libnds/lib/libnds9.a(initSystem.o)
  .debug_pubnames
-                0x00000478       0x79 /opt/devkitPro/libnds/lib/libnds9.a(keys.o)
+                0x0000047a       0x79 /opt/devkitPro/libnds/lib/libnds9.a(keys.o)
  .debug_pubnames
-                0x000004f1       0xd1 /opt/devkitPro/libnds/lib/libnds9.a(sprite.o)
+                0x000004f3       0xd1 /opt/devkitPro/libnds/lib/libnds9.a(sprite.o)
  .debug_pubnames
-                0x000005c2       0x9f /opt/devkitPro/libnds/lib/libnds9.a(sprite_alloc.o)
+                0x000005c4       0x9f /opt/devkitPro/libnds/lib/libnds9.a(sprite_alloc.o)
  .debug_pubnames
-                0x00000661       0x73 /opt/devkitPro/libnds/lib/libnds9.a(system.o)
+                0x00000663       0x73 /opt/devkitPro/libnds/lib/libnds9.a(system.o)
  .debug_pubnames
-                0x000006d4       0x30 /opt/devkitPro/libnds/lib/libnds9.a(touch.o)
+                0x000006d6       0x30 /opt/devkitPro/libnds/lib/libnds9.a(touch.o)
  .debug_pubnames
-                0x00000704       0x99 /opt/devkitPro/libnds/lib/libnds9.a(trig.o)
+                0x00000706       0x99 /opt/devkitPro/libnds/lib/libnds9.a(trig.o)
  .debug_pubnames
-                0x0000079d      0x194 /opt/devkitPro/libnds/lib/libnds9.a(videoGL.o)
+                0x0000079f      0x194 /opt/devkitPro/libnds/lib/libnds9.a(videoGL.o)
  .debug_pubnames
-                0x00000931      0x529 /opt/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
+                0x00000933      0x529 /opt/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
  .debug_pubnames
-                0x00000e5a       0x80 /opt/devkitPro/libnds/lib/libnds9.a(interrupts.o)
+                0x00000e5c       0x80 /opt/devkitPro/libnds/lib/libnds9.a(interrupts.o)
  .debug_pubnames
-                0x00000eda       0xeb /opt/devkitPro/libnds/lib/libnds9.a(video.o)
+                0x00000edc       0xeb /opt/devkitPro/libnds/lib/libnds9.a(video.o)
 
-.debug_info     0x00000000     0x8ff0
+.debug_info     0x00000000     0x8f7a
  *(.debug_info)
  .debug_info    0x00000000       0x68 /opt/devkitPro/devkitARM/lib/gcc/arm-eabi/4.3.3/thumb/crti.o
- .debug_info    0x00000068      0xba7 game.o
- .debug_info    0x00000c0f     0x1189 graphics_main.o
- .debug_info    0x00001d98      0x75e graphics_sub.o
- .debug_info    0x000024f6      0x88c main.o
- .debug_info    0x00002d82      0x4cf P_Audio.o
- .debug_info    0x00003251      0x33e timer_game.o
- .debug_info    0x0000358f      0x36a /opt/devkitPro/libnds/lib/libnds9.a(initSystem.o)
- .debug_info    0x000038f9      0x317 /opt/devkitPro/libnds/lib/libnds9.a(keys.o)
- .debug_info    0x00003c10      0xc37 /opt/devkitPro/libnds/lib/libnds9.a(sprite.o)
- .debug_info    0x00004847      0x963 /opt/devkitPro/libnds/lib/libnds9.a(sprite_alloc.o)
- .debug_info    0x000051aa      0x503 /opt/devkitPro/libnds/lib/libnds9.a(system.o)
- .debug_info    0x000056ad      0x222 /opt/devkitPro/libnds/lib/libnds9.a(touch.o)
- .debug_info    0x000058cf      0x3a7 /opt/devkitPro/libnds/lib/libnds9.a(trig.o)
- .debug_info    0x00005c76     0x1382 /opt/devkitPro/libnds/lib/libnds9.a(videoGL.o)
- .debug_info    0x00006ff8     0x1452 /opt/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
- .debug_info    0x0000844a      0x321 /opt/devkitPro/libnds/lib/libnds9.a(interrupts.o)
- .debug_info    0x0000876b       0xc2 /opt/devkitPro/libnds/lib/libnds9.a(dcache.o)
- .debug_info    0x0000882d       0xc7 /opt/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
- .debug_info    0x000088f4       0xd1 /opt/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
- .debug_info    0x000089c5      0x5c3 /opt/devkitPro/libnds/lib/libnds9.a(video.o)
- .debug_info    0x00008f88       0x68 /opt/devkitPro/devkitARM/lib/gcc/arm-eabi/4.3.3/thumb/crtn.o
+ .debug_info    0x00000068      0xd37 game.o
+ .debug_info    0x00000d9f      0xf83 graphics_main.o
+ .debug_info    0x00001d22      0x75e graphics_sub.o
+ .debug_info    0x00002480      0x88c main.o
+ .debug_info    0x00002d0c      0x4cf P_Audio.o
+ .debug_info    0x000031db      0x33e timer_game.o
+ .debug_info    0x00003519      0x36a /opt/devkitPro/libnds/lib/libnds9.a(initSystem.o)
+ .debug_info    0x00003883      0x317 /opt/devkitPro/libnds/lib/libnds9.a(keys.o)
+ .debug_info    0x00003b9a      0xc37 /opt/devkitPro/libnds/lib/libnds9.a(sprite.o)
+ .debug_info    0x000047d1      0x963 /opt/devkitPro/libnds/lib/libnds9.a(sprite_alloc.o)
+ .debug_info    0x00005134      0x503 /opt/devkitPro/libnds/lib/libnds9.a(system.o)
+ .debug_info    0x00005637      0x222 /opt/devkitPro/libnds/lib/libnds9.a(touch.o)
+ .debug_info    0x00005859      0x3a7 /opt/devkitPro/libnds/lib/libnds9.a(trig.o)
+ .debug_info    0x00005c00     0x1382 /opt/devkitPro/libnds/lib/libnds9.a(videoGL.o)
+ .debug_info    0x00006f82     0x1452 /opt/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
+ .debug_info    0x000083d4      0x321 /opt/devkitPro/libnds/lib/libnds9.a(interrupts.o)
+ .debug_info    0x000086f5       0xc2 /opt/devkitPro/libnds/lib/libnds9.a(dcache.o)
+ .debug_info    0x000087b7       0xc7 /opt/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
+ .debug_info    0x0000887e       0xd1 /opt/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
+ .debug_info    0x0000894f      0x5c3 /opt/devkitPro/libnds/lib/libnds9.a(video.o)
+ .debug_info    0x00008f12       0x68 /opt/devkitPro/devkitARM/lib/gcc/arm-eabi/4.3.3/thumb/crtn.o
 
-.debug_abbrev   0x00000000     0x1ffd
+.debug_abbrev   0x00000000     0x1fdf
  *(.debug_abbrev)
  .debug_abbrev  0x00000000       0x12 /opt/devkitPro/devkitARM/lib/gcc/arm-eabi/4.3.3/thumb/crti.o
- .debug_abbrev  0x00000012      0x1e2 game.o
- .debug_abbrev  0x000001f4      0x2a0 graphics_main.o
- .debug_abbrev  0x00000494      0x1bd graphics_sub.o
- .debug_abbrev  0x00000651      0x1ce main.o
- .debug_abbrev  0x0000081f      0x1a9 P_Audio.o
- .debug_abbrev  0x000009c8      0x13a timer_game.o
- .debug_abbrev  0x00000b02      0x15d /opt/devkitPro/libnds/lib/libnds9.a(initSystem.o)
- .debug_abbrev  0x00000c5f      0x15e /opt/devkitPro/libnds/lib/libnds9.a(keys.o)
- .debug_abbrev  0x00000dbd      0x2b1 /opt/devkitPro/libnds/lib/libnds9.a(sprite.o)
- .debug_abbrev  0x0000106e      0x1ce /opt/devkitPro/libnds/lib/libnds9.a(sprite_alloc.o)
- .debug_abbrev  0x0000123c      0x14f /opt/devkitPro/libnds/lib/libnds9.a(system.o)
- .debug_abbrev  0x0000138b      0x108 /opt/devkitPro/libnds/lib/libnds9.a(touch.o)
- .debug_abbrev  0x00001493      0x178 /opt/devkitPro/libnds/lib/libnds9.a(trig.o)
- .debug_abbrev  0x0000160b      0x3fe /opt/devkitPro/libnds/lib/libnds9.a(videoGL.o)
- .debug_abbrev  0x00001a09      0x349 /opt/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
- .debug_abbrev  0x00001d52      0x161 /opt/devkitPro/libnds/lib/libnds9.a(interrupts.o)
- .debug_abbrev  0x00001eb3       0x14 /opt/devkitPro/libnds/lib/libnds9.a(dcache.o)
- .debug_abbrev  0x00001ec7       0x14 /opt/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
- .debug_abbrev  0x00001edb       0x14 /opt/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
- .debug_abbrev  0x00001eef       0xfc /opt/devkitPro/libnds/lib/libnds9.a(video.o)
- .debug_abbrev  0x00001feb       0x12 /opt/devkitPro/devkitARM/lib/gcc/arm-eabi/4.3.3/thumb/crtn.o
+ .debug_abbrev  0x00000012      0x235 game.o
+ .debug_abbrev  0x00000247      0x22f graphics_main.o
+ .debug_abbrev  0x00000476      0x1bd graphics_sub.o
+ .debug_abbrev  0x00000633      0x1ce main.o
+ .debug_abbrev  0x00000801      0x1a9 P_Audio.o
+ .debug_abbrev  0x000009aa      0x13a timer_game.o
+ .debug_abbrev  0x00000ae4      0x15d /opt/devkitPro/libnds/lib/libnds9.a(initSystem.o)
+ .debug_abbrev  0x00000c41      0x15e /opt/devkitPro/libnds/lib/libnds9.a(keys.o)
+ .debug_abbrev  0x00000d9f      0x2b1 /opt/devkitPro/libnds/lib/libnds9.a(sprite.o)
+ .debug_abbrev  0x00001050      0x1ce /opt/devkitPro/libnds/lib/libnds9.a(sprite_alloc.o)
+ .debug_abbrev  0x0000121e      0x14f /opt/devkitPro/libnds/lib/libnds9.a(system.o)
+ .debug_abbrev  0x0000136d      0x108 /opt/devkitPro/libnds/lib/libnds9.a(touch.o)
+ .debug_abbrev  0x00001475      0x178 /opt/devkitPro/libnds/lib/libnds9.a(trig.o)
+ .debug_abbrev  0x000015ed      0x3fe /opt/devkitPro/libnds/lib/libnds9.a(videoGL.o)
+ .debug_abbrev  0x000019eb      0x349 /opt/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
+ .debug_abbrev  0x00001d34      0x161 /opt/devkitPro/libnds/lib/libnds9.a(interrupts.o)
+ .debug_abbrev  0x00001e95       0x14 /opt/devkitPro/libnds/lib/libnds9.a(dcache.o)
+ .debug_abbrev  0x00001ea9       0x14 /opt/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
+ .debug_abbrev  0x00001ebd       0x14 /opt/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
+ .debug_abbrev  0x00001ed1       0xfc /opt/devkitPro/libnds/lib/libnds9.a(video.o)
+ .debug_abbrev  0x00001fcd       0x12 /opt/devkitPro/devkitARM/lib/gcc/arm-eabi/4.3.3/thumb/crtn.o
 
-.debug_line     0x00000000     0x35bd
+.debug_line     0x00000000     0x35bc
  *(.debug_line)
  .debug_line    0x00000000       0x49 /opt/devkitPro/devkitARM/lib/gcc/arm-eabi/4.3.3/thumb/crti.o
- .debug_line    0x00000049      0x224 game.o
- .debug_line    0x0000026d      0x3f2 graphics_main.o
- .debug_line    0x0000065f      0x23f graphics_sub.o
- .debug_line    0x0000089e      0x1a1 main.o
- .debug_line    0x00000a3f      0x1e8 P_Audio.o
- .debug_line    0x00000c27      0x166 timer_game.o
- .debug_line    0x00000d8d      0x31e /opt/devkitPro/libnds/lib/libnds9.a(initSystem.o)
- .debug_line    0x000010ab      0x2ec /opt/devkitPro/libnds/lib/libnds9.a(keys.o)
- .debug_line    0x00001397      0x2dc /opt/devkitPro/libnds/lib/libnds9.a(sprite.o)
- .debug_line    0x00001673      0x2cd /opt/devkitPro/libnds/lib/libnds9.a(sprite_alloc.o)
- .debug_line    0x00001940      0x2d1 /opt/devkitPro/libnds/lib/libnds9.a(system.o)
- .debug_line    0x00001c11      0x27e /opt/devkitPro/libnds/lib/libnds9.a(touch.o)
- .debug_line    0x00001e8f      0x1dd /opt/devkitPro/libnds/lib/libnds9.a(trig.o)
- .debug_line    0x0000206c      0x595 /opt/devkitPro/libnds/lib/libnds9.a(videoGL.o)
- .debug_line    0x00002601      0x936 /opt/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
- .debug_line    0x00002f37      0x1d9 /opt/devkitPro/libnds/lib/libnds9.a(interrupts.o)
- .debug_line    0x00003110       0xa6 /opt/devkitPro/libnds/lib/libnds9.a(dcache.o)
- .debug_line    0x000031b6       0xc5 /opt/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
- .debug_line    0x0000327b       0xc3 /opt/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
- .debug_line    0x0000333e      0x200 /opt/devkitPro/libnds/lib/libnds9.a(video.o)
- .debug_line    0x0000353e       0x7f /opt/devkitPro/devkitARM/lib/gcc/arm-eabi/4.3.3/thumb/crtn.o
+ .debug_line    0x00000049      0x2e9 game.o
+ .debug_line    0x00000332      0x32c graphics_main.o
+ .debug_line    0x0000065e      0x23f graphics_sub.o
+ .debug_line    0x0000089d      0x1a1 main.o
+ .debug_line    0x00000a3e      0x1e8 P_Audio.o
+ .debug_line    0x00000c26      0x166 timer_game.o
+ .debug_line    0x00000d8c      0x31e /opt/devkitPro/libnds/lib/libnds9.a(initSystem.o)
+ .debug_line    0x000010aa      0x2ec /opt/devkitPro/libnds/lib/libnds9.a(keys.o)
+ .debug_line    0x00001396      0x2dc /opt/devkitPro/libnds/lib/libnds9.a(sprite.o)
+ .debug_line    0x00001672      0x2cd /opt/devkitPro/libnds/lib/libnds9.a(sprite_alloc.o)
+ .debug_line    0x0000193f      0x2d1 /opt/devkitPro/libnds/lib/libnds9.a(system.o)
+ .debug_line    0x00001c10      0x27e /opt/devkitPro/libnds/lib/libnds9.a(touch.o)
+ .debug_line    0x00001e8e      0x1dd /opt/devkitPro/libnds/lib/libnds9.a(trig.o)
+ .debug_line    0x0000206b      0x595 /opt/devkitPro/libnds/lib/libnds9.a(videoGL.o)
+ .debug_line    0x00002600      0x936 /opt/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
+ .debug_line    0x00002f36      0x1d9 /opt/devkitPro/libnds/lib/libnds9.a(interrupts.o)
+ .debug_line    0x0000310f       0xa6 /opt/devkitPro/libnds/lib/libnds9.a(dcache.o)
+ .debug_line    0x000031b5       0xc5 /opt/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
+ .debug_line    0x0000327a       0xc3 /opt/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
+ .debug_line    0x0000333d      0x200 /opt/devkitPro/libnds/lib/libnds9.a(video.o)
+ .debug_line    0x0000353d       0x7f /opt/devkitPro/devkitARM/lib/gcc/arm-eabi/4.3.3/thumb/crtn.o
 
 .debug_frame    0x00000000     0x10b0
  *(.debug_frame)
- .debug_frame   0x00000000       0xf4 game.o
- .debug_frame   0x000000f4      0x194 graphics_main.o
+ .debug_frame   0x00000000      0x180 game.o
+ .debug_frame   0x00000180      0x108 graphics_main.o
  .debug_frame   0x00000288       0xa0 graphics_sub.o
  .debug_frame   0x00000328       0x28 main.o
  .debug_frame   0x00000350       0x58 P_Audio.o
@@ -1704,47 +1704,47 @@ Linker script and memory map
  .debug_frame   0x00000f1c       0xb0 /opt/devkitPro/libnds/lib/libnds9.a(interrupts.o)
  .debug_frame   0x00000fcc       0xe4 /opt/devkitPro/libnds/lib/libnds9.a(video.o)
 
-.debug_str      0x00000000     0x3185
+.debug_str      0x00000000     0x3187
  *(.debug_str)
- .debug_str     0x00000000      0x834 game.o
-                                0x8a9 (size before relaxing)
- .debug_str     0x00000834      0x9b2 graphics_main.o
-                               0x1041 (size before relaxing)
- .debug_str     0x000011e6      0x22d graphics_sub.o
+ .debug_str     0x00000000      0x89b game.o
+                                0x910 (size before relaxing)
+ .debug_str     0x0000089b      0x94d graphics_main.o
+                                0xf85 (size before relaxing)
+ .debug_str     0x000011e8      0x22d graphics_sub.o
                                 0x6da (size before relaxing)
- .debug_str     0x00001413       0xcc main.o
+ .debug_str     0x00001415       0xcc main.o
                                 0x5b1 (size before relaxing)
- .debug_str     0x000014df      0x156 P_Audio.o
+ .debug_str     0x000014e1      0x156 P_Audio.o
                                 0x378 (size before relaxing)
- .debug_str     0x00001635       0x59 timer_game.o
+ .debug_str     0x00001637       0x59 timer_game.o
                                 0x265 (size before relaxing)
- .debug_str     0x0000168e      0x1bb /opt/devkitPro/libnds/lib/libnds9.a(initSystem.o)
+ .debug_str     0x00001690      0x1bb /opt/devkitPro/libnds/lib/libnds9.a(initSystem.o)
                                 0x39d (size before relaxing)
- .debug_str     0x00001849       0xcb /opt/devkitPro/libnds/lib/libnds9.a(keys.o)
+ .debug_str     0x0000184b       0xcb /opt/devkitPro/libnds/lib/libnds9.a(keys.o)
                                 0x28b (size before relaxing)
- .debug_str     0x00001914      0x189 /opt/devkitPro/libnds/lib/libnds9.a(sprite.o)
+ .debug_str     0x00001916      0x189 /opt/devkitPro/libnds/lib/libnds9.a(sprite.o)
                                 0x765 (size before relaxing)
- .debug_str     0x00001a9d      0x120 /opt/devkitPro/libnds/lib/libnds9.a(sprite_alloc.o)
+ .debug_str     0x00001a9f      0x120 /opt/devkitPro/libnds/lib/libnds9.a(sprite_alloc.o)
                                 0x612 (size before relaxing)
- .debug_str     0x00001bbd      0x2aa /opt/devkitPro/libnds/lib/libnds9.a(system.o)
+ .debug_str     0x00001bbf      0x2aa /opt/devkitPro/libnds/lib/libnds9.a(system.o)
                                 0x4ad (size before relaxing)
- .debug_str     0x00001e67       0x74 /opt/devkitPro/libnds/lib/libnds9.a(touch.o)
+ .debug_str     0x00001e69       0x74 /opt/devkitPro/libnds/lib/libnds9.a(touch.o)
                                 0x1a6 (size before relaxing)
- .debug_str     0x00001edb       0xc3 /opt/devkitPro/libnds/lib/libnds9.a(trig.o)
+ .debug_str     0x00001edd       0xc3 /opt/devkitPro/libnds/lib/libnds9.a(trig.o)
                                 0x199 (size before relaxing)
- .debug_str     0x00001f9e      0x613 /opt/devkitPro/libnds/lib/libnds9.a(videoGL.o)
+ .debug_str     0x00001fa0      0x613 /opt/devkitPro/libnds/lib/libnds9.a(videoGL.o)
                                 0xc6c (size before relaxing)
- .debug_str     0x000025b1      0x714 /opt/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
+ .debug_str     0x000025b3      0x714 /opt/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
                                 0x8ff (size before relaxing)
- .debug_str     0x00002cc5      0x13f /opt/devkitPro/libnds/lib/libnds9.a(interrupts.o)
+ .debug_str     0x00002cc7      0x13f /opt/devkitPro/libnds/lib/libnds9.a(interrupts.o)
                                 0x2f0 (size before relaxing)
- .debug_str     0x00002e04      0x381 /opt/devkitPro/libnds/lib/libnds9.a(video.o)
+ .debug_str     0x00002e06      0x381 /opt/devkitPro/libnds/lib/libnds9.a(video.o)
                                 0xae7 (size before relaxing)
 
 .debug_loc      0x00000000     0x3b42
  *(.debug_loc)
- .debug_loc     0x00000000      0x186 game.o
- .debug_loc     0x00000186      0x27e graphics_main.o
+ .debug_loc     0x00000000      0x261 game.o
+ .debug_loc     0x00000261      0x1a3 graphics_main.o
  .debug_loc     0x00000404      0x102 graphics_sub.o
  .debug_loc     0x00000506       0x2b main.o
  .debug_loc     0x00000531       0x81 P_Audio.o

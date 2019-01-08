@@ -47,6 +47,7 @@ void init_sub_background() {
 	REG_BG3PB_SUB = 0;
 	REG_BG3PD_SUB = 256;
 }
+
 void printDigitSmall(int number, int x, int y) {
 	int i, j;
 

@@ -25,9 +25,9 @@ void init_main_bg();
 
 void configureSprites();
 
-void setObjects();
+void initMinerals();
 
-void update_state();
+
 
 void load_start_display();
 
@@ -39,12 +39,6 @@ void restart_display();
 
 void hide_objects();
 
-void check_alexxzandrite(int position_x, int position_y);
 
-void check_amazonite(int position_x, int position_y);
-
-void check_diamond(int position_x, int position_y);
-
-void check_bronze(int position_x, int position_y);
 
 #endif /* GRAPHICS_MAIN_H_ */
