@@ -53,7 +53,7 @@ typedef struct{
 	int y;
 	bool isDrilled;
 	mineralType type;
-} Objects_coord;
+} Mineral;
 
 typedef enum {UP, DOWN, LEFT, RIGHT} dir;
 
@@ -71,6 +71,6 @@ extern int min, sec, msec;
 
 extern int start_pressed, score_changed, score_player;
 
-extern Objects_coord *mineral;
+extern Mineral *mineral;
 
 #endif

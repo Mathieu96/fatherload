@@ -6,6 +6,8 @@ void initMinerals();
 
 void hide_all_minerals();
 
+//Mineral * getMineral(int pos_x, int pos_y);
+
 void check_alexxzandrite(int position_x, int position_y);
 
 void check_amazonite(int position_x, int position_y);

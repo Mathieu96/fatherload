@@ -14,7 +14,7 @@ int screen_y;
 
 int mineral_count = 0;
 
-Objects_coord *mineral;
+Mineral *mineral;
 
 dir orientation;
 
@@ -25,7 +25,7 @@ int score_player = 0;
 int score_changed = 0;
 
 void init_game() {
-	mineral = (Objects_coord *) malloc(N_TOT_MINERALS * sizeof(Objects_coord));
+	mineral = (Mineral *) malloc(N_TOT_MINERALS * sizeof(Mineral));
 
 	Audio_Init();
 	Audio_PlayMusic();
