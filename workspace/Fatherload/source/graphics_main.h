@@ -39,6 +39,8 @@ void restart_display();
 
 void hide_objects();
 
+void update_sprite(u16* gfx, int spriteID, int hide, int paletteNum, int hFlip, int vFlip, int x, int y);
 
+void display_drilled_path(int base, int x, int y);
 
 #endif /* GRAPHICS_MAIN_H_ */

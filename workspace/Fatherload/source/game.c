@@ -18,7 +18,7 @@ Objects_coord *mineral;
 
 dir orientation;
 
-u16 *gfx_horizontal, *gfx_vertical, *diamond_pic, *amazonite_pic, *bronze_pic, *alexandrite_pic;
+u16 *gfx_horizontal, *gfx_vertical, *diamond_pic, *amazonite_pic, *bronze_pic, *alexxzandrite_pic;
 
 int start_pressed = 0;
 int score_player = 0;
@@ -51,7 +51,10 @@ void start_game() {
 	mineral_count = 0;
 	score_player = 0;
 
-	oamSet(&oamMain, 			// oam handler
+	update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0,
+				  PLAYER_VPAL, 0, 0,
+				  player_x, player_y);
+/*	oamSet(&oamMain, 			// oam handler
 			PLAYER_SPRITE_ID, 	// Number of sprite
 			player_x, player_y, // Coordinates
 			0, 					// Priority
@@ -64,7 +67,7 @@ void start_game() {
 			false, 				// Hide this sprite
 			false, false,		// Horizontal or vertical flip
 			false 				// Mosaic
-	);
+	);*/
 	oamUpdate(&oamMain);
 	// set the starting backgrounds
 	init_main_bg();
@@ -122,7 +125,11 @@ void player_pressed_start() {
 		Audio_PlaySoundEX(SFX_TIRE_SCREECH);
 		load_start_display();
 		start_pressed = 1;
-		oamSet(&oamMain,			// oam handler
+
+		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 1,
+					  PLAYER_VPAL, 0, 0,
+					  player_x, player_y);
+/*		oamSet(&oamMain,			// oam handler
 				PLAYER_SPRITE_ID, 	// Number of sprite
 				player_x, player_y, // Coordinates
 				0, 					// Priority
@@ -135,12 +142,15 @@ void player_pressed_start() {
 				true, 				// Hide this sprite
 				false, false,		// Horizontal or vertical flip
 				false 				// Mosaic
-		);
+		);*/
 		oamUpdate(&oamMain);
 		swiDelay(11000000); // Delay to avoid going back out of start mode right after
 	} else {
 		mmResume();
-		oamSet(&oamMain, 			// oam handler
+		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0,
+					  PLAYER_HPAL, 0, 0,
+					  player_x, player_y);
+/*		oamSet(&oamMain, 			// oam handler
 				PLAYER_SPRITE_ID, 	// Number of sprite
 				player_x, player_y, // Coordinates
 				0, 					// Priority
@@ -153,7 +163,7 @@ void player_pressed_start() {
 				false, 				// Hide this sprite
 				false, false, 		// Horizontal or vertical flip
 				false 				// Mosaic
-		);
+		);*/
 		oamUpdate(&oamMain);
 		release_start_display();
 		start_pressed = 0;
@@ -207,75 +217,30 @@ void player_pressed_touchscreen() {
 void update_game() {
 	switch (orientation) {
 	case RIGHT:
-		oamSet(&oamMain, 			// oam handler
-				PLAYER_SPRITE_ID, 	// Number of sprite
-				player_x, player_y, // Coordinates
-				0, 					// Priority
-				0, 					// Palette to use
-				SpriteSize_16x16, 	// Sprite size
-				SpriteColorFormat_16Color, // Color format
-				gfx_horizontal, 	// Loaded graphic to display
-				-1, 				// Affine rotation to use (-1 none)
-				false, 				// Double size if rotating
-				false, 				// Hide this sprite
-				false, false, 		// Horizontal or vertical flip
-				false 				// Mosaic
-		);
+		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0,
+					  PLAYER_HPAL, 0, 0,
+					  player_x, player_y);
 		break;
 	case LEFT:
-		oamSet(&oamMain, 			// oam handler
-				PLAYER_SPRITE_ID, 	// Number of sprite
-				player_x, player_y, // Coordinates
-				0, 					// Priority
-				0, 					// Palette to use
-				SpriteSize_16x16, 	// Sprite size
-				SpriteColorFormat_16Color, // Color format
-				gfx_horizontal, 	// Loaded graphic to display
-				-1, 				// Affine rotation to use (-1 none)
-				false, 				// Double size if rotating
-				false, 				// Hide this sprite
-				true, false, 		// Horizontal or vertical flip
-				false 				// Mosaic
-		);
+		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0,
+					  PLAYER_HPAL, 1, 0,
+					  player_x, player_y);
 		break;
 	case UP:
-		oamSet(&oamMain, 			// oam handler
-				PLAYER_SPRITE_ID, 	// Number of sprite
-				player_x, player_y, // Coordinates
-				0, 					// Priority
-				1, 					// Palette to use
-				SpriteSize_16x16, 	// Sprite size
-				SpriteColorFormat_16Color, // Color format
-				gfx_vertical, 		// Loaded graphic to display
-				-1, 				// Affine rotation to use (-1 none)
-				false,				// Double size if rotating
-				false, 				// Hide this sprite
-				false, false, 		// Horizontal or vertical flip
-				false 				// Mosaic
-		);
+		update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0,
+					  PLAYER_VPAL, 0, 0,
+					  player_x, player_y);
 		break;
 	case DOWN:
-		oamSet(&oamMain, 			// oam handler
-				PLAYER_SPRITE_ID, 	// Number of sprite
-				player_x, player_y, // Coordinates
-				0, 					// Priority
-				1, 					// Palette to use
-				SpriteSize_16x16, 	// Sprite size
-				SpriteColorFormat_16Color, // Color format
-				gfx_vertical, 		// Loaded graphic to display
-				-1, 				// Affine rotation to use (-1 none)
-				false, 				// Double size if rotating
-				false, 				// Hide this sprite
-				false, true, 		// Horizontal or vertical flip
-				false 				// Mosaic
-		);
+		update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0,
+					  PLAYER_VPAL, 0, 1,
+					  player_x, player_y);
 		break;
 	}
 }
 
 
 void update_state(){
-	int i;
 	int position_y = player_y + screen_y;
 	int position_x = player_x + screen_x;
 
@@ -283,43 +248,7 @@ void update_state(){
 		int base = (((position_y)>255)?2:0) + (position_x)/256;
 		int x = ((position_x)%256)/8;
 		int y = ((position_y)%256)/8;
-		if(orientation == UP || orientation == DOWN){
-			for(i = y; i < y + 2; i++){
-				if(i > 31){
-					BG_MAP_RAM(base+2)[0*32 + x] = 1;
-					break;
-				}
-				if(x == 31 && (base == 0 || base == 2)){
-					BG_MAP_RAM(base)[i*32 + x] = 1;
-					BG_MAP_RAM(base+1)[i*32 + 0] = 1;
-					continue;
-				}
-				BG_MAP_RAM(base)[i*32 + x] = 1;
-				BG_MAP_RAM(base)[i*32 + x + 1] = 1;
-//				BG_MAP_RAM(base)[i*32 + x + 2] = 1; //for 32*32 sprite
-//				BG_MAP_RAM(base)[i*32 + x + 3] = 1;
-			}
-		}
-		else{
-			for(i = x; i < x + 2; i++){
-				if(i > 31){
-					if(base == 0 || base == 2)
-						BG_MAP_RAM(base+1)[y*32 + 0] = 1;
-					break;
-				}
-				if(y == 31){
-					if(base == 0 || base == 1){
-						BG_MAP_RAM(base)[y*32 + i] = 1;
-						BG_MAP_RAM(base+2)[0*32 + i] = 1;
-					}
-					continue;
-				}
-				BG_MAP_RAM(base)[y*32 + i] = 1;
-				BG_MAP_RAM(base)[(y + 1)*32 + i] = 1;
-//				BG_MAP_RAM(base)[(y + 2)*32 + i] = 1; //for 32*32 sprite
-//				BG_MAP_RAM(base)[(y + 3)*32 + i] = 1;
-			}
-		}
+		display_drilled_path(base, x, y);
 	}
 	check_alexxzandrite(position_x, position_y);
 	check_amazonite(position_x, position_y);
@@ -344,57 +273,16 @@ void check_diamond(int position_x, int position_y){
 			}
 			Audio_PlaySoundEX(SFX_COIN_PICKUP);
 			mineral[i].isDrilled = 1;
-			oamSet(&oamMain, 			// oam handler
-					OFFSET_MINERAL_SPRITE + i,	// Number of sprite
-					mineral[i].x - screen_x, mineral[i].y - screen_y, // Coordinates
-					0,					// Priority
-					2,					// Palette to use
-					SpriteSize_16x16,	// Sprite size
-					SpriteColorFormat_16Color,	// Color format
-					diamond_pic,		// Loaded graphic to display
-					-1,					// Affine rotation to use (-1 none)
-					false,				// Double size if rotating
-					true,				// Hide this sprite
-					false, false,		// Horizontal or vertical flip
-					false				// Mosaic
-					);
+			update_sprite(diamond_pic, OFFSET_MINERAL_SPRITE + i,
+						  mineral[i].isDrilled, DIAMOND_PAL, 0, 0,
+						  mineral[i].x - screen_x, mineral[i].y - screen_y);
 		}
 
-		if(!mineral[i].isDrilled){
-			if(((mineral[i].x > - 16) 		   && (mineral[i].x < screen_x + 256)) &&
-			   ((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
-
-				oamSet(&oamMain, 	// oam handler
-					OFFSET_MINERAL_SPRITE + i,		// Number of sprite
-					mineral[i].x - screen_x, mineral[i].y - screen_y, // Coordinates
-					0,				// Priority
-					2,				// Palette to use
-					SpriteSize_16x16,			// Sprite size
-					SpriteColorFormat_16Color,	// Color format
-					diamond_pic,	// Loaded graphic to display
-					-1,				// Affine rotation to use (-1 none)
-					false,			// Double size if rotating
-					false,			// Hide this sprite
-					false, false,	// Horizontal or vertical flip
-					false			// Mosaic
-					);
-			}
-			else{
-				oamSet(&oamMain, 	// oam handler
-					OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-					mineral[i].x - screen_x, mineral[i].y - screen_y, // Coordinates
-					0,				// Priority
-					2,				// Palette to use
-					SpriteSize_16x16,			// Sprite size
-					SpriteColorFormat_16Color,	// Color format
-					diamond_pic,			// Loaded graphic to display
-					-1,				// Affine rotation to use (-1 none)
-					false,			// Double size if rotating
-					true,			// Hide this sprite
-					false, false,	// Horizontal or vertical flip
-					false			// Mosaic
-					);
-			}
+		if(((mineral[i].x > - 16) 		   && (mineral[i].x < screen_x + 256)) &&
+		   ((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
+			update_sprite(diamond_pic, OFFSET_MINERAL_SPRITE + i,
+						  mineral[i].isDrilled, DIAMOND_PAL,0, 0,
+						  mineral[i].x - screen_x, mineral[i].y - screen_y);
 		}
 	}
 }
@@ -415,57 +303,18 @@ void check_amazonite(int position_x, int position_y){
 			}
 			Audio_PlaySoundEX(SFX_COIN_PICKUP);
 			mineral[i].isDrilled = 1;
-			oamSet(&oamMain, 	// oam handler
-								OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-								mineral[i].x - screen_x, mineral[i].y - screen_y,// Coordinates
-								0,				// Priority
-								2,				// Palette to use
-								SpriteSize_16x16,			// Sprite size
-								SpriteColorFormat_16Color,	// Color format
-								amazonite_pic,			// Loaded graphic to display
-								-1,				// Affine rotation to use (-1 none)
-								false,			// Double size if rotating
-								true,			// Hide this sprite
-								false, false,	// Horizontal or vertical flip
-								false			// Mosaic
-								);
+			//update_sprite(u16* gfx, int spriteID, int hide, int paletteNum, int x, int y)
+			update_sprite(amazonite_pic, OFFSET_MINERAL_SPRITE + i,
+						  mineral[i].isDrilled, AMAZONITE_PAL, 0, 0,
+						  mineral[i].x - screen_x, mineral[i].y - screen_y);
 		}
 
-		if(!mineral[i].isDrilled){
-			if(((mineral[i].x >  - 16) && (mineral[i].x < screen_x + 256)) &&
-					((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
+		if(((mineral[i].x >  - 16) && (mineral[i].x < screen_x + 256)) &&
+				((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
 
-				oamSet(&oamMain, 	// oam handler
-					OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-					mineral[i].x - screen_x, mineral[i].y - screen_y, // Coordinates
-					0,				// Priority
-					2,				// Palette to use
-					SpriteSize_16x16,			// Sprite size
-					SpriteColorFormat_16Color,	// Color format
-					amazonite_pic,			// Loaded graphic to display
-					-1,				// Affine rotation to use (-1 none)
-					false,			// Double size if rotating
-					false,			// Hide this sprite
-					false, false,	// Horizontal or vertical flip
-					false			// Mosaic
-					);
-			}
-			else{
-				oamSet(&oamMain, 	// oam handler
-					OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-					mineral[i].x - screen_x, mineral[i].y - screen_y,// Coordinates
-					0,				// Priority
-					2,				// Palette to use
-					SpriteSize_16x16,			// Sprite size
-					SpriteColorFormat_16Color,	// Color format
-					amazonite_pic,			// Loaded graphic to display
-					-1,				// Affine rotation to use (-1 none)
-					false,			// Double size if rotating
-					true,			// Hide this sprite
-					false, false,	// Horizontal or vertical flip
-					false			// Mosaic
-					);
-			}
+			update_sprite(amazonite_pic, OFFSET_MINERAL_SPRITE + i,
+						  mineral[i].isDrilled, AMAZONITE_PAL, 0, 0,
+						  mineral[i].x - screen_x, mineral[i].y - screen_y);
 		}
 	}
 }
@@ -486,57 +335,19 @@ void check_bronze(int position_x, int position_y){
 			}
 			Audio_PlaySoundEX(SFX_COIN_PICKUP);
 			mineral[i].isDrilled = 1;
-			oamSet(&oamMain, 	// oam handler
-								OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-								mineral[i].x - screen_x, mineral[i].y - screen_y,// Coordinates
-								0,				// Priority
-								2,				// Palette to use
-								SpriteSize_16x16,			// Sprite size
-								SpriteColorFormat_16Color,	// Color format
-								bronze_pic,			// Loaded graphic to display
-								-1,				// Affine rotation to use (-1 none)
-								false,			// Double size if rotating
-								true,			// Hide this sprite
-								false, false,	// Horizontal or vertical flip
-								false			// Mosaic
-								);
+
+			update_sprite(bronze_pic, OFFSET_MINERAL_SPRITE + i,
+						  mineral[i].isDrilled, BRONZE_PAL, 0, 0,
+						  mineral[i].x - screen_x, mineral[i].y - screen_y);
+
 		}
 
-		if(!mineral[i].isDrilled){
-			if(((mineral[i].x >  - 16) && (mineral[i].x < screen_x + 256)) &&
-					((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
+		if(((mineral[i].x >  - 16) && (mineral[i].x < screen_x + 256)) &&
+				((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
 
-				oamSet(&oamMain, 	// oam handler
-					OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-					mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
-					0,				// Priority
-					2,				// Palette to use
-					SpriteSize_16x16,			// Sprite size
-					SpriteColorFormat_16Color,	// Color format
-					bronze_pic,			// Loaded graphic to display
-					-1,				// Affine rotation to use (-1 none)
-					false,			// Double size if rotating
-					false,			// Hide this sprite
-					false, false,	// Horizontal or vertical flip
-					false			// Mosaic
-					);
-			}
-			else{
-				oamSet(&oamMain, 	// oam handler
-					OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-					mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
-					0,				// Priority
-					2,				// Palette to use
-					SpriteSize_16x16,			// Sprite size
-					SpriteColorFormat_16Color,	// Color format
-					bronze_pic,			// Loaded graphic to display
-					-1,				// Affine rotation to use (-1 none)
-					false,			// Double size if rotating
-					true,			// Hide this sprite
-					false, false,	// Horizontal or vertical flip
-					false			// Mosaic
-					);
-			}
+			update_sprite(bronze_pic, OFFSET_MINERAL_SPRITE + i,
+						  mineral[i].isDrilled, BRONZE_PAL, 0, 0,
+						  mineral[i].x - screen_x, mineral[i].y - screen_y);
 		}
 	}
 }
@@ -558,57 +369,18 @@ void check_alexxzandrite(int position_x, int position_y){
 			}
 			Audio_PlaySoundEX(SFX_COIN_PICKUP);
 			mineral[i].isDrilled = 1;
-			oamSet(&oamMain, 	// oam handler
-								OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-								mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
-								0,				// Priority
-								2,				// Palette to use
-								SpriteSize_16x16,			// Sprite size
-								SpriteColorFormat_16Color,	// Color format
-								alexandrite_pic,			// Loaded graphic to display
-								-1,				// Affine rotation to use (-1 none)
-								false,			// Double size if rotating
-								true,			// Hide this sprite
-								false, false,	// Horizontal or vertical flip
-								false			// Mosaic
-								);
+
+			update_sprite(alexxzandrite_pic, OFFSET_MINERAL_SPRITE + i,
+						  mineral[i].isDrilled, ALEXX_PAL, 0, 0,
+						  mineral[i].x - screen_x, mineral[i].y - screen_y);
 		}
 
-		if(!mineral[i].isDrilled){
-			if(((mineral[i].x >  - 16) && (mineral[i].x < screen_x + 256)) &&
-					((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
+		if(((mineral[i].x >  - 16) && (mineral[i].x < screen_x + 256)) &&
+				((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
 
-				oamSet(&oamMain, 	// oam handler
-					OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-					mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
-					0,				// Priority
-					2,				// Palette to use
-					SpriteSize_16x16,			// Sprite size
-					SpriteColorFormat_16Color,	// Color format
-					alexandrite_pic,			// Loaded graphic to display
-					-1,				// Affine rotation to use (-1 none)
-					false,			// Double size if rotating
-					false,			// Hide this sprite
-					false, false,	// Horizontal or vertical flip
-					false			// Mosaic
-					);
-			}
-			else{
-				oamSet(&oamMain, 	// oam handler
-					OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-					mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
-					0,				// Priority
-					2,				// Palette to use
-					SpriteSize_16x16,			// Sprite size
-					SpriteColorFormat_16Color,	// Color format
-					alexandrite_pic,			// Loaded graphic to display
-					-1,				// Affine rotation to use (-1 none)
-					false,			// Double size if rotating
-					true,			// Hide this sprite
-					false, false,	// Horizontal or vertical flip
-					false			// Mosaic
-					);
-			}
+			update_sprite(alexxzandrite_pic, OFFSET_MINERAL_SPRITE + i,
+						  mineral[i].isDrilled, ALEXX_PAL, 0, 0,
+						  mineral[i].x - screen_x, mineral[i].y - screen_y);
 		}
 	}
 }

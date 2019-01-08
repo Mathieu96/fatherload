@@ -127,7 +127,7 @@ void configureSprites() {
 	diamond_pic		= oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
 	amazonite_pic	= oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
 	bronze_pic     	= oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
-	alexandrite_pic = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
+	alexxzandrite_pic = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
 
 	//Copy data for the graphic (palette and bitmap)
 	// Horizontal player
@@ -152,7 +152,7 @@ void configureSprites() {
 
 	// alexandrite
 	dmaCopy(alexxzandritePal, &SPRITE_PALETTE[5*16], alexxzandritePalLen);
-	dmaCopy(alexxzandriteTiles, alexandrite_pic, alexxzandriteTilesLen);
+	dmaCopy(alexxzandriteTiles, alexxzandrite_pic, alexxzandriteTilesLen);
 }
 
 
@@ -214,20 +214,23 @@ void hide_objects(){
 	int i;
 	for(i = 0; i < N_TOT_MINERALS; i++){
 		if(!mineral[i].isDrilled){
-			oamSet(&oamMain, 	// oam handler
+			//update_sprite(u16* gfx, int spriteID, int hide, int paletteNum, int x, int y)
+			update_sprite(NULL, OFFSET_MINERAL_SPRITE + i,
+				1, 0, 0, 0, mineral[i].x - screen_x, mineral[i].y - screen_y);
+			/*oamSet(&oamMain, 	// oam handler
 				OFFSET_MINERAL_SPRITE + i,				// Number of sprite
 				mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
 				0,				// Priority
 				2,				// Palette to use
 				SpriteSize_16x16,			// Sprite size
 				SpriteColorFormat_16Color,	// Color format
-				alexandrite_pic,			// Loaded graphic to display
+				alexandrite_pic,			// Loaded graphic to display, don't care here because we hide the sprite
 				-1,				// Affine rotation to use (-1 none)
 				false,			// Double size if rotating
 				true,			// Hide this sprite
 				false, false,	// Horizontal or vertical flip
 				false			// Mosaic
-				);
+				);*/
 		}
 	}
 }
@@ -235,50 +238,91 @@ void hide_objects(){
 void print_start(){
 	int i;
 
-	// Drawing S
+	// Drawing P
+	for(i = 9; i < 17; i++)
+			BG_MAP_RAM(9)[i*32 + 1] = 1;
 	BG_MAP_RAM(9)[9*32 + 5] = 1;
-	BG_MAP_RAM(9)[9*32 + 4] = 1;
-	BG_MAP_RAM(9)[9*32 + 3] = 1;
 	BG_MAP_RAM(9)[9*32 + 2] = 1;
-	BG_MAP_RAM(9)[10*32 + 1] = 1;
-	BG_MAP_RAM(9)[10*32 + 2] = 1;
-	BG_MAP_RAM(9)[11*32 + 3] = 1;
-	BG_MAP_RAM(9)[11*32 + 4] = 1;
+	BG_MAP_RAM(9)[9*32 + 3] = 1;
+	BG_MAP_RAM(9)[9*32 + 4] = 1;
+	BG_MAP_RAM(9)[9*32 + 5] = 1;
+	BG_MAP_RAM(9)[10*32 + 5] = 1;
+	BG_MAP_RAM(9)[11*32 + 5] = 1;
+	BG_MAP_RAM(9)[12*32 + 2] = 1;
+	BG_MAP_RAM(9)[12*32 + 3] = 1;
+	BG_MAP_RAM(9)[12*32 + 4] = 1;
 	BG_MAP_RAM(9)[12*32 + 5] = 1;
-	BG_MAP_RAM(9)[13*32 + 5] = 1;
-	BG_MAP_RAM(9)[13*32 + 4] = 1;
-	BG_MAP_RAM(9)[14*32 + 4] = 1;
-	BG_MAP_RAM(9)[14*32 + 3] = 1;
-	BG_MAP_RAM(9)[15*32 + 3] = 1;
-	BG_MAP_RAM(9)[15*32 + 2] = 1;
-	BG_MAP_RAM(9)[15*32 + 1] = 1;
 
-	// Drawing T
+	// Drawing A
+	BG_MAP_RAM(9)[9*32 + 10] = 1;
+	BG_MAP_RAM(9)[9*32 + 9] = 1;
+	BG_MAP_RAM(9)[9*32 + 11] = 1;
+	BG_MAP_RAM(9)[10*32 + 9] = 1;
+	BG_MAP_RAM(9)[10*32 + 8] = 1;
+	BG_MAP_RAM(9)[10*32 + 11] = 1;
+	BG_MAP_RAM(9)[10*32 + 12] = 1;
+	BG_MAP_RAM(9)[11*32 + 12] = 1;
+	BG_MAP_RAM(9)[11*32 + 13] = 1;
+	BG_MAP_RAM(9)[11*32 + 8] = 1;
+	BG_MAP_RAM(9)[11*32 + 7] = 1;
+
+	for(i = 12; i < 17; i++){
+		BG_MAP_RAM(9)[i*32 + 7] = 1;
+		BG_MAP_RAM(9)[i*32 + 13] = 1;
+	}
+	for(i = 8; i < 13; i++)
+		BG_MAP_RAM(9)[13*32 + i] = 1;
+
+	// Drawing U
+	for(i = 9; i < 17; i++){
+		BG_MAP_RAM(9)[i*32 + 15] = 1;
+		BG_MAP_RAM(9)[i*32 + 19] = 1;
+	}
+
+	for(i = 16; i < 19; i++){
+		BG_MAP_RAM(9)[16*32 + i] = 1;
+	}
+
+	// Drawing S
+	BG_MAP_RAM(9)[9*32 + 25] = 1;
+	BG_MAP_RAM(9)[9*32 + 24] = 1;
+	BG_MAP_RAM(9)[9*32 + 23] = 1;
+	BG_MAP_RAM(9)[9*32 + 22] = 1;
+	BG_MAP_RAM(9)[9*32 + 21] = 1;
+	BG_MAP_RAM(9)[10*32 + 21] = 1;
+	BG_MAP_RAM(9)[11*32 + 21] = 1;
+	BG_MAP_RAM(9)[12*32 + 21] = 1;
+	BG_MAP_RAM(9)[12*32 + 22] = 1;
+	BG_MAP_RAM(9)[12*32 + 23] = 1;
+	BG_MAP_RAM(9)[12*32 + 24] = 1;
+	BG_MAP_RAM(9)[12*32 + 25] = 1;
+	BG_MAP_RAM(9)[13*32 + 25] = 1;
+	BG_MAP_RAM(9)[14*32 + 25] = 1;
+	BG_MAP_RAM(9)[15*32 + 25] = 1;
+	BG_MAP_RAM(9)[16*32 + 25] = 1;
+	BG_MAP_RAM(9)[16*32 + 24] = 1;
+	BG_MAP_RAM(9)[16*32 + 23] = 1;
+	BG_MAP_RAM(9)[16*32 + 22] = 1;
+	BG_MAP_RAM(9)[16*32 + 21] = 1;
+
+
+	// Drawing E
+	for(i = 9; i < 17; i++)
+		BG_MAP_RAM(9)[i*32 + 27] = 1;
+	for(i = 28; i < 32; i++){
+		BG_MAP_RAM(9)[9*32 + i] = 1;
+		BG_MAP_RAM(9)[16*32 + i] = 1;
+	}
+	for(i = 28; i < 31; i++)
+		BG_MAP_RAM(9)[12*32 + i] = 1;
+/*	// Drawing T
 	for(i = 7; i < 12; i++)
 			BG_MAP_RAM(9)[9*32 + i] = 1;
 		for(i = 9; i < 17; i++)
 			BG_MAP_RAM(9)[i*32 + 9] = 1;
+*/
 
-	// Drawing A
-	BG_MAP_RAM(9)[9*32 + 16] = 1;
-	BG_MAP_RAM(9)[9*32 + 15] = 1;
-	BG_MAP_RAM(9)[9*32 + 17] = 1;
-	BG_MAP_RAM(9)[10*32 + 15] = 1;
-	BG_MAP_RAM(9)[10*32 + 14] = 1;
-	BG_MAP_RAM(9)[10*32 + 17] = 1;
-	BG_MAP_RAM(9)[10*32 + 18] = 1;
-	BG_MAP_RAM(9)[11*32 + 18] = 1;
-	BG_MAP_RAM(9)[11*32 + 19] = 1;
-	BG_MAP_RAM(9)[11*32 + 14] = 1;
-	BG_MAP_RAM(9)[11*32 + 13] = 1;
-
-	for(i = 12; i < 17; i++){
-		BG_MAP_RAM(9)[i*32 + 13] = 1;
-		BG_MAP_RAM(9)[i*32 + 19] = 1;
-	}
-	for(i = 13; i < 19; i++)
-		BG_MAP_RAM(9)[13*32 + i] = 1;
-
+	/*
 	// Drawing R
 	for(i = 9; i < 17; i++)
 			BG_MAP_RAM(9)[i*32 + 21] = 1;
@@ -299,6 +343,7 @@ void print_start(){
 		BG_MAP_RAM(9)[9*32 + i] = 1;
 	for(i = 9; i < 17; i++)
 		BG_MAP_RAM(9)[i*32 + 28] = 1;
+	*/
 }
 
 void release_start_display(){
@@ -310,3 +355,57 @@ void release_start_display(){
 	}
 }
 
+void update_sprite(u16* gfx, int spriteID, int hide, int paletteNum, int hFlip, int vFlip, int x, int y){
+	// if hide == 1 set true, otherwise set false
+	oamSet(&oamMain, 	// oam handler
+		spriteID,				// Number of sprite
+		x, y,// Coordinates
+		0,				// Priority
+		paletteNum,				// Palette to use
+		SpriteSize_16x16,			// Sprite size
+		SpriteColorFormat_16Color,	// Color format
+		gfx,			// Loaded graphic to display
+		-1,				// Affine rotation to use (-1 none)
+		false,			// Double size if rotating
+		((hide == 1)?true:false),			// Hide this sprite
+		((hFlip == 1)?true:false), ((vFlip == 1)?true:false),	// Horizontal or vertical flip
+		false			// Mosaic
+		);
+}
+
+void display_drilled_path(int base, int x, int y){
+	int i;
+	if(orientation == UP || orientation == DOWN){
+		for(i = y; i < y + 2; i++){
+			if(i > 31){
+				BG_MAP_RAM(base+2)[0*32 + x] = 1;
+				break;
+			}
+			if(x == 31 && (base == 0 || base == 2)){
+				BG_MAP_RAM(base)[i*32 + x] = 1;
+				BG_MAP_RAM(base+1)[i*32 + 0] = 1;
+				continue;
+			}
+			BG_MAP_RAM(base)[i*32 + x] = 1;
+			BG_MAP_RAM(base)[i*32 + x + 1] = 1;
+		}
+	}
+	else{
+		for(i = x; i < x + 2; i++){
+			if(i > 31){
+				if(base == 0 || base == 2)
+					BG_MAP_RAM(base+1)[y*32 + 0] = 1;
+				break;
+			}
+			if(y == 31){
+				if(base == 0 || base == 1){
+					BG_MAP_RAM(base)[y*32 + i] = 1;
+					BG_MAP_RAM(base+2)[0*32 + i] = 1;
+				}
+				continue;
+			}
+			BG_MAP_RAM(base)[y*32 + i] = 1;
+			BG_MAP_RAM(base)[(y + 1)*32 + i] = 1;
+		}
+	}
+}

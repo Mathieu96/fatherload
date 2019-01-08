@@ -33,19 +33,27 @@
 #define N_ALEXANDRITE 5
 #define N_TOT_MINERALS (N_DIAMOND + N_AMAZONITE + N_BRONZE + N_ALEXANDRITE)
 
+// palettes numbers
+#define PLAYER_HPAL 0
+#define PLAYER_VPAL 1
+#define DIAMOND_PAL 2
+#define AMAZONITE_PAL 3
+#define BRONZE_PAL 4
+#define ALEXX_PAL 5
+
 #define SPRITE_WIDTH 32
 #define SPRITE_HEIGTH 32
 
 typedef struct{
 	int x;
 	int y;
-	char isDrilled;
+	int isDrilled;
 	char type[20];
 } Objects_coord;
 
 typedef enum {UP, DOWN, LEFT, RIGHT} dir;
 
-extern u16* diamond_pic, *amazonite_pic, *bronze_pic, *alexandrite_pic;
+extern u16* diamond_pic, *amazonite_pic, *bronze_pic, *alexxzandrite_pic;
 
 extern u16 *gfx_horizontal, *gfx_vertical;
 
