@@ -21,17 +21,17 @@
 #define OFFSET_MINERAL_SPRITE 1
 
 // define the score assigned to the different minerals
-#define DIAMOND_SCORE 1000
-#define AMAZONITE_SCORE 500
-#define BRONZE_SCORE 10
-#define ALEXXZANDRITE_SCORE 5000
+#define SCORE_DIAMONDS 1000
+#define SCORE_AMAZONITE 500
+#define SCORE_BRONZE 10
+#define SCORE_ALEXANDRITE 5000
 
 // specification for the minerals
-#define DIAMOND_NUMBER 10
-#define AMAZONITE_NUMBER 20
-#define BRONZE_NUMBER 40
-#define ALEXXZANDRITE_NUMBER 5
-#define MINERAL_NUMBER (DIAMOND_NUMBER + AMAZONITE_NUMBER + BRONZE_NUMBER + ALEXXZANDRITE_NUMBER)
+#define N_DIAMOND 10
+#define N_AMAZONITE 20
+#define N_BRONZE 40
+#define N_ALEXANDRITE 5
+#define N_TOT_MINERALS (N_DIAMOND + N_AMAZONITE + N_BRONZE + N_ALEXANDRITE)
 
 #define SPRITE_WIDTH 32
 #define SPRITE_HEIGTH 32
@@ -39,13 +39,13 @@
 typedef struct{
 	int x;
 	int y;
-	char isTook;
+	char isDrilled;
 	char type[20];
 } Objects_coord;
 
 typedef enum {UP, DOWN, LEFT, RIGHT} dir;
 
-extern u16* diamond_pic, *amazonite_pic, *bronze_pic, *alexxzandrite_pic;
+extern u16* diamond_pic, *amazonite_pic, *bronze_pic, *alexandrite_pic;
 
 extern u16 *gfx_horizontal, *gfx_vertical;
 

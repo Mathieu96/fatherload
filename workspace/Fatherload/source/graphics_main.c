@@ -122,68 +122,73 @@ void configureSprites() {
 	oamInit(&oamMain, SpriteMapping_1D_32, false);
 
 	//Allocate space for the graphic to show in the sprite
-	gfx_vertical = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
-	gfx_horizontal = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
-	diamond_pic = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
-	amazonite_pic = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
-	bronze_pic = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
-	alexxzandrite_pic = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
+	gfx_vertical	= oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
+	gfx_horizontal	= oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
+	diamond_pic		= oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
+	amazonite_pic	= oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
+	bronze_pic     	= oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
+	alexandrite_pic = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
 
 	//Copy data for the graphic (palette and bitmap)
 	// Horizontal player
 	dmaCopy(PlayerHorizontalPal, &SPRITE_PALETTE[0], PlayerHorizontalPalLen);
 	dmaCopy(PlayerHorizontalTiles, gfx_horizontal, PlayerHorizontalTilesLen);
+
 	// Vertical player
 	dmaCopy(PlayerVerticalPal, &SPRITE_PALETTE[1*16], PlayerVerticalPalLen);
 	dmaCopy(PlayerVerticalTiles, gfx_vertical, PlayerVerticalTilesLen);
+
 	// diamond
 	dmaCopy(diamondPal, &SPRITE_PALETTE[2*16], diamondPalLen);
 	dmaCopy(diamondTiles, diamond_pic, diamondTilesLen);
+
 	// amazonite
 	dmaCopy(amazonitePal, &SPRITE_PALETTE[3*16], amazonitePalLen);
 	dmaCopy(amazoniteTiles, amazonite_pic, amazoniteTilesLen);
+
 	// bronze
 	dmaCopy(bronzePal, &SPRITE_PALETTE[4*16], bronzePalLen);
 	dmaCopy(bronzeTiles, bronze_pic, bronzeTilesLen);
-	// alexxzandrite
+
+	// alexandrite
 	dmaCopy(alexxzandritePal, &SPRITE_PALETTE[5*16], alexxzandritePalLen);
-	dmaCopy(alexxzandriteTiles, alexxzandrite_pic, alexxzandriteTilesLen);
+	dmaCopy(alexxzandriteTiles, alexandrite_pic, alexxzandriteTilesLen);
 }
 
 
 void setObjects(){
 	int i;
 	// Generate the diamonds, deep on the map
-	for(i = 0; i < DIAMOND_NUMBER; i++){
+	for(i = 0; i < N_DIAMOND; i++){
 		mineral[i].x = (rand()%512);
 		mineral[i].y = (rand()%(512-384-16-8)) + 384;
-		// isTook = 0 when not took, 1 when the player took it
-		mineral[i].isTook = 0;
+		// isDrilled = 0 when not took, 1 when the player took it
+		mineral[i].isDrilled = 0;
 		strcpy(mineral[i].type,"diamond");
 	}
 	// Generate the amazonite
-	for(i = DIAMOND_NUMBER; i < DIAMOND_NUMBER + AMAZONITE_NUMBER; i++){
+	for(i = N_DIAMOND; i < N_DIAMOND + N_AMAZONITE; i++){
 			mineral[i].x = (rand()%512);
 			mineral[i].y = (rand()%(512-256-16-8))+ 256;
-			// isTook = 0 when not took, 1 when the player took it
-			mineral[i].isTook = 0;
+			// isDrilled = 0 when not took, 1 when the player took it
+			mineral[i].isDrilled = 0;
 			strcpy(mineral[i].type,"amazonite");
 	}
 	// Generate the bronzes
-	for(i = DIAMOND_NUMBER + AMAZONITE_NUMBER; i < DIAMOND_NUMBER + AMAZONITE_NUMBER + BRONZE_NUMBER; i++){
+	for(i = N_DIAMOND + N_AMAZONITE; i < N_DIAMOND + N_AMAZONITE + N_BRONZE; i++){
 			mineral[i].x = (rand()%512);
 			mineral[i].y = (rand()%(512-128-16-8)) + 128;
-			// isTook = 0 when not took, 1 when the player took it
-			mineral[i].isTook = 0;
+			// isDrilled = 0 when not took, 1 when the player took it
+			mineral[i].isDrilled = 0;
 			strcpy(mineral[i].type,"bronze");
 	}
 	// Generate the alexxzandrites
-	for(i = DIAMOND_NUMBER + AMAZONITE_NUMBER + BRONZE_NUMBER;
-			i < DIAMOND_NUMBER + AMAZONITE_NUMBER + BRONZE_NUMBER + ALEXXZANDRITE_NUMBER; i++){
+	for(i = N_DIAMOND + N_AMAZONITE + N_BRONZE;
+			i < N_DIAMOND + N_AMAZONITE + N_BRONZE + N_ALEXANDRITE; i++){
 			mineral[i].x = (rand()%512);
 			mineral[i].y = (rand()%(512-384-16-8))+ 384;
-			// isTook = 0 when not took, 1 when the player took it
-			mineral[i].isTook = 0;
+			// isDrilled = 0 when not took, 1 when the player took it
+			mineral[i].isDrilled = 0;
 			strcpy(mineral[i].type,"bronze");
 	}
 }
@@ -239,53 +244,53 @@ void update_state(){
 	check_amazonite(position_x, position_y);
 	check_diamond(position_x, position_y);
 	check_bronze(position_x, position_y);
-		oamUpdate(&oamMain);
+	oamUpdate(&oamMain);
 }
 
 void check_diamond(int position_x, int position_y){
 	int i;
-	for(i = 0; i < DIAMOND_NUMBER; i++){
-		if(!mineral[i].isTook && (
-		(((position_y - mineral[i].y > 0) ? (position_y - mineral[i].y):(mineral[i].y - position_y)) < 16) //abs(diamond.y - position_y) < 16
+	for(i = 0; i < N_DIAMOND; i++){
+		if(!mineral[i].isDrilled && (
+		   (((position_y - mineral[i].y > 0) ? (position_y - mineral[i].y):(mineral[i].y - position_y)) < 16) // abs(diamond.y - position_y) < 16
 		&& (((position_x - mineral[i].x > 0) ? (position_x - mineral[i].x):(mineral[i].x - position_x)) < 16) // abs(diamond.x - position_x) < 16
 		)){
 			mineral_count++;
 			if(score_player < 999999){
-				score_player += DIAMOND_SCORE;
+				score_player += SCORE_DIAMONDS;
 				if(score_player > 999999)
 					score_player = 999999;
 				score_changed = 1;
 			}
 			Audio_PlaySoundEX(SFX_COIN_PICKUP);
-			mineral[i].isTook = 1;
-			oamSet(&oamMain, 	// oam handler
-								OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-								mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
-								0,				// Priority
-								2,				// Palette to use
-								SpriteSize_16x16,			// Sprite size
-								SpriteColorFormat_16Color,	// Color format
-								diamond_pic,			// Loaded graphic to display
-								-1,				// Affine rotation to use (-1 none)
-								false,			// Double size if rotating
-								true,			// Hide this sprite
-								false, false,	// Horizontal or vertical flip
-								false			// Mosaic
-								);
+			mineral[i].isDrilled = 1;
+			oamSet(&oamMain, 			// oam handler
+					OFFSET_MINERAL_SPRITE + i,	// Number of sprite
+					mineral[i].x - screen_x, mineral[i].y - screen_y, // Coordinates
+					0,					// Priority
+					2,					// Palette to use
+					SpriteSize_16x16,	// Sprite size
+					SpriteColorFormat_16Color,	// Color format
+					diamond_pic,		// Loaded graphic to display
+					-1,					// Affine rotation to use (-1 none)
+					false,				// Double size if rotating
+					true,				// Hide this sprite
+					false, false,		// Horizontal or vertical flip
+					false				// Mosaic
+					);
 		}
 
-		if(!mineral[i].isTook){
-			if(((mineral[i].x >  - 16) && (mineral[i].x < screen_x + 256)) &&
-					((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
+		if(!mineral[i].isDrilled){
+			if(((mineral[i].x > - 16) 		   && (mineral[i].x < screen_x + 256)) &&
+			   ((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
 
 				oamSet(&oamMain, 	// oam handler
-					OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-					mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
+					OFFSET_MINERAL_SPRITE + i,		// Number of sprite
+					mineral[i].x - screen_x, mineral[i].y - screen_y, // Coordinates
 					0,				// Priority
 					2,				// Palette to use
 					SpriteSize_16x16,			// Sprite size
 					SpriteColorFormat_16Color,	// Color format
-					diamond_pic,			// Loaded graphic to display
+					diamond_pic,	// Loaded graphic to display
 					-1,				// Affine rotation to use (-1 none)
 					false,			// Double size if rotating
 					false,			// Hide this sprite
@@ -296,7 +301,7 @@ void check_diamond(int position_x, int position_y){
 			else{
 				oamSet(&oamMain, 	// oam handler
 					OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-					mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
+					mineral[i].x - screen_x, mineral[i].y - screen_y, // Coordinates
 					0,				// Priority
 					2,				// Palette to use
 					SpriteSize_16x16,			// Sprite size
@@ -315,23 +320,23 @@ void check_diamond(int position_x, int position_y){
 
 void check_amazonite(int position_x, int position_y){
 	int i;
-	for(i = DIAMOND_NUMBER; i < DIAMOND_NUMBER + AMAZONITE_NUMBER; i++){
-		if(!mineral[i].isTook && (
+	for(i = N_DIAMOND; i < N_DIAMOND + N_AMAZONITE; i++){
+		if(!mineral[i].isDrilled && (
 		(((position_y - mineral[i].y > 0) ? (position_y - mineral[i].y):(mineral[i].y - position_y)) < 16) //abs(diamond.y - position_y) < 16
 		&& (((position_x - mineral[i].x > 0) ? (position_x - mineral[i].x):(mineral[i].x - position_x)) < 16) // abs(diamond.x - position_x) < 16
 		)){
 			mineral_count++;
 			if(score_player < 999999){
-				score_player += AMAZONITE_SCORE;
+				score_player += SCORE_AMAZONITE;
 				if(score_player > 999999)
 					score_player = 999999;
 				score_changed = 1;
 			}
 			Audio_PlaySoundEX(SFX_COIN_PICKUP);
-			mineral[i].isTook = 1;
+			mineral[i].isDrilled = 1;
 			oamSet(&oamMain, 	// oam handler
 								OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-								mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
+								mineral[i].x - screen_x, mineral[i].y - screen_y,// Coordinates
 								0,				// Priority
 								2,				// Palette to use
 								SpriteSize_16x16,			// Sprite size
@@ -345,13 +350,13 @@ void check_amazonite(int position_x, int position_y){
 								);
 		}
 
-		if(!mineral[i].isTook){
+		if(!mineral[i].isDrilled){
 			if(((mineral[i].x >  - 16) && (mineral[i].x < screen_x + 256)) &&
 					((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
 
 				oamSet(&oamMain, 	// oam handler
 					OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-					mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
+					mineral[i].x - screen_x, mineral[i].y - screen_y, // Coordinates
 					0,				// Priority
 					2,				// Palette to use
 					SpriteSize_16x16,			// Sprite size
@@ -367,7 +372,7 @@ void check_amazonite(int position_x, int position_y){
 			else{
 				oamSet(&oamMain, 	// oam handler
 					OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-					mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
+					mineral[i].x - screen_x, mineral[i].y - screen_y,// Coordinates
 					0,				// Priority
 					2,				// Palette to use
 					SpriteSize_16x16,			// Sprite size
@@ -386,23 +391,23 @@ void check_amazonite(int position_x, int position_y){
 
 void check_bronze(int position_x, int position_y){
 	int i;
-	for(i = DIAMOND_NUMBER + AMAZONITE_NUMBER; i < DIAMOND_NUMBER + AMAZONITE_NUMBER + BRONZE_NUMBER; i++){
-		if(!mineral[i].isTook && (
+	for(i = N_DIAMOND + N_AMAZONITE; i < N_DIAMOND + N_AMAZONITE + N_BRONZE; i++){
+		if(!mineral[i].isDrilled && (
 		(((position_y - mineral[i].y > 0) ? (position_y - mineral[i].y):(mineral[i].y - position_y)) < 16) //abs(diamond.y - position_y) < 16
 		&& (((position_x - mineral[i].x > 0) ? (position_x - mineral[i].x):(mineral[i].x - position_x)) < 16) // abs(diamond.x - position_x) < 16
 		)){
 			mineral_count++;
 			if(score_player < 999999){
-				score_player += BRONZE_SCORE;
+				score_player += SCORE_BRONZE;
 				if(score_player > 999999)
 					score_player = 999999;
 				score_changed = 1;
 			}
 			Audio_PlaySoundEX(SFX_COIN_PICKUP);
-			mineral[i].isTook = 1;
+			mineral[i].isDrilled = 1;
 			oamSet(&oamMain, 	// oam handler
 								OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-								mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
+								mineral[i].x - screen_x, mineral[i].y - screen_y,// Coordinates
 								0,				// Priority
 								2,				// Palette to use
 								SpriteSize_16x16,			// Sprite size
@@ -416,7 +421,7 @@ void check_bronze(int position_x, int position_y){
 								);
 		}
 
-		if(!mineral[i].isTook){
+		if(!mineral[i].isDrilled){
 			if(((mineral[i].x >  - 16) && (mineral[i].x < screen_x + 256)) &&
 					((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
 
@@ -457,21 +462,21 @@ void check_bronze(int position_x, int position_y){
 
 void check_alexxzandrite(int position_x, int position_y){
 	int i;
-	for(i = DIAMOND_NUMBER + AMAZONITE_NUMBER + BRONZE_NUMBER;
-		i < DIAMOND_NUMBER + AMAZONITE_NUMBER + BRONZE_NUMBER + ALEXXZANDRITE_NUMBER; i++){
-		if(!mineral[i].isTook && (
+	for(i = N_DIAMOND + N_AMAZONITE + N_BRONZE;
+		i < N_DIAMOND + N_AMAZONITE + N_BRONZE + N_ALEXANDRITE; i++){
+		if(!mineral[i].isDrilled && (
 		(((position_y - mineral[i].y > 0) ? (position_y - mineral[i].y):(mineral[i].y - position_y)) < 16) //abs(diamond.y - position_y) < 16
 		&& (((position_x - mineral[i].x > 0) ? (position_x - mineral[i].x):(mineral[i].x - position_x)) < 16) // abs(diamond.x - position_x) < 16
 		)){
 			mineral_count++;
 			if(score_player < 999999){
-				score_player += ALEXXZANDRITE_SCORE;
+				score_player += SCORE_ALEXANDRITE;
 				if(score_player > 999999)
 					score_player = 999999;
 				score_changed = 1;
 			}
 			Audio_PlaySoundEX(SFX_COIN_PICKUP);
-			mineral[i].isTook = 1;
+			mineral[i].isDrilled = 1;
 			oamSet(&oamMain, 	// oam handler
 								OFFSET_MINERAL_SPRITE + i,				// Number of sprite
 								mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
@@ -479,7 +484,7 @@ void check_alexxzandrite(int position_x, int position_y){
 								2,				// Palette to use
 								SpriteSize_16x16,			// Sprite size
 								SpriteColorFormat_16Color,	// Color format
-								alexxzandrite_pic,			// Loaded graphic to display
+								alexandrite_pic,			// Loaded graphic to display
 								-1,				// Affine rotation to use (-1 none)
 								false,			// Double size if rotating
 								true,			// Hide this sprite
@@ -488,7 +493,7 @@ void check_alexxzandrite(int position_x, int position_y){
 								);
 		}
 
-		if(!mineral[i].isTook){
+		if(!mineral[i].isDrilled){
 			if(((mineral[i].x >  - 16) && (mineral[i].x < screen_x + 256)) &&
 					((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
 
@@ -499,7 +504,7 @@ void check_alexxzandrite(int position_x, int position_y){
 					2,				// Palette to use
 					SpriteSize_16x16,			// Sprite size
 					SpriteColorFormat_16Color,	// Color format
-					alexxzandrite_pic,			// Loaded graphic to display
+					alexandrite_pic,			// Loaded graphic to display
 					-1,				// Affine rotation to use (-1 none)
 					false,			// Double size if rotating
 					false,			// Hide this sprite
@@ -515,7 +520,7 @@ void check_alexxzandrite(int position_x, int position_y){
 					2,				// Palette to use
 					SpriteSize_16x16,			// Sprite size
 					SpriteColorFormat_16Color,	// Color format
-					alexxzandrite_pic,			// Loaded graphic to display
+					alexandrite_pic,			// Loaded graphic to display
 					-1,				// Affine rotation to use (-1 none)
 					false,			// Double size if rotating
 					true,			// Hide this sprite
@@ -545,8 +550,8 @@ void load_start_display(){
 
 void hide_objects(){
 	int i;
-	for(i = 0; i < MINERAL_NUMBER; i++){
-		if(!mineral[i].isTook){
+	for(i = 0; i < N_TOT_MINERALS; i++){
+		if(!mineral[i].isDrilled){
 			oamSet(&oamMain, 	// oam handler
 				OFFSET_MINERAL_SPRITE + i,				// Number of sprite
 				mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
@@ -554,7 +559,7 @@ void hide_objects(){
 				2,				// Palette to use
 				SpriteSize_16x16,			// Sprite size
 				SpriteColorFormat_16Color,	// Color format
-				alexxzandrite_pic,			// Loaded graphic to display
+				alexandrite_pic,			// Loaded graphic to display
 				-1,				// Affine rotation to use (-1 none)
 				false,			// Double size if rotating
 				true,			// Hide this sprite

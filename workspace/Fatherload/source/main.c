@@ -9,17 +9,18 @@
 #include "graphics_sub.h"
 #include "game.h"
 
-int main(void){
+int main(void) {
 	srand(time(NULL));
 	init_game();
 	u16 keys;
-	do{
+
+	do {
 		// set the player and screen starting coordinates
 		start_game();
-		while(1){
+		while (1) {
 			scanKeys();
 			keys = keysHeld();
-			switch(keys){
+			switch (keys) {
 			case KEY_DOWN:
 				player_move_down();
 				break;
@@ -36,8 +37,9 @@ int main(void){
 				player_pressed_start();
 				break;
 			}
-			if(!start_pressed){
-				if(keys & KEY_TOUCH){
+
+			if (!start_pressed) {
+				if (keys & KEY_TOUCH) {
 					player_pressed_touchscreen();
 				}
 
@@ -53,7 +55,7 @@ int main(void){
 				// Update the drilled path
 				update_state();
 
-				if(score_changed){
+				if (score_changed) {
 					score_update();
 				}
 
@@ -62,10 +64,10 @@ int main(void){
 				// Show the time since the game began
 				updateChronoDisp(min, sec, msec);
 				// Stop the while if the player reaches the number of mineral generated
-				if(mineral_count == MINERAL_NUMBER)
+				if (mineral_count == N_TOT_MINERALS)
 					break;
 			}
 		}
-	} while(1);
+	} while (1);
 	return 0;
 }
