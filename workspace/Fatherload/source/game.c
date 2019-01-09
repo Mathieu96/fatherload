@@ -14,18 +14,27 @@ int screen_y;
 
 int mineral_count = 0;
 
-Objects_coord *mineral;
+Mineral *mineralMap;
 
 dir orientation;
 
 u16 *gfx_horizontal, *gfx_vertical, *diamond_pic, *amazonite_pic, *bronze_pic, *alexxzandrite_pic;
 
-int start_pressed = 0;
-int score_player = 0;
+bool start_pressed = false;
+bool drilling = false;
+int player_score = 0;
 int score_changed = 0;
 
+int player_diamonds = 0;
+int player_amazonite = 0;
+int player_bronze = 0;
+int player_alexxzandrite = 0;
+//TODO: Find reasonnable values for these:
+int player_drill_health = 50;
+int player_fuel = 100;
+
 void init_game() {
-	mineral = (Objects_coord *) malloc(N_TOT_MINERALS * sizeof(Objects_coord));
+	mineralMap = (Mineral *) malloc(N_TOT_MINERALS * sizeof(Mineral));
 
 	Audio_Init();
 	Audio_PlayMusic();
@@ -35,6 +44,7 @@ void init_game() {
 	init_sub_background();
 
 	orientation = RIGHT;
+
 
 	TIMER_DATA(0) = TIMER_FREQ(100);
 	TIMER0_CR = TIMER_ENABLE | TIMER_DIV_64 | TIMER_IRQ_REQ;
@@ -49,25 +59,11 @@ void start_game() {
 	screen_x = 128;
 	screen_y = 0;
 	mineral_count = 0;
-	score_player = 0;
+	player_score = 0;
 
 	update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0,
 				  PLAYER_VPAL, 0, 0,
 				  player_x, player_y);
-/*	oamSet(&oamMain, 			// oam handler
-			PLAYER_SPRITE_ID, 	// Number of sprite
-			player_x, player_y, // Coordinates
-			0, 					// Priority
-			0, 					// Palette to use
-			SpriteSize_16x16, 	// Sprite size
-			SpriteColorFormat_16Color, // Color format
-			gfx_horizontal,	 	// Loaded graphic to display
-			-1, 				// Affine rotation to use (-1 none)
-			false, 				// Double size if rotating
-			false, 				// Hide this sprite
-			false, false,		// Horizontal or vertical flip
-			false 				// Mosaic
-	);*/
 	oamUpdate(&oamMain);
 	// set the starting backgrounds
 	init_main_bg();
@@ -75,46 +71,109 @@ void start_game() {
 	//set the objects coordinates
 	initMinerals();
 	irqEnable(IRQ_TIMER0);
-	score_update();
+	update_scoreboard();
+}
+
+bool hasBeenDrilled(int pos_x, int pos_y, bool answer) {
+	//TODO: Mathieu, can you implement this?
+	// last argument only for debugging purposes, should be removed when implemented properly
+	// Possibly re-use it with display_drilled_path if applicable
+	if (answer)
+		return true;
+	else
+		return false;
 }
 
 void player_move_right() {
+	orientation = RIGHT;
 	if (screen_x < 512 - 256 && !start_pressed) {
-		Audio_PlaySoundEX(SFX_BULLDOZER);
-		orientation = RIGHT;
-		screen_x++;
-		if (player_x < 256 - 16)
-			player_x++;
+		if (hasBeenDrilled(player_x + 1, player_y, true)) {
+			screen_x++;
+			if (player_x < 256 - 16)
+				player_x++;
+			player_fuel--;
+		}
 	}
 }
 
 void player_move_left() {
+	orientation = LEFT;
 	if (screen_x > 0 && !start_pressed) {
-		Audio_PlaySoundEX(SFX_BULLDOZER);
-		orientation = LEFT;
-		screen_x--;
-		if (player_x > 0)
-			player_x--;
+		if (hasBeenDrilled(player_x - 1, player_y, true)) {
+			screen_x--;
+			if (player_x > 0)
+				player_x--;
+			player_fuel--;
+		}
 	}
 }
 
 void player_move_down() {
+	orientation = DOWN;
 	if (screen_y < 512 - 192 && !start_pressed) {
-		Audio_PlaySoundEX(SFX_BULLDOZER);
-		orientation = DOWN;
-		screen_y++;
-		if (player_y < 168)
-			player_y++;
+		if (hasBeenDrilled(player_x, player_y + 1, true)) {
+			screen_y++;
+			if (player_y < 168)
+				player_y++;
+			player_fuel--;
+		}
 	}
 }
 
 void player_move_up() {
+	orientation = UP;
 	if (screen_y > 0 && !start_pressed) {
-		Audio_PlaySoundEX(SFX_BULLDOZER);
-		orientation = UP;
-		screen_y--;
-		if (player_y > 112)
-			player_y--;
+		if (hasBeenDrilled(player_x, player_y - 1, true)) {
+			screen_y--;
+			if (player_y > 112)
+				player_y--;
+			player_fuel--;
+		}
+	}
+}
+
+void player_drills() {
+	switch (orientation) {
+	case RIGHT:
+		if (screen_x < 512 - 256 && !start_pressed && !hasBeenDrilled(player_x + 1, player_y, false)) {
+			screen_x++;
+			if (player_x < 256 - 16){
+				player_x++;
+			}
+			player_drill_health--;
+			drilling = true;
+		}
+		break;
+	case LEFT:
+		if (screen_x > 0 && !start_pressed && !hasBeenDrilled(player_x - 1, player_y, false)) {
+			screen_x--;
+			if (player_x > 0) {
+				player_x--;
+			}
+			player_drill_health--;
+			drilling = true;
+		}
+		break;
+	case DOWN:
+		if (screen_y < 512 - 192 && !start_pressed && !hasBeenDrilled(player_x, player_y + 1, false)) {
+			screen_y++;
+			if (player_y < 168){
+				player_y++;
+			}
+			player_drill_health--;
+			drilling = true;
+		}
+		break;
+	case UP:
+		if (screen_y > 0 && !start_pressed && !hasBeenDrilled(player_x, player_y - 1, false)) {
+			screen_y--;
+			if (player_y > 112){
+				player_y--;
+			}
+			player_drill_health--;
+			drilling = true;
+		}
+		break;
 	}
 }
 
@@ -129,41 +188,14 @@ void player_pressed_start() {
 		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 1,
 					  PLAYER_VPAL, 0, 0,
 					  player_x, player_y);
-/*		oamSet(&oamMain,			// oam handler
-				PLAYER_SPRITE_ID, 	// Number of sprite
-				player_x, player_y, // Coordinates
-				0, 					// Priority
-				0, 					// Palette to use
-				SpriteSize_16x16, 	// Sprite size
-				SpriteColorFormat_16Color, // Color format
-				gfx_horizontal, 	// Loaded graphic to display
-				-1, 				// Affine rotation to use (-1 none)
-				false, 				// Double size if rotating
-				true, 				// Hide this sprite
-				false, false,		// Horizontal or vertical flip
-				false 				// Mosaic
-		);*/
 		oamUpdate(&oamMain);
+		//TODO: change to key released?
 		swiDelay(11000000); // Delay to avoid going back out of start mode right after
 	} else {
 		mmResume();
 		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0,
 					  PLAYER_HPAL, 0, 0,
 					  player_x, player_y);
-/*		oamSet(&oamMain, 			// oam handler
-				PLAYER_SPRITE_ID, 	// Number of sprite
-				player_x, player_y, // Coordinates
-				0, 					// Priority
-				0, 					// Palette to use
-				SpriteSize_16x16, 	// Sprite size
-				SpriteColorFormat_16Color, // Color format
-				gfx_horizontal, 	// Loaded graphic to display
-				-1, 				// Affine rotation to use (-1 none)
-				false, 				// Double size if rotating
-				false, 				// Hide this sprite
-				false, false, 		// Horizontal or vertical flip
-				false 				// Mosaic
-		);*/
 		oamUpdate(&oamMain);
 		release_start_display();
 		start_pressed = 0;
@@ -173,6 +205,7 @@ void player_pressed_start() {
 }
 
 void player_pressed_touchscreen() {
+	//TODO: update to new movement/drilling scheme
 	touchPosition touch;
 	touchRead(&touch);
 	if (((touch.py >= 0) && (touch.py < 50)) && (touch.px >= 45) && (touch.px <= 85)) {
@@ -214,7 +247,7 @@ void player_pressed_touchscreen() {
 	}
 }
 
-void update_game() {
+void update_vehicle() {
 	switch (orientation) {
 	case RIGHT:
 		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0,
@@ -239,6 +272,56 @@ void update_game() {
 	}
 }
 
+void addToInventory(mineralType mineral) {
+	switch (mineral) {
+	case DIAMOND:
+		player_diamonds++;
+		break;
+	case AMAZONITE:
+		player_amazonite++;
+		break;
+	case BRONZE:
+		player_bronze++;
+		break;
+	case ALEXXZANDRITE:
+		player_alexxzandrite++;
+		break;
+	default:
+		break;
+	}
+}
+
+void sellItemFromInventory(mineralType mineral) {
+	switch (mineral) {
+	case DIAMOND:
+		if (player_diamonds){
+			player_diamonds--;
+			player_score += SCORE_DIAMONDS;
+		}
+		break;
+	case AMAZONITE:
+		if (player_amazonite){
+			player_amazonite--;
+			player_score += SCORE_AMAZONITE;
+		}
+		break;
+	case BRONZE:
+		if (player_bronze) {
+			player_bronze--;
+			player_score += SCORE_BRONZE;
+		}
+		break;
+	case ALEXXZANDRITE:
+		if (player_alexxzandrite) {
+			player_alexxzandrite--;
+			player_score += SCORE_ALEXANDRITE;
+		}
+		break;
+	default:
+		break;
+	}
+	update_scoreboard();
+}
 
 void update_state(){
 	int position_y = player_y + screen_y;
@@ -250,137 +333,29 @@ void update_state(){
 		int y = ((position_y)%256)/8;
 		display_drilled_path(base, x, y);
 	}
-	check_alexxzandrite(position_x, position_y);
-	check_amazonite(position_x, position_y);
-	check_diamond(position_x, position_y);
-	check_bronze(position_x, position_y);
+
+	if (drilling) {
+		mineralType mineral = drillMineralReturnValue(position_x, position_y);
+		if (mineral != DIRT){
+			addToInventory(mineral);
+			//TODO: Fix when store is implemented, just sell right away for now
+			sellItemFromInventory(mineral);
+			Audio_PlaySoundEX(SFX_COIN_PICKUP);
+		} else {
+			Audio_PlaySoundEX(SFX_BULLDOZER);
+		}
+
+	}
+
+//	check_alexxzandrite(position_x, position_y);
+//	check_amazonite(position_x, position_y);
+//	check_diamond(position_x, position_y);
+//	check_bronze(position_x, position_y);
+
+//	if (!score_changed)
+//		Audio_PlaySoundEX(SFX_BULLDOZER);
+
+	drilling = false;
 	oamUpdate(&oamMain);
 }
 
-void check_diamond(int position_x, int position_y){
-	int i;
-	for(i = 0; i < N_DIAMOND; i++){
-		if(!mineral[i].isDrilled && (
-		   (((position_y - mineral[i].y > 0) ? (position_y - mineral[i].y):(mineral[i].y - position_y)) < 16) // abs(diamond.y - position_y) < 16
-		&& (((position_x - mineral[i].x > 0) ? (position_x - mineral[i].x):(mineral[i].x - position_x)) < 16) // abs(diamond.x - position_x) < 16
-		)){
-			mineral_count++;
-			if(score_player < 999999){
-				score_player += SCORE_DIAMONDS;
-				if(score_player > 999999)
-					score_player = 999999;
-				score_changed = 1;
-			}
-			Audio_PlaySoundEX(SFX_COIN_PICKUP);
-			mineral[i].isDrilled = 1;
-			update_sprite(diamond_pic, OFFSET_MINERAL_SPRITE + i,
-						  mineral[i].isDrilled, DIAMOND_PAL, 0, 0,
-						  mineral[i].x - screen_x, mineral[i].y - screen_y);
-		}
-
-		if(((mineral[i].x > - 16) 		   && (mineral[i].x < screen_x + 256)) &&
-		   ((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
-			update_sprite(diamond_pic, OFFSET_MINERAL_SPRITE + i,
-						  mineral[i].isDrilled, DIAMOND_PAL,0, 0,
-						  mineral[i].x - screen_x, mineral[i].y - screen_y);
-		}
-	}
-}
-
-void check_amazonite(int position_x, int position_y){
-	int i;
-	for(i = N_DIAMOND; i < N_DIAMOND + N_AMAZONITE; i++){
-		if(!mineral[i].isDrilled && (
-		(((position_y - mineral[i].y > 0) ? (position_y - mineral[i].y):(mineral[i].y - position_y)) < 16) //abs(diamond.y - position_y) < 16
-		&& (((position_x - mineral[i].x > 0) ? (position_x - mineral[i].x):(mineral[i].x - position_x)) < 16) // abs(diamond.x - position_x) < 16
-		)){
-			mineral_count++;
-			if(score_player < 999999){
-				score_player += SCORE_AMAZONITE;
-				if(score_player > 999999)
-					score_player = 999999;
-				score_changed = 1;
-			}
-			Audio_PlaySoundEX(SFX_COIN_PICKUP);
-			mineral[i].isDrilled = 1;
-			//update_sprite(u16* gfx, int spriteID, int hide, int paletteNum, int x, int y)
-			update_sprite(amazonite_pic, OFFSET_MINERAL_SPRITE + i,
-						  mineral[i].isDrilled, AMAZONITE_PAL, 0, 0,
-						  mineral[i].x - screen_x, mineral[i].y - screen_y);
-		}
-
-		if(((mineral[i].x >  - 16) && (mineral[i].x < screen_x + 256)) &&
-				((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
-
-			update_sprite(amazonite_pic, OFFSET_MINERAL_SPRITE + i,
-						  mineral[i].isDrilled, AMAZONITE_PAL, 0, 0,
-						  mineral[i].x - screen_x, mineral[i].y - screen_y);
-		}
-	}
-}
-
-void check_bronze(int position_x, int position_y){
-	int i;
-	for(i = N_DIAMOND + N_AMAZONITE; i < N_DIAMOND + N_AMAZONITE + N_BRONZE; i++){
-		if(!mineral[i].isDrilled && (
-		(((position_y - mineral[i].y > 0) ? (position_y - mineral[i].y):(mineral[i].y - position_y)) < 16) //abs(diamond.y - position_y) < 16
-		&& (((position_x - mineral[i].x > 0) ? (position_x - mineral[i].x):(mineral[i].x - position_x)) < 16) // abs(diamond.x - position_x) < 16
-		)){
-			mineral_count++;
-			if(score_player < 999999){
-				score_player += SCORE_BRONZE;
-				if(score_player > 999999)
-					score_player = 999999;
-				score_changed = 1;
-			}
-			Audio_PlaySoundEX(SFX_COIN_PICKUP);
-			mineral[i].isDrilled = 1;
-
-			update_sprite(bronze_pic, OFFSET_MINERAL_SPRITE + i,
-						  mineral[i].isDrilled, BRONZE_PAL, 0, 0,
-						  mineral[i].x - screen_x, mineral[i].y - screen_y);
-
-		}
-
-		if(((mineral[i].x >  - 16) && (mineral[i].x < screen_x + 256)) &&
-				((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
-
-			update_sprite(bronze_pic, OFFSET_MINERAL_SPRITE + i,
-						  mineral[i].isDrilled, BRONZE_PAL, 0, 0,
-						  mineral[i].x - screen_x, mineral[i].y - screen_y);
-		}
-	}
-}
-
-void check_alexxzandrite(int position_x, int position_y){
-	int i;
-	for(i = N_DIAMOND + N_AMAZONITE + N_BRONZE;
-		i < N_DIAMOND + N_AMAZONITE + N_BRONZE + N_ALEXANDRITE; i++){
-		if(!mineral[i].isDrilled && (
-		(((position_y - mineral[i].y > 0) ? (position_y - mineral[i].y):(mineral[i].y - position_y)) < 16) //abs(diamond.y - position_y) < 16
-		&& (((position_x - mineral[i].x > 0) ? (position_x - mineral[i].x):(mineral[i].x - position_x)) < 16) // abs(diamond.x - position_x) < 16
-		)){
-			mineral_count++;
-			if(score_player < 999999){
-				score_player += SCORE_ALEXANDRITE;
-				if(score_player > 999999)
-					score_player = 999999;
-				score_changed = 1;
-			}
-			Audio_PlaySoundEX(SFX_COIN_PICKUP);
-			mineral[i].isDrilled = 1;
-
-			update_sprite(alexxzandrite_pic, OFFSET_MINERAL_SPRITE + i,
-						  mineral[i].isDrilled, ALEXX_PAL, 0, 0,
-						  mineral[i].x - screen_x, mineral[i].y - screen_y);
-		}
-
-		if(((mineral[i].x >  - 16) && (mineral[i].x < screen_x + 256)) &&
-				((mineral[i].y > screen_y - 16) && (mineral[i].y < screen_y + 192))){
-
-			update_sprite(alexxzandrite_pic, OFFSET_MINERAL_SPRITE + i,
-						  mineral[i].isDrilled, ALEXX_PAL, 0, 0,
-						  mineral[i].x - screen_x, mineral[i].y - screen_y);
-		}
-	}
-}
