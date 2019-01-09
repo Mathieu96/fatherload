@@ -10,11 +10,14 @@
 
 #include <nds.h>
 #include <string.h>
+#include <stdbool.h>
 #include "P_Audio.h"
 #include "graphics_main.h"
 #include "graphics_sub.h"
 #include "game.h"
 #include "timer_game.h"
+#include "mineral.h"
+
 
 // define sprite IDs
 #define PLAYER_SPRITE_ID 0
@@ -30,8 +33,8 @@
 #define N_DIAMOND 10
 #define N_AMAZONITE 20
 #define N_BRONZE 40
-#define N_ALEXANDRITE 5
-#define N_TOT_MINERALS (N_DIAMOND + N_AMAZONITE + N_BRONZE + N_ALEXANDRITE)
+#define N_ALEXXZANDRITE 5
+#define N_TOT_MINERALS (N_DIAMOND + N_AMAZONITE + N_BRONZE + N_ALEXXZANDRITE)
 
 // palettes numbers
 #define PLAYER_HPAL 0
@@ -44,14 +47,27 @@
 #define SPRITE_WIDTH 32
 #define SPRITE_HEIGTH 32
 
-typedef struct{
+typedef enum {DIRT, DRILLED, DIAMOND, AMAZONITE, BRONZE, ALEXXZANDRITE} mineralType;
+
+typedef struct {
 	int x;
 	int y;
-	int isDrilled;
-	char type[20];
-} Objects_coord;
+	int n;
+	bool isDrilled;
+	mineralType type;
+} Mineral;
 
 typedef enum {UP, DOWN, LEFT, RIGHT} dir;
+
+// inventory
+extern int player_diamonds;
+extern int player_amazonite;
+extern int player_bronze;
+extern int player_alexxzandrite;
+extern int player_fuel;
+extern int player_drill_health;
+extern int player_score;
+extern int score_changed;
 
 extern u16* diamond_pic, *amazonite_pic, *bronze_pic, *alexxzandrite_pic;
 
@@ -65,8 +81,8 @@ extern int mineral_count;
 
 extern int min, sec, msec;
 
-extern int start_pressed, score_changed, score_player;
+extern bool start_pressed;
 
-extern Objects_coord *mineral;
+extern Mineral *mineralMap;
 
 #endif

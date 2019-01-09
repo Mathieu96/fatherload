@@ -100,9 +100,9 @@ void updateChronoDisp(int min, int sec, int msec, int pal) {
 	printDigit((int) msec % 10, 15, 20, pal);
 }
 
-void score_display(int x, int y, int pal, int score) {
+void score_display(int x, int y, int pal, int score){
 	int i;
-	int temp = score;
+	int temp = player_score;
 	for (i = 1000000; i > 0; i /= 10) {
 		x += 2;
 		printDigit(temp / i, x, y, pal);

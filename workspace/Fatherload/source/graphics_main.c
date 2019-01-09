@@ -30,6 +30,17 @@ u8 endTile[64] = {
 		254, 254, 255, 255, 254, 254, 255, 255
 };
 
+u8 endTile2[64] = {
+		255, 255, 254, 254, 255, 255, 254, 254,
+		255, 255, 254, 254, 255, 255, 254, 254,
+		254, 254, 255, 255, 254, 254, 255, 255,
+		254, 254, 255, 255, 254, 254, 255, 255,
+		255, 255, 254, 254, 255, 255, 254, 254,
+		255, 255, 254, 254, 255, 255, 254, 254,
+		254, 254, 255, 255, 254, 254, 255, 255,
+		254, 254, 255, 255, 254, 254, 255, 255
+};
+
 u8 emptyTile[64] = {
 		0, 0, 0, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 0, 0, 0,
@@ -67,17 +78,17 @@ void config_main_background(){
 	dmaCopy(fondTile, (u8*)BG_TILE_RAM(1) + 1*64, 64);
 	dmaCopy(endTile, (u8*)BG_TILE_RAM(1) + 2*64, 64);
 	dmaCopy(troubleTile, (u8*)BG_TILE_RAM(1) + 3*64, 64);
+	dmaCopy(emptyTile, (u8*)BG_TILE_RAM(1) + 4*64, 64);
 
 	// Init BG2
 	BGCTRL[2] = BG_COLOR_256 | BG_MAP_BASE(0) | BG_TILE_BASE(1) | BG_64x64;
 
-	dmaCopy(FONDSPal, BG_PALETTE, FONDSPalLen);
-	BG_PALETTE[254] = ARGB16(1,15,15,15);
-	BG_PALETTE[255] = ARGB16(1,21,17,12);
-
 	// Init background 3
 	BGCTRL[3] = BG_COLOR_256 | BG_MAP_BASE(4) | BG_TILE_BASE(2) | BG_64x64;
 	dmaCopy(FONDSTiles, BG_TILE_RAM(2), FONDSTilesLen);
+	dmaCopy(FONDSPal, BG_PALETTE, FONDSPalLen);
+	BG_PALETTE[254] = ARGB16(1,15,15,15);
+	BG_PALETTE[255] = ARGB16(1,21,17,12);
 }
 
 void init_main_bg(){
@@ -100,8 +111,9 @@ void init_main_bg(){
 	// Init map of BG2
 	for(i = 0; i < 32; i++){
 		for(j = 0; j < 32; j++){
-			BG_MAP_RAM(0)[i*32 + j] = 0;
-			BG_MAP_RAM(1)[i*32 + j] = 0;
+			// We want to differenciate the empty tiles of the upper part (above the dirt to dig) to the downer part
+			BG_MAP_RAM(0)[i*32 + j] = ((i < 16)?4:0);
+			BG_MAP_RAM(1)[i*32 + j] = ((i < 16)?4:0);
 			BG_MAP_RAM(2)[i*32 + j] = 0;
 			BG_MAP_RAM(3)[i*32 + j] = 0;
 		}
@@ -163,46 +175,6 @@ void configureSprites() {
 	dmaCopy(alexxzandriteTiles, alexxzandrite_pic, alexxzandriteTilesLen);
 }
 
-
-void initMinerals(){
-	int i;
-	// Generate the diamonds, deep on the map
-	for(i = 0; i < N_DIAMOND; i++){
-		mineral[i].x = (rand()%512);
-		mineral[i].y = (rand()%(512-384-16-8)) + 384;
-		// isDrilled = 0 when not took, 1 when the player took it
-		mineral[i].isDrilled = 0;
-		strcpy(mineral[i].type,"diamond");
-	}
-	// Generate the amazonite
-	for(i = N_DIAMOND; i < N_DIAMOND + N_AMAZONITE; i++){
-			mineral[i].x = (rand()%512);
-			mineral[i].y = (rand()%(512-256-16-8))+ 256;
-			// isDrilled = 0 when not took, 1 when the player took it
-			mineral[i].isDrilled = 0;
-			strcpy(mineral[i].type,"amazonite");
-	}
-	// Generate the bronzes
-	for(i = N_DIAMOND + N_AMAZONITE; i < N_DIAMOND + N_AMAZONITE + N_BRONZE; i++){
-			mineral[i].x = (rand()%512);
-			mineral[i].y = (rand()%(512-128-16-8)) + 128;
-			// isDrilled = 0 when not took, 1 when the player took it
-			mineral[i].isDrilled = 0;
-			strcpy(mineral[i].type,"bronze");
-	}
-	// Generate the alexxzandrites
-	for(i = N_DIAMOND + N_AMAZONITE + N_BRONZE;
-			i < N_DIAMOND + N_AMAZONITE + N_BRONZE + N_ALEXANDRITE; i++){
-			mineral[i].x = (rand()%512);
-			mineral[i].y = (rand()%(512-384-16-8))+ 384;
-			// isDrilled = 0 when not took, 1 when the player took it
-			mineral[i].isDrilled = 0;
-			strcpy(mineral[i].type,"bronze");
-	}
-}
-
-
-
 void restart_display(){
 	dmaCopy(Game_OverMap, BG_MAP_RAM(10), Game_OverMapLen);
 }
@@ -214,18 +186,8 @@ void load_start_display(){
 			BG_MAP_RAM(9)[i*32 + j] = 3;
 		}
 	}
-	hide_objects();
+	hide_all_minerals();
 	print_start();
-}
-
-void hide_objects(){
-	int i;
-	for(i = 0; i < N_TOT_MINERALS; i++){
-		if(!mineral[i].isDrilled){
-			update_sprite(NULL, OFFSET_MINERAL_SPRITE + i,
-				1, 0, 0, 0, mineral[i].x - screen_x, mineral[i].y - screen_y);
-		}
-	}
 }
 
 void print_start(){
@@ -366,7 +328,7 @@ void update_sprite(u16* gfx, int spriteID, int hide, int paletteNum, int hFlip, 
 		);
 }
 
-void display_drilled_path(int base, int x, int y){
+void drilling_path(int base, int x, int y){
 	int i;
 	if(orientation == UP || orientation == DOWN){
 		for(i = y; i < y + 2; i++){

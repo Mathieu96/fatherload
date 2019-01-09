@@ -10,6 +10,9 @@
 
 #include "fatherload_defines.h"
 #include "P_Score.h"
+#include "mineral.h"
+#include "timer_game.h"
+#include "P_Score.h"
 
 void init_game();
 
@@ -25,18 +28,14 @@ void player_move_down();
 
 void player_move_up();
 
+void player_drills();
+
 void player_pressed_start();
 
 void player_pressed_touchscreen();
 
-void update_game();
+void update_vehicle();
 
-void check_alexxzandrite(int position_x, int position_y);
 
-void check_amazonite(int position_x, int position_y);
-
-void check_diamond(int position_x, int position_y);
-
-void check_bronze(int position_x, int position_y);
 
 #endif /* GRAPHICS_MAIN_H_ */

@@ -7,19 +7,19 @@ int max_score = 0;
 
 void updateScore(int score)
 {
-	if(score_player < 9999999){
-		score_player += score;
-		if(score_player > 9999999)
-			score_player = 9999999;
+	if(player_score < 9999999){
+		player_score += score;
+		if(player_score > 9999999)
+			player_score = 9999999;
 		score_changed = 1;
 	}
 
 	//Display the score
-	score_display(16, 1, 10, score_player);
+	score_display(16, 1, 10, player_score);
 
 	//Update highest score
-	if(score_player > max_score){
-		max_score = score_player;
+	if(player_score > max_score){
+		max_score = player_score;
 		writeMaxScore(max_score);
 	}
 }

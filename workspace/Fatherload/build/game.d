@@ -68,6 +68,7 @@ game.o: /home/nds/files/fatherload/workspace/Fatherload/source/game.c \
   /home/nds/files/fatherload/workspace/Fatherload/build/numbers.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/numbers_small.h \
   /home/nds/files/fatherload/workspace/Fatherload/source/timer_game.h \
+  /home/nds/files/fatherload/workspace/Fatherload/source/mineral.h \
   /home/nds/files/fatherload/workspace/Fatherload/source/P_Score.h
 
 /home/nds/files/fatherload/workspace/Fatherload/source/game.h:
@@ -207,5 +208,7 @@ game.o: /home/nds/files/fatherload/workspace/Fatherload/source/game.c \
 /home/nds/files/fatherload/workspace/Fatherload/build/numbers_small.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/source/timer_game.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/source/mineral.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/source/P_Score.h:
