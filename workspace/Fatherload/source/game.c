@@ -213,6 +213,7 @@ void player_drills() {
 void player_pressed_start() {
 	if (!start_pressed) {
 		irqDisable(IRQ_TIMER0);
+		irqDisable(IRQ_TIMER1);
 		mmPause();
 		Audio_PlaySoundEX(SFX_TIRE_SCREECH);
 		load_start_display();
@@ -237,6 +238,7 @@ void player_pressed_start() {
 		start_pressed = 0;
 		swiDelay(11000000); // Delay to avoid going back into start mode right after
 		irqEnable(IRQ_TIMER0);
+		irqEnable(IRQ_TIMER1);
 	}
 }
 

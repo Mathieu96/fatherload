@@ -373,55 +373,55 @@ Linker script and memory map
  .text          0x020003b0        0x0 numbers_small.o
  .text          0x020003b0        0x0 PlayerHorizontal.o
  .text          0x020003b0        0x0 PlayerVertical.o
- .text          0x020003b0      0xd6c game.o
+ .text          0x020003b0      0xd78 game.o
                 0x020007e8                player_move_up
                 0x020009d8                player_pressed_start
                 0x0200043c                start_game
                 0x020006b8                player_move_left
-                0x020010a0                player_fall
+                0x020010ac                player_fall
                 0x0200074c                player_move_down
                 0x020004e0                hasBeenDrilled
-                0x02000f3c                update_state
+                0x02000f48                update_state
                 0x02000880                player_drills
-                0x02000df0                addToInventory
+                0x02000dfc                addToInventory
                 0x020003b0                init_game
-                0x02000d20                update_vehicle
-                0x02000a9c                player_pressed_touchscreen
+                0x02000d2c                update_vehicle
+                0x02000aa8                player_pressed_touchscreen
                 0x0200060c                player_move_right
-                0x02000e68                sellItemFromInventory
- .text          0x0200111c      0xad4 graphics_main.o
-                0x0200111c                config_main_background
-                0x0200148c                configureSprites
-                0x02001640                restart_display
-                0x02001a44                drilling_path
-                0x02001290                init_main_bg
-                0x020016ac                print_start
-                0x02001660                load_start_display
-                0x020019d4                update_sprite
-                0x02001990                release_start_display
- .text          0x02001bf0      0x4f8 graphics_sub.o
-                0x02002018                score_display
-                0x02001e78                updateChronoDisp
-                0x02002080                print_fuel
-                0x02001dd8                printDigit
-                0x02001bf0                init_sub_background
- .text          0x020020e8      0x1c4 main.o
-                0x020020e8                main
- .text          0x020022ac      0xa34 mineral.o
-                0x020029cc                refreshMineralSprites
-                0x02002780                drillMineralReturnValue
-                0x020022ac                isMineralPlaceValid
-                0x020026f4                getMineral
-                0x02002678                hide_all_minerals
-                0x02002334                initMinerals
- .text          0x02002ce0       0x7c P_Audio.o
-                0x02002d40                Audio_PlayMusic
-                0x02002d0c                Audio_PlaySoundEX
-                0x02002ce0                Audio_Init
- .text          0x02002d5c      0x11c P_Score.o
-                0x02002dd4                readMaxScore
-                0x02002e28                writeMaxScore
-                0x02002d5c                updateScore
+                0x02000e74                sellItemFromInventory
+ .text          0x02001128      0xad4 graphics_main.o
+                0x02001128                config_main_background
+                0x02001498                configureSprites
+                0x0200164c                restart_display
+                0x02001a50                drilling_path
+                0x0200129c                init_main_bg
+                0x020016b8                print_start
+                0x0200166c                load_start_display
+                0x020019e0                update_sprite
+                0x0200199c                release_start_display
+ .text          0x02001bfc      0x4f8 graphics_sub.o
+                0x02002024                score_display
+                0x02001e84                updateChronoDisp
+                0x0200208c                print_fuel
+                0x02001de4                printDigit
+                0x02001bfc                init_sub_background
+ .text          0x020020f4      0x1c4 main.o
+                0x020020f4                main
+ .text          0x020022b8      0xa34 mineral.o
+                0x020029d8                refreshMineralSprites
+                0x0200278c                drillMineralReturnValue
+                0x020022b8                isMineralPlaceValid
+                0x02002700                getMineral
+                0x02002684                hide_all_minerals
+                0x02002340                initMinerals
+ .text          0x02002cec       0x7c P_Audio.o
+                0x02002d4c                Audio_PlayMusic
+                0x02002d18                Audio_PlaySoundEX
+                0x02002cec                Audio_Init
+ .text          0x02002d68      0x110 P_Score.o
+                0x02002de0                readMaxScore
+                0x02002e34                writeMaxScore
+                0x02002d68                updateScore
  .text          0x02002e78       0x84 timer_game.o
                 0x02002e78                timer0_ISR
                 0x02002ee0                timer1_ISR
@@ -2788,43 +2788,43 @@ Linker script and memory map
  .debug_abbrev  0x000039d0       0xfc /opt/devkitPro/libnds/lib/libnds9.a(video.o)
  .debug_abbrev  0x00003acc       0x12 /opt/devkitPro/devkitARM/lib/gcc/arm-eabi/4.3.3/thumb/crtn.o
 
-.debug_line     0x00000000     0x651d
+.debug_line     0x00000000     0x651e
  *(.debug_line)
  .debug_line    0x00000000       0x49 /opt/devkitPro/devkitARM/lib/gcc/arm-eabi/4.3.3/thumb/crti.o
- .debug_line    0x00000049      0x28b game.o
- .debug_line    0x000002d4      0x324 graphics_main.o
- .debug_line    0x000005f8      0x238 graphics_sub.o
- .debug_line    0x00000830      0x1a5 main.o
- .debug_line    0x000009d5      0x1fe mineral.o
- .debug_line    0x00000bd3      0x1d4 P_Audio.o
- .debug_line    0x00000da7      0x23e P_Score.o
- .debug_line    0x00000fe5      0x178 timer_game.o
- .debug_line    0x0000115d      0x426 /opt/devkitPro/libnds/lib/libfat.a(libfat.o)
- .debug_line    0x00001583      0x43b /opt/devkitPro/libnds/lib/libfat.a(partition.o)
- .debug_line    0x000019be      0x307 /opt/devkitPro/libnds/lib/libfat.a(cache.o)
- .debug_line    0x00001cc5      0x13e /opt/devkitPro/libnds/lib/libfat.a(disc.o)
- .debug_line    0x00001e03      0x5c1 /opt/devkitPro/libnds/lib/libfat.a(fatdir.o)
- .debug_line    0x000023c4      0x8a8 /opt/devkitPro/libnds/lib/libfat.a(fatfile.o)
- .debug_line    0x00002c6c      0x2a4 /opt/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
- .debug_line    0x00002f10      0x1c4 /opt/devkitPro/libnds/lib/libfat.a(filetime.o)
- .debug_line    0x000030d4      0x831 /opt/devkitPro/libnds/lib/libfat.a(directory.o)
- .debug_line    0x00003905      0x31e /opt/devkitPro/libnds/lib/libnds9.a(initSystem.o)
- .debug_line    0x00003c23      0x2ec /opt/devkitPro/libnds/lib/libnds9.a(keys.o)
- .debug_line    0x00003f0f      0x2dc /opt/devkitPro/libnds/lib/libnds9.a(sprite.o)
- .debug_line    0x000041eb      0x2cd /opt/devkitPro/libnds/lib/libnds9.a(sprite_alloc.o)
- .debug_line    0x000044b8      0x2d1 /opt/devkitPro/libnds/lib/libnds9.a(system.o)
- .debug_line    0x00004789      0x27e /opt/devkitPro/libnds/lib/libnds9.a(touch.o)
- .debug_line    0x00004a07      0x1dd /opt/devkitPro/libnds/lib/libnds9.a(trig.o)
- .debug_line    0x00004be4      0x595 /opt/devkitPro/libnds/lib/libnds9.a(videoGL.o)
- .debug_line    0x00005179      0x359 /opt/devkitPro/libnds/lib/libnds9.a(dldi.o)
- .debug_line    0x000054d2      0x936 /opt/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
- .debug_line    0x00005e08      0x1d9 /opt/devkitPro/libnds/lib/libnds9.a(interrupts.o)
- .debug_line    0x00005fe1       0xa6 /opt/devkitPro/libnds/lib/libnds9.a(dcache.o)
- .debug_line    0x00006087       0x8f /opt/devkitPro/libnds/lib/libnds9.a(dldi_stub.o)
- .debug_line    0x00006116       0xc5 /opt/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
- .debug_line    0x000061db       0xc3 /opt/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
- .debug_line    0x0000629e      0x200 /opt/devkitPro/libnds/lib/libnds9.a(video.o)
- .debug_line    0x0000649e       0x7f /opt/devkitPro/devkitARM/lib/gcc/arm-eabi/4.3.3/thumb/crtn.o
+ .debug_line    0x00000049      0x28d game.o
+ .debug_line    0x000002d6      0x324 graphics_main.o
+ .debug_line    0x000005fa      0x238 graphics_sub.o
+ .debug_line    0x00000832      0x1a5 main.o
+ .debug_line    0x000009d7      0x1fe mineral.o
+ .debug_line    0x00000bd5      0x1d4 P_Audio.o
+ .debug_line    0x00000da9      0x23d P_Score.o
+ .debug_line    0x00000fe6      0x178 timer_game.o
+ .debug_line    0x0000115e      0x426 /opt/devkitPro/libnds/lib/libfat.a(libfat.o)
+ .debug_line    0x00001584      0x43b /opt/devkitPro/libnds/lib/libfat.a(partition.o)
+ .debug_line    0x000019bf      0x307 /opt/devkitPro/libnds/lib/libfat.a(cache.o)
+ .debug_line    0x00001cc6      0x13e /opt/devkitPro/libnds/lib/libfat.a(disc.o)
+ .debug_line    0x00001e04      0x5c1 /opt/devkitPro/libnds/lib/libfat.a(fatdir.o)
+ .debug_line    0x000023c5      0x8a8 /opt/devkitPro/libnds/lib/libfat.a(fatfile.o)
+ .debug_line    0x00002c6d      0x2a4 /opt/devkitPro/libnds/lib/libfat.a(file_allocation_table.o)
+ .debug_line    0x00002f11      0x1c4 /opt/devkitPro/libnds/lib/libfat.a(filetime.o)
+ .debug_line    0x000030d5      0x831 /opt/devkitPro/libnds/lib/libfat.a(directory.o)
+ .debug_line    0x00003906      0x31e /opt/devkitPro/libnds/lib/libnds9.a(initSystem.o)
+ .debug_line    0x00003c24      0x2ec /opt/devkitPro/libnds/lib/libnds9.a(keys.o)
+ .debug_line    0x00003f10      0x2dc /opt/devkitPro/libnds/lib/libnds9.a(sprite.o)
+ .debug_line    0x000041ec      0x2cd /opt/devkitPro/libnds/lib/libnds9.a(sprite_alloc.o)
+ .debug_line    0x000044b9      0x2d1 /opt/devkitPro/libnds/lib/libnds9.a(system.o)
+ .debug_line    0x0000478a      0x27e /opt/devkitPro/libnds/lib/libnds9.a(touch.o)
+ .debug_line    0x00004a08      0x1dd /opt/devkitPro/libnds/lib/libnds9.a(trig.o)
+ .debug_line    0x00004be5      0x595 /opt/devkitPro/libnds/lib/libnds9.a(videoGL.o)
+ .debug_line    0x0000517a      0x359 /opt/devkitPro/libnds/lib/libnds9.a(dldi.o)
+ .debug_line    0x000054d3      0x936 /opt/devkitPro/libnds/lib/libnds9.a(fifosystem.o)
+ .debug_line    0x00005e09      0x1d9 /opt/devkitPro/libnds/lib/libnds9.a(interrupts.o)
+ .debug_line    0x00005fe2       0xa6 /opt/devkitPro/libnds/lib/libnds9.a(dcache.o)
+ .debug_line    0x00006088       0x8f /opt/devkitPro/libnds/lib/libnds9.a(dldi_stub.o)
+ .debug_line    0x00006117       0xc5 /opt/devkitPro/libnds/lib/libnds9.a(biosCalls.o)
+ .debug_line    0x000061dc       0xc3 /opt/devkitPro/libnds/lib/libnds9.a(interruptDispatcher.o)
+ .debug_line    0x0000629f      0x200 /opt/devkitPro/libnds/lib/libnds9.a(video.o)
+ .debug_line    0x0000649f       0x7f /opt/devkitPro/devkitARM/lib/gcc/arm-eabi/4.3.3/thumb/crtn.o
 
 .debug_frame    0x00000000     0x1bac
  *(.debug_frame)

@@ -20,7 +20,7 @@ void updateScore(int score)
 	//Update highest score
 	if(player_score > max_score){
 		max_score = player_score;
-		writeMaxScore(max_score);
+		score_display(16, 5, 9, score);
 	}
 }
 
@@ -48,5 +48,4 @@ void writeMaxScore(int score)
 		//Close the file
 		fclose(file);
 	}
-	score_display(16, 5, 9, score);
 }
