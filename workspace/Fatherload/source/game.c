@@ -86,7 +86,6 @@ bool hasBeenDrilled(int pos_x, int pos_y, bool answer) {
 	int base = (((position_y)>255)?2:0) + (position_x)/256;
 	int x = ((position_x)%256)/8;
 	int y = ((position_y)%256)/8;
-	printf("base: %d,%d,%d: %d\n",base,x,y,BG_MAP_RAM(base)[y*32+x]);
 	if(BG_MAP_RAM(base)[y * 32 + x] == 1 ||
 			BG_MAP_RAM(base)[y * 32 + x] == 4)
 		return true;
@@ -104,6 +103,14 @@ void player_move_right() {
 			player_fuel--;
 		}
 	}
+	// TODO: falling, if drilled beyond, fall
+	while(hasBeenDrilled(player_x, player_y + 16, false)){
+		if(screen_y < 512 - 192)
+			screen_y += 3;
+		if(player_y < 256 - 16)
+			player_y ++;
+		swiWaitForVBlank();
+	}
 }
 
 void player_move_left() {
@@ -115,6 +122,14 @@ void player_move_left() {
 				player_x--;
 			player_fuel--;
 		}
+	}
+	// TODO: falling, if drilled beyond, fall
+	while(hasBeenDrilled(player_x, player_y + 16, false)){
+		if(screen_y < 512 - 192)
+			screen_y ++;
+		if(player_y < 256 - 16)
+			player_y ++;
+		swiWaitForVBlank();
 	}
 }
 
@@ -128,10 +143,19 @@ void player_move_down() {
 			player_fuel--;
 		}
 	}
+	// TODO: falling, if drilled beyond, fall
+	while(hasBeenDrilled(player_x, player_y + 16, false)){
+		if(screen_y < 512 - 192)
+			screen_y ++;
+		if(player_y < 256 - 16)
+			player_y ++;
+		swiWaitForVBlank();
+	}
 }
 
 void player_move_up() {
 	orientation = UP;
+	// Equivalent to fly mode
 	if (screen_y > 0 && !start_pressed) {
 		if(hasBeenDrilled(player_x, player_y - 1, true)){
 			screen_y--;
@@ -231,7 +255,7 @@ void player_pressed_touchscreen() {
 		if (screen_y > 0) {
 			Audio_PlaySoundEX(SFX_BULLDOZER);
 			orientation = UP;
-			screen_y -= 3;
+			screen_y --;
 			if (player_y > 112)
 				player_y--;
 		}
@@ -241,7 +265,7 @@ void player_pressed_touchscreen() {
 		if (screen_y < 512 - 192) {
 			Audio_PlaySoundEX(SFX_BULLDOZER);
 			orientation = DOWN;
-			screen_y += 3;
+			screen_y ++;
 			if (player_y < 168)
 				player_y++;
 		}
@@ -263,6 +287,13 @@ void player_pressed_touchscreen() {
 			if (player_x < 256 - 16)
 				player_x++;
 		}
+	}
+	// TODO: falling, if drilled beyond, fall
+	while(hasBeenDrilled(player_x, player_y + 16, false)){
+		if(screen_y < 512 - 192)
+			screen_y ++;
+		if(player_y < 256 - 16)
+			player_y ++;
 	}
 }
 
