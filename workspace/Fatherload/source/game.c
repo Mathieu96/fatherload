@@ -105,7 +105,7 @@ void player_move_right() {
 	flying = 0;
 	if (screen_x < 512 - 256 && !start_pressed) {
 		if(hasBeenDrilled(player_x + 16, player_y) &&
-				hasBeenDrilled(player_x + 16, player_y + 10)) {
+				hasBeenDrilled(player_x + 16, player_y + 10)){
 			screen_x++;
 			if (player_x < 256 - 16)
 				player_x++;
@@ -117,7 +117,7 @@ void player_move_right() {
 void player_move_left() {
 	orientation = LEFT;
 	flying = 0;
-	if (screen_x > 0 && !start_pressed) {
+	if (screen_x > 0) {
 		if(hasBeenDrilled(player_x - 1, player_y) &&
 				hasBeenDrilled(player_x - 1, player_y + 10)) {
 			screen_x--;
@@ -131,7 +131,7 @@ void player_move_left() {
 void player_move_down() {
 	orientation = DOWN;
 	flying = 0;
-	if (screen_y < 512 - 192 && !start_pressed) {
+	if (screen_y < 512 - 192) {
 		if(hasBeenDrilled(player_x, player_y + 16) &&
 				hasBeenDrilled(player_x + 10, player_y + 16)) {
 			screen_y++;
@@ -144,18 +144,18 @@ void player_move_down() {
 
 void player_move_up() {
 	orientation = UP;
-	flying = 1;
 	// Equivalent to fly mode
-	if (screen_y > 0 && !start_pressed) {
-		if(hasBeenDrilled(player_x, player_y - 1) &&
-				hasBeenDrilled(player_x + 10, player_y - 1)){
+	if(hasBeenDrilled(player_x, player_y - 1) &&
+			hasBeenDrilled(player_x + 10, player_y - 1)){
+		flying = 1;
+		if (screen_y > 0) {
 			screen_y--;
 			player_fuel--;
 		}
+
+		if (player_y > 90)
+			player_y--;
 	}
-	if (player_y > 90 && hasBeenDrilled(player_x, player_y - 1) &&
-			hasBeenDrilled(player_x + 10, player_y - 1))
-		player_y--;
 }
 
 void player_drills() {
@@ -164,7 +164,6 @@ void player_drills() {
 	switch (orientation) {
 	case RIGHT:
 		if (screen_x < 512 - 256 && !start_pressed && !hasBeenDrilled(player_x + 16, player_y)) {
-			Audio_PlaySoundEX(SFX_BULLDOZER);
 			screen_x++;
 			if (player_x < 256 - 16){
 				player_x++;
@@ -175,7 +174,6 @@ void player_drills() {
 		break;
 	case LEFT:
 		if (screen_x > 0 && !start_pressed && !hasBeenDrilled(player_x - 8, player_y)) {
-			Audio_PlaySoundEX(SFX_BULLDOZER);
 			screen_x--;
 			if (player_x > 0) {
 				player_x--;
@@ -186,7 +184,6 @@ void player_drills() {
 		break;
 	case DOWN:
 		if (screen_y < 512 - 192 && !start_pressed && !hasBeenDrilled(player_x, player_y + 16)) {
-			Audio_PlaySoundEX(SFX_BULLDOZER);
 			screen_y++;
 			if (player_y < 168){
 				player_y++;
@@ -197,7 +194,6 @@ void player_drills() {
 		break;
 		case UP:
 			if (screen_y > 0 && !start_pressed && !hasBeenDrilled(player_x, player_y - 8)) {
-				Audio_PlaySoundEX(SFX_BULLDOZER);
 				screen_y--;
 				if (player_y > 112){
 					player_y--;
@@ -243,41 +239,61 @@ void player_pressed_touchscreen() {
 	//TODO: update to new movement/drilling scheme
 	touchPosition touch;
 	touchRead(&touch);
-	if (((touch.py >= 0) && (touch.py < 50)) && (touch.px >= 45) && (touch.px <= 85)) {
-		if (screen_y > 0) {
-			Audio_PlaySoundEX(SFX_BULLDOZER);
-			orientation = UP;
-			screen_y --;
+	// UP
+	if (((touch.py >= 0) && (touch.py < 50)) && (touch.px >= 45) && (touch.px <= 85)){
+		orientation = UP;
+		if(hasBeenDrilled(player_x, player_y - 1) &&
+				hasBeenDrilled(player_x + 10, player_y - 1)){
+			flying = 1;
+			if (screen_y > 0) {
+				screen_y--;
+				player_fuel--;
+			}
+
 			if (player_y > 90)
 				player_y--;
 		}
 	}
-	if (((touch.py >= 75) && (touch.py <= 128)) && (touch.px >= 45)
-			&& (touch.px <= 85)) {
+	// DOWN
+	if(((touch.py >= 75) && (touch.py <= 128)) && (touch.px >= 45)	&& (touch.px <= 85)){
 		if (screen_y < 512 - 192) {
-			Audio_PlaySoundEX(SFX_BULLDOZER);
 			orientation = DOWN;
-			screen_y ++;
-			if (player_y < 168)
-				player_y++;
+			flying = 0;
+			if(hasBeenDrilled(player_x, player_y + 16) &&
+					hasBeenDrilled(player_x + 10, player_y + 16)){
+				screen_y ++;
+				player_fuel--;
+				if (player_y < 168)
+					player_y++;
+			}
 		}
 	}
+	// LEFT
 	if (((touch.py >= 30) && (touch.py < 90)) && (touch.px >= 2) && (touch.px <= 37)) {
-		if (screen_x > 0) {
-			Audio_PlaySoundEX(SFX_BULLDOZER);
+		if (screen_x > 0){
 			orientation = LEFT;
-			screen_x--;
-			if (player_x > 0)
-				player_x--;
+			flying = 0;
+			if(hasBeenDrilled(player_x - 1, player_y) &&
+					hasBeenDrilled(player_x - 1, player_y + 10)) {
+				screen_x--;
+				player_fuel--;
+				if (player_x > 0)
+					player_x--;
+			}
 		}
 	}
+	// RIGHT
 	if (((touch.py >= 30) && (touch.py < 90)) && (touch.px >= 90) && (touch.px <= 128)) {
 		if (screen_x < 512 - 256) {
-			Audio_PlaySoundEX(SFX_BULLDOZER);
 			orientation = RIGHT;
-			screen_x++;
-			if (player_x < 256 - 16)
-				player_x++;
+			flying = 0;
+			if(hasBeenDrilled(player_x + 16, player_y) &&
+					hasBeenDrilled(player_x + 16, player_y + 10)){
+				screen_x++;
+				player_fuel--;
+				if (player_x < 256 - 16)
+					player_x++;
+			}
 		}
 	}
 }
