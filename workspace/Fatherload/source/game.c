@@ -32,7 +32,7 @@ int player_bronze = 0;
 int player_alexxzandrite = 0;
 //TODO: Find reasonnable values for these:
 int player_drill_health = 50;
-int player_fuel = 100;
+int player_fuel = 1000;
 
 void init_game() {
 	mineralMap = (Mineral *) malloc(N_TOT_MINERALS * sizeof(Mineral));
@@ -77,6 +77,7 @@ void start_game() {
 
 	//set the objects coordinates
 	initMinerals();
+
 	irqEnable(IRQ_TIMER0);
 	irqEnable(IRQ_TIMER1);
 
@@ -163,42 +164,46 @@ void player_drills() {
 	// 16 for right and down, for up and left the offsets are needed because at the same time we create new blocks of drilled parts
 	switch (orientation) {
 	case RIGHT:
-		if (screen_x < 512 - 256 && !start_pressed && !hasBeenDrilled(player_x + 16, player_y)) {
+		if (screen_x < 512 - 256) {
 			screen_x++;
 			if (player_x < 256 - 16){
 				player_x++;
 			}
 			player_drill_health--;
+			player_fuel -= 2;
 			drilling = true;
 		}
 		break;
 	case LEFT:
-		if (screen_x > 0 && !start_pressed && !hasBeenDrilled(player_x - 8, player_y)) {
+		if (screen_x > 0) {
 			screen_x--;
 			if (player_x > 0) {
 				player_x--;
 			}
 			player_drill_health--;
+			player_fuel -= 2;
 			drilling = true;
 		}
 		break;
 	case DOWN:
-		if (screen_y < 512 - 192 && !start_pressed && !hasBeenDrilled(player_x, player_y + 16)) {
+		if (screen_y < 512 - 192){
 			screen_y++;
 			if (player_y < 168){
 				player_y++;
 			}
 			player_drill_health--;
+			player_fuel -= 2;
 			drilling = true;
 		}
 		break;
 		case UP:
-			if (screen_y > 0 && !start_pressed && !hasBeenDrilled(player_x, player_y - 8)) {
+			if (screen_y > 0){
 				screen_y--;
 				if (player_y > 112){
 					player_y--;
 				}
 				player_drill_health--;
+				player_fuel -= 2;
 				drilling = true;
 			}
 			break;

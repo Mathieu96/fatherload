@@ -29,6 +29,9 @@ int main(void) {
 			scanKeys();
 			keys = keysHeld();
 
+			if(keys & KEY_START)
+				player_pressed_start();
+
 			if (!start_pressed) {
 				if(keys & KEY_A)
 					player_drills();
@@ -45,9 +48,6 @@ int main(void) {
 
 					if(keys & KEY_UP)
 						player_move_up();
-
-					if(keys & KEY_START)
-						player_pressed_start();
 
 					if (keys & KEY_TOUCH) {
 						player_pressed_touchscreen();
@@ -83,9 +83,15 @@ int main(void) {
 				// Stop the while if the player reaches the number of mineral generated
 				if (mineral_count == N_TOT_MINERALS)
 					break;
+
+				if(player_fuel <= 0)
+					break;
 			}
 			swiWaitForVBlank(); // slow down the game
 		}
+		if(max_score < player_score)
+			writeMaxScore(player_score);
+		// restart part
 	} while (1);
 	return 0;
 }

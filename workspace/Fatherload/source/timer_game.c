@@ -4,6 +4,7 @@
  */
 
 #include "timer_game.h"
+#include "graphics_sub.h"
 
 int msec, sec, min;
 
@@ -26,4 +27,5 @@ void timer0_ISR() {
 
 void timer1_ISR() {
 	flying = 0;
+	print_fuel(18, 10, 12);
 }

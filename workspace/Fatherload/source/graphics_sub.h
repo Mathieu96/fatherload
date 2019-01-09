@@ -24,4 +24,6 @@ void updateChronoDisp(int min, int sec, int msec, int pal);
 
 void score_display(int x, int y, int pal, int score);
 
+void print_fuel(int x, int y, int pal);
+
 #endif /* GRAPHICS_MAIN_H_ */

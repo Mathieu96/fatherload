@@ -38,10 +38,10 @@ void init_sub_background() {
 	dmaCopy(numbers_smallPal, &BG_PALETTE_SUB[9*16], numbers_smallPalLen);
 	dmaCopy(numbers_smallPal, &BG_PALETTE_SUB[10*16], numbers_smallPalLen);
 	dmaCopy(numbers_smallPal, &BG_PALETTE_SUB[11*16], numbers_smallPalLen);
+	dmaCopy(numbers_smallPal, &BG_PALETTE_SUB[12*16], numbers_smallPalLen);
 	BG_PALETTE_SUB[145] = ARGB16(1,31,0,0);
 	BG_PALETTE_SUB[161] = ARGB16(1,0,31,0);
 	BG_PALETTE_SUB[177] = ARGB16(1,0,0,31);
-
 
 	int i, j;
 	// initialize all the tiles of BG2 & BG1 to transparent, to avoid overlapping the background 3
@@ -104,6 +104,16 @@ void score_display(int x, int y, int pal, int score){
 	int i;
 	int temp = player_score;
 	for (i = 1000000; i > 0; i /= 10) {
+		x += 2;
+		printDigit(temp / i, x, y, pal);
+		temp = temp % i;
+	}
+}
+
+void print_fuel(int x, int y, int pal){
+	int i;
+	int temp = player_fuel;
+	for(i = 100000; i > 0; i /= 10){
 		x += 2;
 		printDigit(temp / i, x, y, pal);
 		temp = temp % i;

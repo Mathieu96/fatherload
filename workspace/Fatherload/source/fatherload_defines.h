@@ -67,6 +67,7 @@ extern int player_alexxzandrite;
 extern int player_fuel;
 extern int player_drill_health;
 extern int player_score;
+extern int max_score;
 extern int score_changed;
 extern int flying;
 
