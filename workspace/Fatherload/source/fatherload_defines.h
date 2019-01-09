@@ -68,6 +68,7 @@ extern int player_fuel;
 extern int player_drill_health;
 extern int player_score;
 extern int score_changed;
+extern int flying;
 
 extern u16* diamond_pic, *amazonite_pic, *bronze_pic, *alexxzandrite_pic;
 

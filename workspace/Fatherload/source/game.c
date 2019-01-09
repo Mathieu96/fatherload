@@ -11,6 +11,7 @@ int player_x;
 int player_y;
 int screen_x;
 int screen_y;
+int flying;
 
 int mineral_count = 0;
 
@@ -50,6 +51,10 @@ void init_game() {
 	TIMER0_CR = TIMER_ENABLE | TIMER_DIV_64 | TIMER_IRQ_REQ;
 	irqSet(IRQ_TIMER0, timer0_ISR);
 
+	TIMER_DATA(1) = TIMER_FREQ(10);
+	TIMER1_CR = TIMER_ENABLE | TIMER_DIV_64 | TIMER_IRQ_REQ;
+	irqSet(IRQ_TIMER1, timer1_ISR);
+
 	configureSprites();
 }
 
@@ -60,6 +65,7 @@ void start_game() {
 	screen_y = 0;
 	mineral_count = 0;
 	player_score = 0;
+	flying = 0;
 
 	update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0,
 				  PLAYER_VPAL, 0, 0,
@@ -72,11 +78,12 @@ void start_game() {
 	//set the objects coordinates
 	initMinerals();
 	irqEnable(IRQ_TIMER0);
+	irqEnable(IRQ_TIMER1);
 
 	score_display(16, 1, 10, player_score);
 }
 
-bool hasBeenDrilled(int pos_x, int pos_y, bool answer) {
+bool hasBeenDrilled(int pos_x, int pos_y) {
 	//TODO: Mathieu, can you implement this?
 	// last argument only for debugging purposes, should be removed when implemented properly
 	// Possibly re-use it with display_drilled_path if applicable
@@ -95,75 +102,60 @@ bool hasBeenDrilled(int pos_x, int pos_y, bool answer) {
 
 void player_move_right() {
 	orientation = RIGHT;
+	flying = 0;
 	if (screen_x < 512 - 256 && !start_pressed) {
-		if(hasBeenDrilled(player_x + 16, player_y, true)) {
+		if(hasBeenDrilled(player_x + 16, player_y) &&
+				hasBeenDrilled(player_x + 16, player_y + 10)) {
 			screen_x++;
 			if (player_x < 256 - 16)
 				player_x++;
 			player_fuel--;
 		}
 	}
-	// TODO: falling, if drilled beyond, fall
-	while(hasBeenDrilled(player_x, player_y + 16, false)){
-		if(screen_y < 512 - 192)
-			screen_y += 3;
-		if(player_y < 256 - 16)
-			player_y ++;
-		swiWaitForVBlank();
-	}
 }
 
 void player_move_left() {
 	orientation = LEFT;
+	flying = 0;
 	if (screen_x > 0 && !start_pressed) {
-		if(hasBeenDrilled(player_x - 1, player_y, true)) {
+		if(hasBeenDrilled(player_x - 1, player_y) &&
+				hasBeenDrilled(player_x - 1, player_y + 10)) {
 			screen_x--;
 			if (player_x > 0)
 				player_x--;
 			player_fuel--;
 		}
 	}
-	// TODO: falling, if drilled beyond, fall
-	while(hasBeenDrilled(player_x, player_y + 16, false)){
-		if(screen_y < 512 - 192)
-			screen_y ++;
-		if(player_y < 256 - 16)
-			player_y ++;
-		swiWaitForVBlank();
-	}
 }
 
 void player_move_down() {
 	orientation = DOWN;
+	flying = 0;
 	if (screen_y < 512 - 192 && !start_pressed) {
-		if(hasBeenDrilled(player_x, player_y + 16, true)) {
+		if(hasBeenDrilled(player_x, player_y + 16) &&
+				hasBeenDrilled(player_x + 10, player_y + 16)) {
 			screen_y++;
 			if (player_y < 168)
 				player_y++;
 			player_fuel--;
 		}
 	}
-	// TODO: falling, if drilled beyond, fall
-	while(hasBeenDrilled(player_x, player_y + 16, false)){
-		if(screen_y < 512 - 192)
-			screen_y ++;
-		if(player_y < 256 - 16)
-			player_y ++;
-		swiWaitForVBlank();
-	}
 }
 
 void player_move_up() {
 	orientation = UP;
+	flying = 1;
 	// Equivalent to fly mode
 	if (screen_y > 0 && !start_pressed) {
-		if(hasBeenDrilled(player_x, player_y - 1, true)){
+		if(hasBeenDrilled(player_x, player_y - 1) &&
+				hasBeenDrilled(player_x + 10, player_y - 1)){
 			screen_y--;
-			if (player_y > 112)
-				player_y--;
 			player_fuel--;
 		}
 	}
+	if (player_y > 90 && hasBeenDrilled(player_x, player_y - 1) &&
+			hasBeenDrilled(player_x + 10, player_y - 1))
+		player_y--;
 }
 
 void player_drills() {
@@ -171,7 +163,7 @@ void player_drills() {
 	// 16 for right and down, for up and left the offsets are needed because at the same time we create new blocks of drilled parts
 	switch (orientation) {
 	case RIGHT:
-		if (screen_x < 512 - 256 && !start_pressed && !hasBeenDrilled(player_x + 16, player_y, false)) {
+		if (screen_x < 512 - 256 && !start_pressed && !hasBeenDrilled(player_x + 16, player_y)) {
 			Audio_PlaySoundEX(SFX_BULLDOZER);
 			screen_x++;
 			if (player_x < 256 - 16){
@@ -182,7 +174,7 @@ void player_drills() {
 		}
 		break;
 	case LEFT:
-		if (screen_x > 0 && !start_pressed && !hasBeenDrilled(player_x - 8, player_y, false)) {
+		if (screen_x > 0 && !start_pressed && !hasBeenDrilled(player_x - 8, player_y)) {
 			Audio_PlaySoundEX(SFX_BULLDOZER);
 			screen_x--;
 			if (player_x > 0) {
@@ -193,7 +185,7 @@ void player_drills() {
 		}
 		break;
 	case DOWN:
-		if (screen_y < 512 - 192 && !start_pressed && !hasBeenDrilled(player_x, player_y + 16, false)) {
+		if (screen_y < 512 - 192 && !start_pressed && !hasBeenDrilled(player_x, player_y + 16)) {
 			Audio_PlaySoundEX(SFX_BULLDOZER);
 			screen_y++;
 			if (player_y < 168){
@@ -204,7 +196,7 @@ void player_drills() {
 		}
 		break;
 		case UP:
-			if (screen_y > 0 && !start_pressed && !hasBeenDrilled(player_x, player_y - 8, false)) {
+			if (screen_y > 0 && !start_pressed && !hasBeenDrilled(player_x, player_y - 8)) {
 				Audio_PlaySoundEX(SFX_BULLDOZER);
 				screen_y--;
 				if (player_y > 112){
@@ -256,7 +248,7 @@ void player_pressed_touchscreen() {
 			Audio_PlaySoundEX(SFX_BULLDOZER);
 			orientation = UP;
 			screen_y --;
-			if (player_y > 112)
+			if (player_y > 90)
 				player_y--;
 		}
 	}
@@ -287,13 +279,6 @@ void player_pressed_touchscreen() {
 			if (player_x < 256 - 16)
 				player_x++;
 		}
-	}
-	// TODO: falling, if drilled beyond, fall
-	while(hasBeenDrilled(player_x, player_y + 16, false)){
-		if(screen_y < 512 - 192)
-			screen_y ++;
-		if(player_y < 256 - 16)
-			player_y ++;
 	}
 }
 
@@ -398,4 +383,15 @@ void update_state(){
 	}
 	drilling = false;
 	oamUpdate(&oamMain);
+}
+
+void player_fall(){
+	if(hasBeenDrilled(player_x, player_y + 16) &&
+			hasBeenDrilled(player_x + 10, player_y + 16)){
+		if(screen_y < 512 - 192)
+			screen_y ++;
+		if(player_y < 256 - 16)
+			player_y ++;
+	}
+
 }

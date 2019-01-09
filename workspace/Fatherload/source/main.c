@@ -28,28 +28,25 @@ int main(void) {
 			swiWaitForVBlank();
 			scanKeys();
 			keys = keysHeld();
-			switch (keys) {
-			case KEY_DOWN:
-				player_move_down();
-				break;
-			case KEY_UP:
-				player_move_up();
-				break;
-			case KEY_RIGHT:
-				player_move_right();
-				break;
-			case KEY_LEFT:
-				player_move_left();
-				break;
-			case KEY_A:
-				player_drills();
-				break;
-				// B = fly then?
-			case KEY_START:
-				player_pressed_start();
-				break;
-			}
 
+			if(keys & KEY_A)
+				player_drills();
+
+			else{
+				if(keys & KEY_DOWN)
+					player_move_down();
+
+				if(keys & KEY_RIGHT)
+					player_move_right();
+
+				if(keys & KEY_LEFT)
+					player_move_left();
+
+				if(keys & KEY_UP)
+					player_move_up();
+				if(keys & KEY_START)
+					player_pressed_start();
+			}
 			if (!start_pressed) {
 				if (keys & KEY_TOUCH) {
 					player_pressed_touchscreen();
@@ -67,6 +64,9 @@ int main(void) {
 
 				// Update the drilled path
 				update_state();
+
+				if(!flying)
+					player_fall();
 
 				refreshMineralSprites();
 

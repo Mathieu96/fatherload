@@ -36,6 +36,6 @@ void player_pressed_touchscreen();
 
 void update_vehicle();
 
-
+void player_fall();
 
 #endif /* GRAPHICS_MAIN_H_ */

@@ -23,3 +23,7 @@ void timer0_ISR() {
 		}
 	}
 }
+
+void timer1_ISR() {
+	flying = 0;
+}

@@ -12,4 +12,6 @@
 
 void timer0_ISR();
 
+void timer1_ISR();
+
 #endif /* GRAPHICS_MAIN_H_ */
