@@ -9,6 +9,7 @@
 #define GAME_H_
 
 #include "fatherload_defines.h"
+#include "P_Score.h"
 
 void init_game();
 

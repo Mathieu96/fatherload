@@ -42,14 +42,14 @@ u8 emptyTile[64] = {
 };
 
 u8 troubleTile[64] = {
-	0,0,254,254,0,0,254,254,
-	0,0,254,254,0,0,254,254,
-	254,254,0,0,254,254,0,0,
-	254,254,0,0,254,254,0,0,
-	0,0,254,254,0,0,254,254,
-	0,0,254,254,0,0,254,254,
-	254,254,0,0,254,254,0,0,
-	254,254,0,0,254,254,0,0
+		0, 0, 254, 254, 0, 0, 254, 254,
+		0, 0, 254, 254, 0, 0, 254, 254,
+		254, 254, 0, 0, 254, 254, 0, 0,
+		254, 254, 0, 0, 254, 254, 0, 0,
+		0, 0, 254, 254, 0, 0, 254, 254,
+		0, 0, 254, 254, 0, 0, 254, 254,
+		254, 254, 0, 0, 254, 254, 0, 0,
+		254, 254, 0, 0, 254, 254, 0, 0
 };
 
 void config_main_background(){
@@ -58,7 +58,7 @@ void config_main_background(){
 	VRAM_B_CR = VRAM_ENABLE | VRAM_B_MAIN_BG;
 
 	// Init BG0
-	BGCTRL[3] = BG_COLOR_256 | BG_MAP_BASE(10) | BG_TILE_BASE(10) | BG_32x32;
+	BGCTRL[0] = BG_COLOR_256 | BG_MAP_BASE(10) | BG_TILE_BASE(10) | BG_32x32;
 	dmaCopy(Game_OverTiles, BG_TILE_RAM(16), Game_OverTilesLen);
 
 	// Init BG1
@@ -82,6 +82,14 @@ void config_main_background(){
 
 void init_main_bg(){
 	int i,j;
+
+	// init the map of BG0
+	for(i = 0; i < 24; i++){
+		for(j = 0; j < 32; j++){
+			BG_MAP_RAM(10)[i*32 + j] = 0;
+		}
+	}
+
 	// init the map of BG1
 	for(i = 0; i < 24; i++){
 		for(j = 0; j < 32; j++){
@@ -214,23 +222,8 @@ void hide_objects(){
 	int i;
 	for(i = 0; i < N_TOT_MINERALS; i++){
 		if(!mineral[i].isDrilled){
-			//update_sprite(u16* gfx, int spriteID, int hide, int paletteNum, int x, int y)
 			update_sprite(NULL, OFFSET_MINERAL_SPRITE + i,
 				1, 0, 0, 0, mineral[i].x - screen_x, mineral[i].y - screen_y);
-			/*oamSet(&oamMain, 	// oam handler
-				OFFSET_MINERAL_SPRITE + i,				// Number of sprite
-				mineral[i].x - screen_x, mineral[i].y - screen_y,			// Coordinates
-				0,				// Priority
-				2,				// Palette to use
-				SpriteSize_16x16,			// Sprite size
-				SpriteColorFormat_16Color,	// Color format
-				alexandrite_pic,			// Loaded graphic to display, don't care here because we hide the sprite
-				-1,				// Affine rotation to use (-1 none)
-				false,			// Double size if rotating
-				true,			// Hide this sprite
-				false, false,	// Horizontal or vertical flip
-				false			// Mosaic
-				);*/
 		}
 	}
 }

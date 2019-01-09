@@ -5,11 +5,11 @@
 //
 //	Game_Over, 256x192@8, 
 //	+ palette 256 entries, not compressed
-//	+ 88 tiles (t|f reduced) not compressed
+//	+ 125 tiles (t|f reduced) not compressed
 //	+ regular map (flat), not compressed, 32x24 
-//	Total size: 512 + 5632 + 1536 = 7680
+//	Total size: 512 + 8000 + 1536 = 10048
 //
-//	Time-stamp: 2019-01-06, 06:25:07
+//	Time-stamp: 2019-01-06, 07:48:05
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -18,8 +18,8 @@
 #ifndef GRIT_GAME_OVER_H
 #define GRIT_GAME_OVER_H
 
-#define Game_OverTilesLen 5632
-extern const unsigned int Game_OverTiles[1408];
+#define Game_OverTilesLen 8000
+extern const unsigned int Game_OverTiles[2000];
 
 #define Game_OverMapLen 1536
 extern const unsigned short Game_OverMap[768];

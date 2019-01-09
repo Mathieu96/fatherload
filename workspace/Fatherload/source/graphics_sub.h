@@ -16,12 +16,12 @@
 // Initialization of the backgrounds
 void init_sub_background();
 
-void printDigit(int number, int x, int y);
+void printDigitChrono(int number, int x, int y);
 
-void printDigitSmall(int number, int x, int y);
+void printDigitScore(int number, int x, int y, int pal);
 
-void updateChronoDisp(int min, int sec, int msec);
+void updateChronoDisp(int min, int sec, int msec, int pal);
 
-void score_update();
+void score_display(int x, int y, int pal, int score);
 
 #endif /* GRAPHICS_MAIN_H_ */

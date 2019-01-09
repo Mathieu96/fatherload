@@ -1,12 +1,13 @@
 main.o: /home/nds/files/fatherload/workspace/Fatherload/source/main.c \
-  /home/nds/files/fatherload/workspace/Fatherload/source/fatherload_defines.h \
+  /opt/devkitPro/libnds/include/fat.h \
+  /opt/devkitPro/libnds/include/nds/disc_io.h \
+  /opt/devkitPro/libnds/include/nds/ndstypes.h \
   /opt/devkitPro/libnds/include/nds.h \
   /opt/devkitPro/libnds/include/nds/libversion.h \
   /opt/devkitPro/libnds/include/nds/ndstypes.h \
   /opt/devkitPro/libnds/include/nds/bios.h \
   /opt/devkitPro/libnds/include/nds/ndstypes.h \
   /opt/devkitPro/libnds/include/nds/card.h \
-  /opt/devkitPro/libnds/include/nds/ndstypes.h \
   /opt/devkitPro/libnds/include/nds/debug.h \
   /opt/devkitPro/libnds/include/nds/dma.h \
   /opt/devkitPro/libnds/include/nds/interrupts.h \
@@ -48,6 +49,7 @@ main.o: /home/nds/files/fatherload/workspace/Fatherload/source/main.c \
   /opt/devkitPro/libnds/include/nds/arm9/sprite.h \
   /opt/devkitPro/libnds/include/nds/system.h \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
+  /home/nds/files/fatherload/workspace/Fatherload/source/fatherload_defines.h \
   /home/nds/files/fatherload/workspace/Fatherload/source/P_Audio.h \
   /opt/devkitPro/libnds/include/maxmod9.h \
   /opt/devkitPro/libnds/include/mm_types.h \
@@ -67,9 +69,14 @@ main.o: /home/nds/files/fatherload/workspace/Fatherload/source/main.c \
   /home/nds/files/fatherload/workspace/Fatherload/build/numbers.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/numbers_small.h \
   /home/nds/files/fatherload/workspace/Fatherload/source/game.h \
+  /home/nds/files/fatherload/workspace/Fatherload/source/P_Score.h \
   /home/nds/files/fatherload/workspace/Fatherload/source/timer_game.h
 
-/home/nds/files/fatherload/workspace/Fatherload/source/fatherload_defines.h:
+/opt/devkitPro/libnds/include/fat.h:
+
+/opt/devkitPro/libnds/include/nds/disc_io.h:
+
+/opt/devkitPro/libnds/include/nds/ndstypes.h:
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -82,8 +89,6 @@ main.o: /home/nds/files/fatherload/workspace/Fatherload/source/main.c \
 /opt/devkitPro/libnds/include/nds/ndstypes.h:
 
 /opt/devkitPro/libnds/include/nds/card.h:
-
-/opt/devkitPro/libnds/include/nds/ndstypes.h:
 
 /opt/devkitPro/libnds/include/nds/debug.h:
 
@@ -167,6 +172,8 @@ main.o: /home/nds/files/fatherload/workspace/Fatherload/source/main.c \
 
 /opt/devkitPro/libnds/include/nds/arm9/decompress.h:
 
+/home/nds/files/fatherload/workspace/Fatherload/source/fatherload_defines.h:
+
 /home/nds/files/fatherload/workspace/Fatherload/source/P_Audio.h:
 
 /opt/devkitPro/libnds/include/maxmod9.h:
@@ -204,5 +211,7 @@ main.o: /home/nds/files/fatherload/workspace/Fatherload/source/main.c \
 /home/nds/files/fatherload/workspace/Fatherload/build/numbers_small.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/source/game.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/source/P_Score.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/source/timer_game.h:

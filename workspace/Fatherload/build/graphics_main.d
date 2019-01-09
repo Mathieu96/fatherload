@@ -60,6 +60,7 @@ graphics_main.o:  \
   /home/nds/files/fatherload/workspace/Fatherload/build/numbers.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/numbers_small.h \
   /home/nds/files/fatherload/workspace/Fatherload/source/game.h \
+  /home/nds/files/fatherload/workspace/Fatherload/source/P_Score.h \
   /home/nds/files/fatherload/workspace/Fatherload/source/timer_game.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/diamond.h \
@@ -189,6 +190,8 @@ graphics_main.o:  \
 /home/nds/files/fatherload/workspace/Fatherload/build/numbers_small.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/source/game.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/source/P_Score.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/source/timer_game.h:
 
