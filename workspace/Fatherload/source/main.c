@@ -3,7 +3,9 @@
  * May 2011
  */
 
+#include <stdbool.h>
 #include "fatherload_defines.h"
+#include "mineral.h"
 #include "graphics_main.h"
 #include "P_Audio.h"
 #include "graphics_sub.h"
@@ -18,6 +20,7 @@ int main(void) {
 		// set the player and screen starting coordinates
 		start_game();
 		while (1) {
+			swiWaitForVBlank();
 			scanKeys();
 			keys = keysHeld();
 			switch (keys) {
@@ -33,6 +36,9 @@ int main(void) {
 			case KEY_LEFT:
 				player_move_left();
 				break;
+			case KEY_A:
+				player_drills();
+				break;
 			case KEY_START:
 				player_pressed_start();
 				break;
@@ -43,23 +49,25 @@ int main(void) {
 					player_pressed_touchscreen();
 				}
 
-				swiWaitForVBlank();
 				// move the background 3 => the main background
 				REG_BG3HOFS = screen_x;
 				REG_BG3VOFS = screen_y;
 				// move the background 2 => the digged parts
 				REG_BG2HOFS = screen_x;
 				REG_BG2VOFS = screen_y;
+
 				// update the player's movements
-				update_game();
+				update_vehicle();
+
 				// Update the drilled path
 				update_state();
 
+				refreshMineralSprites();
+
 				if (score_changed) {
-					score_update();
+					update_scoreboard();
 				}
 
-				swiWaitForVBlank(); // slow down the game
 				oamUpdate(&oamMain);
 				// Show the time since the game began
 				updateChronoDisp(min, sec, msec);
@@ -67,6 +75,7 @@ int main(void) {
 				if (mineral_count == N_TOT_MINERALS)
 					break;
 			}
+			swiWaitForVBlank(); // slow down the game
 		}
 	} while (1);
 	return 0;

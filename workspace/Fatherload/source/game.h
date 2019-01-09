@@ -25,11 +25,13 @@ void player_move_down();
 
 void player_move_up();
 
+void player_drills();
+
 void player_pressed_start();
 
 void player_pressed_touchscreen();
 
-void update_game();
+void update_vehicle();
 
 
 
