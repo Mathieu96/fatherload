@@ -38,8 +38,8 @@ void init_game() {
 	Audio_Init();
 
 	config_main_background();
-	//consoleDemoInit();
-	init_sub_background();
+	consoleDemoInit();
+	//init_sub_background();
 
 	orientation = RIGHT;
 
@@ -94,6 +94,7 @@ bool hasBeenDrilled(int pos_x, int pos_y) {
 	int base = (((position_y)>255)?2:0) + (position_x)/256;
 	int x = ((position_x)%256)/8;
 	int y = ((position_y)%256)/8;
+	printf("b: %d, x: %d, y: %d. %d\n",base, x, y, BG_MAP_RAM(base)[y * 32 + x]);
 	if(BG_MAP_RAM(base)[y * 32 + x] == 1 ||
 			BG_MAP_RAM(base)[y * 32 + x] == 4)
 		return true;
@@ -202,8 +203,9 @@ void player_drills() {
 				if (player_y > 112){
 					player_y--;
 				}
+				flying = 1;
 				player_drill_health--;
-				player_fuel -= 2;
+				player_fuel -= 4;
 				drilling = true;
 			}
 			break;
