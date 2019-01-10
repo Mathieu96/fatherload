@@ -92,6 +92,8 @@ int main(void) {
 		if(max_score < player_score)
 			writeMaxScore(player_score);
 		// restart part
+		free(mineralMap);
+		hide_all_minerals();
 	} while (1);
 	return 0;
 }

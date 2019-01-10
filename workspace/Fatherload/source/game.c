@@ -35,10 +35,7 @@ int player_drill_health = 50;
 int player_fuel = 1000;
 
 void init_game() {
-	mineralMap = (Mineral *) malloc(N_TOT_MINERALS * sizeof(Mineral));
-
 	Audio_Init();
-	Audio_PlayMusic();
 
 	config_main_background();
 	//consoleDemoInit();
@@ -66,6 +63,9 @@ void start_game() {
 	mineral_count = 0;
 	player_score = 0;
 	flying = 0;
+	player_fuel = 100000;
+
+	Audio_PlayMusic();
 
 	update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0,
 				  PLAYER_VPAL, 0, 0,
@@ -151,7 +151,7 @@ void player_move_up() {
 		flying = 1;
 		if (screen_y > 0) {
 			screen_y--;
-			player_fuel--;
+			player_fuel -= 2;
 		}
 
 		if (player_y > 90)
@@ -229,9 +229,14 @@ void player_pressed_start() {
 	} else {
 		mmResume();
 
-		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0,
-					  PLAYER_HPAL, 0, 0,
-					  player_x, player_y);
+		if(orientation == DOWN || orientation == UP)
+			update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0,
+						  PLAYER_VPAL, 0, ((orientation == DOWN)?1:0),
+						  player_x, player_y);
+		else
+			update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0,
+									  PLAYER_VPAL, ((orientation == LEFT)?1:0), 0,
+									  player_x, player_y);
 
 		oamUpdate(&oamMain);
 		release_start_display();
@@ -413,7 +418,7 @@ void player_fall(){
 			hasBeenDrilled(player_x + 10, player_y + 16)){
 		if(screen_y < 512 - 192)
 			screen_y ++;
-		if(player_y < 256 - 16)
+		if(player_y < 168)
 			player_y ++;
 	}
 

@@ -3,17 +3,17 @@
 bool isMineralPlaceValid(int pos_x, int pos_y, int n_mineral) {
 	int i;
 	for (i = 0; i < n_mineral; i++) {
-		if ((((pos_y - mineralMap[i].y > 0) ? (pos_y - mineralMap[i].y) : (mineralMap[i].y - pos_y)) < 20)
+		if((((pos_y - mineralMap[i].y > 0) ? (pos_y - mineralMap[i].y) : (mineralMap[i].y - pos_y)) < 20)
 		 && (((pos_x - mineralMap[i].x > 0) ? (pos_x - mineralMap[i].x) : (mineralMap[i].x - pos_x)) < 20)
-		) {
+		){
 			return false;
-			break;
 		}
 	}
 	return true;
 }
 
 void initMinerals(){
+	mineralMap = (Mineral *) malloc(N_TOT_MINERALS * sizeof(Mineral));
 	int i;
 	// Generate the diamonds, deep on the map
 	for(i = 0; i < N_DIAMOND; i++){
@@ -23,7 +23,7 @@ void initMinerals(){
 		do {
 			mineralMap[i].x = (rand()%512);
 			mineralMap[i].y = (rand()%(512-384-16-8)) + 384;
-		} while (isMineralPlaceValid(mineralMap[i].x, mineralMap[i].y, i) == false);
+		}while(!(isMineralPlaceValid(mineralMap[i].x, mineralMap[i].y, i)));
 
 	}
 	// Generate the amazonite
@@ -34,7 +34,7 @@ void initMinerals(){
 		do {
 			mineralMap[i].x = (rand()%512);
 			mineralMap[i].y = (rand()%(512-256-16-8))+ 256;
-		} while (isMineralPlaceValid(mineralMap[i].x, mineralMap[i].y, i) == false);
+		} while(!(isMineralPlaceValid(mineralMap[i].x, mineralMap[i].y, i)));
 
 	}
 	// Generate the bronzes
@@ -45,7 +45,7 @@ void initMinerals(){
 		do {
 			mineralMap[i].x = (rand()%512);
 			mineralMap[i].y = (rand()%(512-128-16-8)) + 128;
-		} while (isMineralPlaceValid(mineralMap[i].x, mineralMap[i].y, i) == false);
+		} while(!(isMineralPlaceValid(mineralMap[i].x, mineralMap[i].y, i)));
 
 	}
 	// Generate the alexxzandrites
@@ -56,8 +56,7 @@ void initMinerals(){
 		do {
 			mineralMap[i].x = (rand()%512);
 			mineralMap[i].y = (rand()%(512-384-16-8))+ 384;
-		} while (isMineralPlaceValid(mineralMap[i].x, mineralMap[i].y, i) == false);
-
+		} while(!(isMineralPlaceValid(mineralMap[i].x, mineralMap[i].y, i)));
 	}
 }
 
@@ -77,9 +76,8 @@ Mineral * getMineral(int pos_x, int pos_y) {
 	for (i = 0; i < N_TOT_MINERALS; i++) {
 		if ((((pos_y - mineralMap[i].y > 0) ? (pos_y - mineralMap[i].y):(mineralMap[i].y - pos_y)) < 16) // abs(diamond.y - pos_y) < 16
 		 && (((pos_x - mineralMap[i].x > 0) ? (pos_x - mineralMap[i].x):(mineralMap[i].x - pos_x)) < 16) // abs(diamond.x - pos_x) < 16
-		) {
+		){
 			return &mineralMap[i];
-			break;
 		}
 	}
 	return NULL;
@@ -99,7 +97,7 @@ mineralType drillMineralReturnValue(int pos_x, int pos_y) {
 						  mineralMap[i].isDrilled, DIAMOND_PAL, 0, 0,
 						  mineralMap[i].x - screen_x, mineralMap[i].y - screen_y);
 			return DIAMOND;
-			break;
+
 		case AMAZONITE:
 			mineralMap[i].isDrilled = true;
 			mineralMap[i].type = DRILLED;
@@ -107,7 +105,7 @@ mineralType drillMineralReturnValue(int pos_x, int pos_y) {
 						  mineralMap[i].isDrilled, AMAZONITE_PAL, 0, 0,
 						  mineralMap[i].x - screen_x, mineralMap[i].y - screen_y);
 			return AMAZONITE;
-			break;
+
 		case BRONZE:
 			mineralMap[i].isDrilled = true;
 			mineralMap[i].type = DRILLED;
@@ -115,7 +113,7 @@ mineralType drillMineralReturnValue(int pos_x, int pos_y) {
 						  mineralMap[i].isDrilled, BRONZE_PAL, 0, 0,
 						  mineralMap[i].x - screen_x, mineralMap[i].y - screen_y);
 			return BRONZE;
-			break;
+
 		case ALEXXZANDRITE:
 			mineralMap[i].isDrilled = true;
 			mineralMap[i].type = DRILLED;
@@ -123,12 +121,10 @@ mineralType drillMineralReturnValue(int pos_x, int pos_y) {
 						  mineralMap[i].isDrilled, ALEXX_PAL, 0, 0,
 						  mineralMap[i].x - screen_x, mineralMap[i].y - screen_y);
 			return ALEXXZANDRITE;
-			break;
+
 		default: // DIRT or DRILLED
 			return DRILLED;
-			break;
 		}
-
 	}
 }
 
