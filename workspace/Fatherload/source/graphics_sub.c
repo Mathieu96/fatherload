@@ -30,6 +30,7 @@ void init_sub_background() {
 
 	// Init BG3
 	BGCTRL_SUB[3] = BG_MAP_BASE(0) | BG_BMP8_128x128;
+	//BGCTRL_SUB[3] = BG_MAP_BASE(0) | BG_BMP8_256x256;
 
 	dmaCopy(controlsPal, BG_PALETTE_SUB, controlsPalLen);
 	dmaCopy(controlsBitmap, BG_MAP_RAM_SUB(0), controlsBitmapLen);
@@ -103,7 +104,7 @@ void updateChronoDisp(int min, int sec, int msec, int pal) {
 void score_display(int x, int y, int pal, int score){
 	int i;
 	int temp = player_score;
-	for (i = 1000000; i > 0; i /= 10) {
+	for (i = 10000; i > 0; i /= 10) {
 		x += 2;
 		printDigit(temp / i, x, y, pal);
 		temp = temp % i;

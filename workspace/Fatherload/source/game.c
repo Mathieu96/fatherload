@@ -41,8 +41,8 @@ void init_game() {
 	Audio_Init();
 
 	config_main_background();
-	consoleDemoInit();
-	//init_sub_background();
+	//consoleDemoInit();
+	init_sub_background();
 
 	orientation = RIGHT;
 
@@ -65,7 +65,7 @@ void start_game() {
 	mineral_count = 0;
 	player_score = 0;
 	flying = 0;
-	player_fuel = 100000;
+	player_fuel = 50000;
 
 	Audio_PlayMusic();
 
@@ -82,7 +82,7 @@ void start_game() {
 	irqEnable(IRQ_TIMER0);
 	irqEnable(IRQ_TIMER1);
 
-	score_display(16, 1, 10, player_score);
+	score_display(20, 1, 10, player_score);
 }
 
 bool hasBeenDrilled(int pos_x, int pos_y) {
