@@ -83,6 +83,9 @@ extern int mineral_count;
 
 extern int min, sec, msec;
 
+typedef enum {NONE, COIN, DRILL} soundEffectType;
+extern soundEffectType currentSF, nextSF;
+
 extern bool start_pressed;
 
 extern Mineral *mineralMap;

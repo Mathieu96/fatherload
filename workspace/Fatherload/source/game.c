@@ -19,7 +19,8 @@ Mineral *mineralMap;
 
 dir orientation;
 
-u16 *gfx_horizontal, *gfx_vertical, *diamond_pic, *amazonite_pic, *bronze_pic, *alexxzandrite_pic;
+u16 *gfx_horizontal, *gfx_vertical, *diamond_pic, *amazonite_pic, *bronze_pic,
+		*alexxzandrite_pic;
 
 bool start_pressed = false;
 bool drilling = false;
@@ -34,6 +35,8 @@ int player_alexxzandrite = 0;
 int player_drill_health = 50;
 int player_fuel = 1000;
 
+soundEffectType nextSF;
+
 void init_game() {
 	Audio_Init();
 
@@ -42,7 +45,6 @@ void init_game() {
 	//init_sub_background();
 
 	orientation = RIGHT;
-
 
 	TIMER_DATA(0) = TIMER_FREQ(100);
 	TIMER0_CR = TIMER_ENABLE | TIMER_DIV_64 | TIMER_IRQ_REQ;
@@ -67,9 +69,8 @@ void start_game() {
 
 	Audio_PlayMusic();
 
-	update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0,
-				  PLAYER_VPAL, 0, 0,
-				  player_x, player_y);
+	update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, 0, 0,
+			player_x, player_y);
 
 	oamUpdate(&oamMain);
 	// set the starting backgrounds
@@ -91,12 +92,11 @@ bool hasBeenDrilled(int pos_x, int pos_y) {
 	int position_y = pos_y + screen_y;
 	int position_x = pos_x + screen_x;
 
-	int base = (((position_y)>255)?2:0) + (position_x)/256;
-	int x = ((position_x)%256)/8;
-	int y = ((position_y)%256)/8;
+	int base = (((position_y) > 255) ? 2 : 0) + (position_x) / 256;
+	int x = ((position_x) % 256) / 8;
+	int y = ((position_y) % 256) / 8;
 	//printf("b: %d, x: %d, y: %d. %d\n",base, x, y, BG_MAP_RAM(base)[y * 32 + x]);
-	if(BG_MAP_RAM(base)[y * 32 + x] == 1 ||
-			BG_MAP_RAM(base)[y * 32 + x] == 4)
+	if (BG_MAP_RAM(base)[y * 32 + x] == 1 || BG_MAP_RAM(base)[y * 32 + x] == 4)
 		return true;
 	else
 		return false;
@@ -106,8 +106,8 @@ void player_move_right() {
 	orientation = RIGHT;
 	flying = 0;
 	if (screen_x < 512 - 256 && !start_pressed) {
-		if(hasBeenDrilled(player_x + 16, player_y) &&
-				hasBeenDrilled(player_x + 16, player_y + 10)){
+		if (hasBeenDrilled(player_x + 16, player_y) && hasBeenDrilled(player_x
+				+ 16, player_y + 10)) {
 			screen_x++;
 			if (player_x < 256 - 16)
 				player_x++;
@@ -120,8 +120,8 @@ void player_move_left() {
 	orientation = LEFT;
 	flying = 0;
 	if (screen_x > 0) {
-		if(hasBeenDrilled(player_x - 1, player_y) &&
-				hasBeenDrilled(player_x - 1, player_y + 10)) {
+		if (hasBeenDrilled(player_x - 1, player_y) && hasBeenDrilled(player_x
+				- 1, player_y + 10)) {
 			screen_x--;
 			if (player_x > 0)
 				player_x--;
@@ -134,8 +134,8 @@ void player_move_down() {
 	orientation = DOWN;
 	flying = 0;
 	if (screen_y < 512 - 192) {
-		if(hasBeenDrilled(player_x, player_y + 16) &&
-				hasBeenDrilled(player_x + 10, player_y + 16)) {
+		if (hasBeenDrilled(player_x, player_y + 16) && hasBeenDrilled(player_x
+				+ 10, player_y + 16)) {
 			screen_y++;
 			if (player_y < 168)
 				player_y++;
@@ -147,8 +147,8 @@ void player_move_down() {
 void player_move_up() {
 	orientation = UP;
 	// Equivalent to fly mode
-	if(hasBeenDrilled(player_x, player_y - 1) &&
-			hasBeenDrilled(player_x + 10, player_y - 1)){
+	if (hasBeenDrilled(player_x, player_y - 1) && hasBeenDrilled(player_x + 10,
+			player_y - 1)) {
 		flying = 1;
 		if (screen_y > 0) {
 			screen_y--;
@@ -167,7 +167,7 @@ void player_drills() {
 	case RIGHT:
 		if (screen_x < 512 - 256) {
 			screen_x++;
-			if (player_x < 256 - 16){
+			if (player_x < 256 - 16) {
 				player_x++;
 			}
 			player_drill_health--;
@@ -187,9 +187,9 @@ void player_drills() {
 		}
 		break;
 	case DOWN:
-		if (screen_y < 512 - 192){
+		if (screen_y < 512 - 192) {
 			screen_y++;
-			if (player_y < 168){
+			if (player_y < 168) {
 				player_y++;
 			}
 			player_drill_health--;
@@ -197,18 +197,18 @@ void player_drills() {
 			drilling = true;
 		}
 		break;
-		case UP:
-			if (screen_y > 0){
-				screen_y--;
-				if (player_y > 112){
-					player_y--;
-				}
-				flying = 1;
-				player_drill_health--;
-				player_fuel -= 4;
-				drilling = true;
+	case UP:
+		if (screen_y > 0) {
+			screen_y--;
+			if (player_y > 112) {
+				player_y--;
 			}
-			break;
+			flying = 1;
+			player_drill_health--;
+			player_fuel -= 4;
+			drilling = true;
+		}
+		break;
 	}
 }
 
@@ -221,9 +221,8 @@ void player_pressed_start() {
 		load_start_display();
 		start_pressed = 1;
 
-		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 1,
-					  PLAYER_VPAL, 0, 0,
-					  player_x, player_y);
+		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 1, PLAYER_VPAL, 0, 0,
+				player_x, player_y);
 
 		oamUpdate(&oamMain);
 		//TODO: change to key released?
@@ -231,14 +230,12 @@ void player_pressed_start() {
 	} else {
 		mmResume();
 
-		if(orientation == DOWN || orientation == UP)
-			update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0,
-						  PLAYER_VPAL, 0, ((orientation == DOWN)?1:0),
-						  player_x, player_y);
+		if (orientation == DOWN || orientation == UP)
+			update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, 0,
+					((orientation == DOWN) ? 1 : 0), player_x, player_y);
 		else
-			update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0,
-									  PLAYER_VPAL, ((orientation == LEFT)?1:0), 0,
-									  player_x, player_y);
+			update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0, PLAYER_VPAL,
+					((orientation == LEFT) ? 1 : 0), 0, player_x, player_y);
 
 		oamUpdate(&oamMain);
 		release_start_display();
@@ -254,10 +251,11 @@ void player_pressed_touchscreen() {
 	touchPosition touch;
 	touchRead(&touch);
 	// UP
-	if (((touch.py >= 0) && (touch.py < 50)) && (touch.px >= 45) && (touch.px <= 85)){
+	if (((touch.py >= 0) && (touch.py < 50)) && (touch.px >= 45) && (touch.px
+			<= 85)) {
 		orientation = UP;
-		if(hasBeenDrilled(player_x, player_y - 1) &&
-				hasBeenDrilled(player_x + 10, player_y - 1)){
+		if (hasBeenDrilled(player_x, player_y - 1) && hasBeenDrilled(player_x
+				+ 10, player_y - 1)) {
 			flying = 1;
 			if (screen_y > 0) {
 				screen_y--;
@@ -269,13 +267,14 @@ void player_pressed_touchscreen() {
 		}
 	}
 	// DOWN
-	if(((touch.py >= 75) && (touch.py <= 128)) && (touch.px >= 45)	&& (touch.px <= 85)){
+	if (((touch.py >= 75) && (touch.py <= 128)) && (touch.px >= 45)
+			&& (touch.px <= 85)) {
 		if (screen_y < 512 - 192) {
 			orientation = DOWN;
 			flying = 0;
-			if(hasBeenDrilled(player_x, player_y + 16) &&
-					hasBeenDrilled(player_x + 10, player_y + 16)){
-				screen_y ++;
+			if (hasBeenDrilled(player_x, player_y + 16) && hasBeenDrilled(
+					player_x + 10, player_y + 16)) {
+				screen_y++;
 				player_fuel--;
 				if (player_y < 168)
 					player_y++;
@@ -283,12 +282,13 @@ void player_pressed_touchscreen() {
 		}
 	}
 	// LEFT
-	if (((touch.py >= 30) && (touch.py < 90)) && (touch.px >= 2) && (touch.px <= 37)) {
-		if (screen_x > 0){
+	if (((touch.py >= 30) && (touch.py < 90)) && (touch.px >= 2) && (touch.px
+			<= 37)) {
+		if (screen_x > 0) {
 			orientation = LEFT;
 			flying = 0;
-			if(hasBeenDrilled(player_x - 1, player_y) &&
-					hasBeenDrilled(player_x - 1, player_y + 10)) {
+			if (hasBeenDrilled(player_x - 1, player_y) && hasBeenDrilled(
+					player_x - 1, player_y + 10)) {
 				screen_x--;
 				player_fuel--;
 				if (player_x > 0)
@@ -297,12 +297,13 @@ void player_pressed_touchscreen() {
 		}
 	}
 	// RIGHT
-	if (((touch.py >= 30) && (touch.py < 90)) && (touch.px >= 90) && (touch.px <= 128)) {
+	if (((touch.py >= 30) && (touch.py < 90)) && (touch.px >= 90) && (touch.px
+			<= 128)) {
 		if (screen_x < 512 - 256) {
 			orientation = RIGHT;
 			flying = 0;
-			if(hasBeenDrilled(player_x + 16, player_y) &&
-					hasBeenDrilled(player_x + 16, player_y + 10)){
+			if (hasBeenDrilled(player_x + 16, player_y) && hasBeenDrilled(
+					player_x + 16, player_y + 10)) {
 				screen_x++;
 				player_fuel--;
 				if (player_x < 256 - 16)
@@ -315,24 +316,20 @@ void player_pressed_touchscreen() {
 void update_vehicle() {
 	switch (orientation) {
 	case RIGHT:
-		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0,
-					  PLAYER_HPAL, 0, 0,
-					  player_x, player_y);
+		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0, PLAYER_HPAL, 0, 0,
+				player_x, player_y);
 		break;
 	case LEFT:
-		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0,
-					  PLAYER_HPAL, 1, 0,
-					  player_x, player_y);
+		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0, PLAYER_HPAL, 1, 0,
+				player_x, player_y);
 		break;
 	case UP:
-		update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0,
-					  PLAYER_VPAL, 0, 0,
-					  player_x, player_y);
+		update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, 0, 0,
+				player_x, player_y);
 		break;
 	case DOWN:
-		update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0,
-					  PLAYER_VPAL, 0, 1,
-					  player_x, player_y);
+		update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, 0, 1,
+				player_x, player_y);
 		break;
 	}
 }
@@ -359,13 +356,13 @@ void addToInventory(mineralType mineral) {
 void sellItemFromInventory(mineralType mineral) {
 	switch (mineral) {
 	case DIAMOND:
-		if (player_diamonds > 0){
+		if (player_diamonds > 0) {
 			player_diamonds--;
 			updateScore(SCORE_DIAMONDS);
 		}
 		break;
 	case AMAZONITE:
-		if (player_amazonite > 0){
+		if (player_amazonite > 0) {
 			player_amazonite--;
 			updateScore(SCORE_AMAZONITE);
 		}
@@ -385,43 +382,60 @@ void sellItemFromInventory(mineralType mineral) {
 	default:
 		break;
 	}
-	if(mineral != DIRT)
+	if (mineral != DIRT)
 		score_changed = 1;
 }
 
-void update_state(){
+void addToAudioEffectQueue(soundEffectType sf){
+	switch (sf){
+	case COIN:
+		nextSF = COIN;
+		break;
+	case DRILL:
+		if (nextSF == NONE)
+			nextSF = DRILL;
+		break;
+	default:
+		break;
+	}
+}
+
+void update_state() {
 	int position_y = player_y + screen_y;
 	int position_x = player_x + screen_x;
 
-	if(position_y > 112 + 15){
-		int base = (((position_y)>255)?2:0) + (position_x)/256;
-		int x = ((position_x)%256)/8;
-		int y = ((position_y)%256)/8;
+	if (position_y > 112 + 15) {
+		int base = (((position_y) > 255) ? 2 : 0) + (position_x) / 256;
+		int x = ((position_x) % 256) / 8;
+		int y = ((position_y) % 256) / 8;
 		drilling_path(base, x, y);
 	}
 	if (drilling) {
 		mineralType mineral = drillMineralReturnValue(position_x, position_y);
-		if (mineral != DIRT){
+		if (mineral != DIRT) {
 			addToInventory(mineral);
 			//TODO: Fix when store is implemented, just sell right away for now
 			sellItemFromInventory(mineral);
-			Audio_PlaySoundEX(SFX_COIN_PICKUP);
+			addToAudioEffectQueue(COIN);
+			//Audio_PlaySoundEX(SFX_COIN_PICKUP);
 		} else {
-			Audio_PlaySoundEX(SFX_BULLDOZER);
+			addToAudioEffectQueue(DRILL);
+			//Audio_PlaySoundEX(SFX_BULLDOZER);
 		}
-
 	}
 	drilling = false;
 	oamUpdate(&oamMain);
 }
 
-void player_fall(){
-	if(hasBeenDrilled(player_x, player_y + 16) &&
-			hasBeenDrilled(player_x + 10, player_y + 16)){
-		if(screen_y < 512 - 192)
-			screen_y ++;
-		if(player_y < 168)
-			player_y ++;
+
+
+void player_fall() {
+	if (hasBeenDrilled(player_x, player_y + 16) && hasBeenDrilled(
+			player_x + 10, player_y + 16)) {
+		if (screen_y < 512 - 192)
+			screen_y++;
+		if (player_y < 168)
+			player_y++;
 	}
 
 }
