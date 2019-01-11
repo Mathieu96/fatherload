@@ -74,10 +74,7 @@ void showInitImage(){
 	dmaCopy(launcherImagePal,   BG_PALETTE, launcherImagePalLen);
 
 	// TODO: something else here?
-	int i = 0;
-	while (i < 5000000) {
-		i++;
-	}
+	swiDelay(200000000);
 }
 
 void config_main_background(){
@@ -193,7 +190,20 @@ void configureSprites() {
 }
 
 void restart_display(){
-	dmaCopy(Game_OverMap, BG_MAP_RAM(10), Game_OverMapLen);
+	int i, j;
+	for(i = 0; i < 24; i++){
+		for(j = 0; j < 32; j++){
+			BG_MAP_RAM(9)[i*32 + j] = 3;
+		}
+	}
+	hide_all_minerals();
+
+
+	BGCTRL[3] = BG_COLOR_256 | BG_MAP_BASE(4) | BG_TILE_BASE(2) | BG_64x64;
+
+	dmaCopy(Game_OverTiles, BG_TILE_RAM(2), Game_OverTilesLen);
+	dmaCopy(Game_OverMap, BG_MAP_RAM(4), Game_OverMapLen);
+	dmaCopy(Game_OverPal, BG_PALETTE, Game_OverPalLen);
 }
 
 void load_start_display(){

@@ -23,8 +23,6 @@ int main(void) {
 	fatInitDefault();
 	u16 keys;
 
-
-
 	do {
 		// set the player and screen starting coordinates
 		start_game();
@@ -94,8 +92,12 @@ int main(void) {
 			}
 			swiWaitForVBlank(); // slow down the game
 		}
+
 		if(max_score < player_score)
 			writeMaxScore(player_score);
+
+		gameOverState();
+
 		// restart part
 		free(mineralMap);
 		hide_all_minerals();

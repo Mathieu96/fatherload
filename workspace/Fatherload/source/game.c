@@ -65,7 +65,8 @@ void start_game() {
 	mineral_count = 0;
 	player_score = 0;
 	flying = 0;
-	player_fuel = 50000;
+	//player_fuel = 50000;
+	player_fuel = 500;
 
 	Audio_PlayMusic();
 
@@ -437,5 +438,38 @@ void player_fall() {
 		if (player_y < 168)
 			player_y++;
 	}
+}
+
+void gameOverState(){
+
+	irqDisable(IRQ_TIMER0);
+	irqDisable(IRQ_TIMER1);
+	mmPause();
+	Audio_PlaySoundEX(SFX_TIRE_SCREECH);
+
+	update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 1, PLAYER_VPAL, 0, 0,
+					player_x, player_y);
+
+	oamUpdate(&oamMain);
+
+	restart_display();
+
+	swiDelay(30000000);
+
+	u16 keys = 0;
+	while (keys == 0){
+		swiWaitForVBlank();
+		scanKeys();
+
+		keys = keysHeld();
+
+		if(keys & KEY_A) {
+			// restart game
+		} else if (keys & KEY_B) {
+			// do not start a new game
+			//TODO: what should be done then?
+		}
+	}
+
 
 }
