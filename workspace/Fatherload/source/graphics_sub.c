@@ -29,8 +29,8 @@ void init_sub_background() {
 	BGCTRL_SUB[2] = BG_TILE_BASE(4) | BG_MAP_BASE(9) | BG_COLOR_16 | BG_32x32;
 
 	// Init BG3
-	BGCTRL_SUB[3] = BG_MAP_BASE(0) | BG_BMP8_128x128;
-	//BGCTRL_SUB[3] = BG_MAP_BASE(0) | BG_BMP8_256x256;
+	//BGCTRL_SUB[3] = BG_MAP_BASE(0) | BG_BMP8_128x128;
+	BGCTRL_SUB[3] = BG_MAP_BASE(0) | BG_BMP8_256x256;
 
 	dmaCopy(controlsPal, BG_PALETTE_SUB, controlsPalLen);
 	dmaCopy(controlsBitmap, BG_MAP_RAM_SUB(0), controlsBitmapLen);
@@ -114,7 +114,7 @@ void score_display(int x, int y, int pal, int score){
 void print_fuel(int x, int y, int pal){
 	int i;
 	int temp = player_fuel;
-	for(i = 100000; i > 0; i /= 10){
+	for(i = 10000; i > 0; i /= 10){
 		x += 2;
 		printDigit(temp / i, x, y, pal);
 		temp = temp % i;
