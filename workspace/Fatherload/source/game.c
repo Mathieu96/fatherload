@@ -94,7 +94,7 @@ bool hasBeenDrilled(int pos_x, int pos_y) {
 	int base = (((position_y)>255)?2:0) + (position_x)/256;
 	int x = ((position_x)%256)/8;
 	int y = ((position_y)%256)/8;
-	printf("b: %d, x: %d, y: %d. %d\n",base, x, y, BG_MAP_RAM(base)[y * 32 + x]);
+	//printf("b: %d, x: %d, y: %d. %d\n",base, x, y, BG_MAP_RAM(base)[y * 32 + x]);
 	if(BG_MAP_RAM(base)[y * 32 + x] == 1 ||
 			BG_MAP_RAM(base)[y * 32 + x] == 4)
 		return true;

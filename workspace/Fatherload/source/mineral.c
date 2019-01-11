@@ -85,11 +85,11 @@ Mineral * getMineral(int pos_x, int pos_y) {
 
 mineralType drillMineralReturnValue(int pos_x, int pos_y) {
 	Mineral *mineral = getMineral(pos_x, pos_y);
-	if (mineral == NULL) {
+	if (mineral == NULL || mineral->isDrilled){
 		return DIRT;
-	} else {
-		int i = (*mineral).n;
-		switch ((*mineral).type) {
+	} else{
+		int i = mineral->n;
+		switch (mineral->type) {
 		case DIAMOND:
 			mineralMap[i].isDrilled = true;
 			mineralMap[i].type = DRILLED;
