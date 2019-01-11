@@ -15,10 +15,15 @@
 #include "P_Score.h"
 
 int main(void) {
+
+	showInitImage();
+
 	srand(time(NULL));
 	init_game();
 	fatInitDefault();
 	u16 keys;
+
+
 
 	do {
 		// set the player and screen starting coordinates

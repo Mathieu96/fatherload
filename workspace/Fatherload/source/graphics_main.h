@@ -17,6 +17,7 @@
 #include "bronze.h"
 #include "alexxzandrite.h"
 #include "Game-Over.h"
+#include "launcherImage.h"
 
 // Initialization of the backgrounds
 void config_main_background();

@@ -63,6 +63,23 @@ u8 troubleTile[64] = {
 		254, 254, 0, 0, 254, 254, 0, 0
 };
 
+void showInitImage(){
+	VRAM_A_CR = VRAM_ENABLE | VRAM_A_MAIN_BG;
+	REG_DISPCNT = MODE_0_2D | DISPLAY_BG3_ACTIVE;
+
+	BGCTRL[3] = BG_COLOR_256 | BG_MAP_BASE(4) | BG_TILE_BASE(2) | BG_64x64;
+
+	dmaCopy(launcherImageTiles, BG_TILE_RAM(2) , launcherImageTilesLen);
+	dmaCopy(launcherImageMap,   BG_MAP_RAM(4) , launcherImageMapLen);
+	dmaCopy(launcherImagePal,   BG_PALETTE, launcherImagePalLen);
+
+	// TODO: something else here?
+	int i = 0;
+	while (i < 5000000) {
+		i++;
+	}
+}
+
 void config_main_background(){
 	REG_DISPCNT = MODE_0_2D | DISPLAY_BG0_ACTIVE | DISPLAY_BG1_ACTIVE | DISPLAY_BG2_ACTIVE | DISPLAY_BG3_ACTIVE;
 	VRAM_A_CR = VRAM_ENABLE | VRAM_A_MAIN_BG;
