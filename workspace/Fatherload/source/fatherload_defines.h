@@ -70,6 +70,7 @@ extern int player_score;
 extern int max_score;
 extern int score_changed;
 extern int flying;
+extern bool drilling;
 
 extern u16* diamond_pic, *amazonite_pic, *bronze_pic, *alexxzandrite_pic;
 

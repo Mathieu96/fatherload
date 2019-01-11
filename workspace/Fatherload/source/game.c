@@ -33,7 +33,7 @@ int player_bronze = 0;
 int player_alexxzandrite = 0;
 //TODO: Find reasonnable values for these:
 int player_drill_health = 50;
-int player_fuel = 1000;
+int player_fuel = 5000;
 
 soundEffectType nextSF;
 
@@ -65,7 +65,7 @@ void start_game() {
 	mineral_count = 0;
 	player_score = 0;
 	flying = 0;
-	player_fuel = 50000;
+	player_fuel = 500;
 
 	Audio_PlayMusic();
 

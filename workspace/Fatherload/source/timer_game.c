@@ -26,6 +26,7 @@ void timer0_ISR() {
 				min = 0;
 		}
 	}
+	drilling = false;
 }
 
 void timer1_ISR() {

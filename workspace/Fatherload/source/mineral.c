@@ -21,7 +21,7 @@ void initMinerals(){
 		mineralMap[i].type = DIAMOND;
 		mineralMap[i].n = i;
 		do {
-			mineralMap[i].x = (rand()%512);
+			mineralMap[i].x = (rand()%512 - 16);
 			mineralMap[i].y = (rand()%(512-384-16-8)) + 384;
 		}while(!(isMineralPlaceValid(mineralMap[i].x, mineralMap[i].y, i)));
 
@@ -32,7 +32,7 @@ void initMinerals(){
 		mineralMap[i].type = AMAZONITE;
 		mineralMap[i].n = i;
 		do {
-			mineralMap[i].x = (rand()%512);
+			mineralMap[i].x = (rand()%512 - 16);
 			mineralMap[i].y = (rand()%(512-256-16-8))+ 256;
 		} while(!(isMineralPlaceValid(mineralMap[i].x, mineralMap[i].y, i)));
 
@@ -43,7 +43,7 @@ void initMinerals(){
 		mineralMap[i].type = BRONZE;
 		mineralMap[i].n = i;
 		do {
-			mineralMap[i].x = (rand()%512);
+			mineralMap[i].x = (rand()%512 - 16);
 			mineralMap[i].y = (rand()%(512-128-16-8)) + 128;
 		} while(!(isMineralPlaceValid(mineralMap[i].x, mineralMap[i].y, i)));
 
@@ -54,7 +54,7 @@ void initMinerals(){
 		mineralMap[i].type = ALEXXZANDRITE;
 		mineralMap[i].n = i;
 		do {
-			mineralMap[i].x = (rand()%512);
+			mineralMap[i].x = (rand()%512 - 16);
 			mineralMap[i].y = (rand()%(512-384-16-8))+ 384;
 		} while(!(isMineralPlaceValid(mineralMap[i].x, mineralMap[i].y, i)));
 	}
@@ -88,6 +88,7 @@ mineralType drillMineralReturnValue(int pos_x, int pos_y) {
 	if (mineral == NULL || mineral->isDrilled){
 		return DIRT;
 	} else{
+		mineral_count++;
 		int i = mineral->n;
 		switch (mineral->type) {
 		case DIAMOND:

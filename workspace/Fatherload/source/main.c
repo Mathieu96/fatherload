@@ -24,7 +24,7 @@ int main(void) {
 		// set the player and screen starting coordinates
 		start_game();
 		readMaxScore();
-		while (1) {
+		while(1){
 			swiWaitForVBlank();
 			scanKeys();
 			keys = keysHeld();
