@@ -65,7 +65,7 @@ void start_game() {
 	mineral_count = 0;
 	player_score = 0;
 	flying = 0;
-	player_fuel = 5000;
+	player_fuel = 500;
 	player_drill_health = 50;
 
 	Audio_PlayMusic();

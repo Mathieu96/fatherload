@@ -81,7 +81,7 @@ void showInitImage(){
 	dmaCopy(press_to_beginMap, BG_MAP_RAM_SUB(0), press_to_beginMapLen);
 	dmaCopy(press_to_beginPal,   BG_PALETTE_SUB, press_to_beginPalLen);
 
-	swiDelay(100000000);
+//	swiDelay(100000000);
 }
 
 void config_main_background(){
