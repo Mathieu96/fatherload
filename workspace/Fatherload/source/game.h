@@ -38,4 +38,6 @@ void update_vehicle();
 
 void player_fall();
 
+int gameOverState();
+
 #endif /* GRAPHICS_MAIN_H_ */

@@ -63,6 +63,27 @@ u8 troubleTile[64] = {
 		254, 254, 0, 0, 254, 254, 0, 0
 };
 
+void showInitImage(){
+	VRAM_A_CR = VRAM_ENABLE | VRAM_A_MAIN_BG;
+	REG_DISPCNT = MODE_0_2D | DISPLAY_BG0_ACTIVE;
+
+	BGCTRL[0] = BG_COLOR_256 | BG_MAP_BASE(0) | BG_TILE_BASE(1) | BG_32x32;
+
+	VRAM_C_CR = VRAM_ENABLE | VRAM_C_SUB_BG;
+	REG_DISPCNT_SUB = MODE_3_2D | DISPLAY_BG0_ACTIVE;
+
+	BGCTRL_SUB[0] = BG_TILE_BASE(1) | BG_MAP_BASE(0) | BG_COLOR_256 | BG_32x32;
+
+	dmaCopy(launcherImageTiles, BG_TILE_RAM(1) , launcherImageTilesLen);
+	dmaCopy(launcherImageMap,   BG_MAP_RAM(0) , launcherImageMapLen);
+	dmaCopy(launcherImagePal,   BG_PALETTE, launcherImagePalLen);
+	dmaCopy(press_to_beginTiles, BG_TILE_RAM_SUB(1), press_to_beginTilesLen);
+	dmaCopy(press_to_beginMap, BG_MAP_RAM_SUB(0), press_to_beginMapLen);
+	dmaCopy(press_to_beginPal,   BG_PALETTE_SUB, press_to_beginPalLen);
+
+	swiDelay(100000000);
+}
+
 void config_main_background(){
 	REG_DISPCNT = MODE_0_2D | DISPLAY_BG0_ACTIVE | DISPLAY_BG1_ACTIVE | DISPLAY_BG2_ACTIVE | DISPLAY_BG3_ACTIVE;
 	VRAM_A_CR = VRAM_ENABLE | VRAM_A_MAIN_BG;
@@ -176,7 +197,20 @@ void configureSprites() {
 }
 
 void restart_display(){
-	dmaCopy(Game_OverMap, BG_MAP_RAM(10), Game_OverMapLen);
+	/*int i, j;
+	for(i = 0; i < 24; i++){
+		for(j = 0; j < 32; j++){
+			BG_MAP_RAM(9)[i*32 + j] = 3;
+		}
+	}*/
+	hide_all_minerals();
+
+	REG_DISPCNT = MODE_0_2D | DISPLAY_BG0_ACTIVE;
+	BGCTRL[0] = BG_COLOR_256 | BG_MAP_BASE(0) | BG_TILE_BASE(1) | BG_32x32;
+
+	dmaCopy(Game_OverTiles, BG_TILE_RAM(1), Game_OverTilesLen);
+	dmaCopy(Game_OverMap, BG_MAP_RAM(0), Game_OverMapLen);
+	dmaCopy(Game_OverPal, BG_PALETTE, Game_OverPalLen);
 }
 
 void load_start_display(){

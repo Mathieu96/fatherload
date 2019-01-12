@@ -2,7 +2,7 @@
  * graphics_main.c
  *
  *  Created on: Dec 11, 2018
- *      Author: nds
+ *      Author: M
  */
 
 #include "game.h"
@@ -32,8 +32,8 @@ int player_amazonite = 0;
 int player_bronze = 0;
 int player_alexxzandrite = 0;
 //TODO: Find reasonnable values for these:
-int player_drill_health = 50;
-int player_fuel = 5000;
+int player_drill_health;
+int player_fuel;
 
 soundEffectType nextSF;
 
@@ -65,7 +65,8 @@ void start_game() {
 	mineral_count = 0;
 	player_score = 0;
 	flying = 0;
-	player_fuel = 500;
+	player_fuel = 5000;
+	player_drill_health = 50;
 
 	Audio_PlayMusic();
 
@@ -86,9 +87,6 @@ void start_game() {
 }
 
 bool hasBeenDrilled(int pos_x, int pos_y) {
-	//TODO: Mathieu, can you implement this?
-	// last argument only for debugging purposes, should be removed when implemented properly
-	// Possibly re-use it with display_drilled_path if applicable
 	int position_y = pos_y + screen_y;
 	int position_x = pos_x + screen_x;
 
@@ -152,11 +150,11 @@ void player_move_up() {
 		flying = 1;
 		if (screen_y > 0) {
 			screen_y--;
-			player_fuel -= 2;
 		}
 
 		if (player_y > 90)
 			player_y--;
+		player_fuel -= 2;
 	}
 }
 
@@ -225,7 +223,6 @@ void player_pressed_start() {
 				player_x, player_y);
 
 		oamUpdate(&oamMain);
-		//TODO: change to key released?
 		swiDelay(11000000); // Delay to avoid going back out of start mode right after
 	} else {
 		mmResume();
@@ -437,5 +434,34 @@ void player_fall() {
 		if (player_y < 168)
 			player_y++;
 	}
+}
 
+int gameOverState(){
+
+	irqDisable(IRQ_TIMER0);
+	irqDisable(IRQ_TIMER1);
+	mmPause();
+	Audio_PlaySoundEX(SFX_TIRE_SCREECH);
+
+	update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 1, PLAYER_VPAL, 0, 0,
+					player_x, player_y);
+
+	oamUpdate(&oamMain);
+
+	restart_display();
+
+	u16 keys = 0;
+	while(1){
+		swiWaitForVBlank();
+		scanKeys();
+
+		keys = keysDown();
+
+		if(keys & KEY_A){
+			return 1;
+
+		}else if (keys & KEY_B) {
+			return 0;
+		}
+	}
 }

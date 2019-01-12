@@ -16,12 +16,22 @@
 
 int main(void) {
 	srand(time(NULL));
-	init_game();
 	fatInitDefault();
 	u16 keys;
-
 	do {
 		// set the player and screen starting coordinates
+		showInitImage();
+		while(1){
+			swiWaitForVBlank();
+			scanKeys();
+			keys = keysDown();
+			if((keys & KEY_START) || (keys & KEY_A) || (keys & KEY_B) ||
+			   (keys & KEY_R) || (keys & KEY_L) || (keys & KEY_TOUCH) ||
+			   (keys & KEY_SELECT) || (keys & KEY_UP) || (keys & KEY_DOWN) ||
+			   (keys & KEY_LEFT) || (keys & KEY_RIGHT))
+				break;
+		}
+		init_game();
 		start_game();
 		readMaxScore();
 		while(1){
@@ -86,14 +96,23 @@ int main(void) {
 
 				if(player_fuel <= 0)
 					break;
+
 			}
 			swiWaitForVBlank(); // slow down the game
 		}
+
 		if(max_score < player_score)
 			writeMaxScore(player_score);
+
+		player_fuel = 0;
+		print_fuel(20, 10, 12);
 		// restart part
 		free(mineralMap);
 		hide_all_minerals();
-	} while (1);
+	} while(gameOverState());
+
+	// Shutdown the NDS
+	powerOn(PM_SYSTEM_PWR);
+
 	return 0;
 }

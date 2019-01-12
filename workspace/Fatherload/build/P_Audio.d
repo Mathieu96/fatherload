@@ -69,6 +69,8 @@ P_Audio.o:  \
   /home/nds/files/fatherload/workspace/Fatherload/build/bronze.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/alexxzandrite.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/Game-Over.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/launcherImage.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/press_to_begin.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/soundbank.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/soundbank_bin.h
 
@@ -209,6 +211,10 @@ P_Audio.o:  \
 /home/nds/files/fatherload/workspace/Fatherload/build/alexxzandrite.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/build/Game-Over.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/launcherImage.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/press_to_begin.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/build/soundbank.h:
 

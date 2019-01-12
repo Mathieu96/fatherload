@@ -62,6 +62,8 @@ timer_game.o:  \
   /home/nds/files/fatherload/workspace/Fatherload/build/bronze.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/alexxzandrite.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/Game-Over.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/launcherImage.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/press_to_begin.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/soundbank.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/soundbank_bin.h \
   /home/nds/files/fatherload/workspace/Fatherload/source/graphics_sub.h \
@@ -195,6 +197,10 @@ timer_game.o:  \
 /home/nds/files/fatherload/workspace/Fatherload/build/alexxzandrite.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/build/Game-Over.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/launcherImage.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/press_to_begin.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/build/soundbank.h:
 
