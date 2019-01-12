@@ -15,16 +15,16 @@ void updateScore(int score)
 	}
 
 	//Display the score
-	score_display(20, 1, 10, player_score);
+	score_display(20, 5, 10, player_score);
 	//Update highest score
 	if(player_score > max_score){
-		score_display(20, 5, 9, player_score);
+		score_display(20, 1, 9, player_score);
 	}
 }
 
 void readMaxScore(){
 	//Open the file in read mode
-	FILE* file = fopen("/record.txt","r");
+	FILE* file = fopen("/Fatherloadrecord.txt","r");
 	if(file != NULL)
 	{
 		//Read the value and put it into the variable max_score
@@ -33,13 +33,13 @@ void readMaxScore(){
 		fclose(file);
 		printf("%d\n", max_score);
 	}
-	score_display(20, 5, 9, max_score);
+	score_display(20, 1, 9, max_score);
 }
 
 void writeMaxScore(int score)
 {
 	//Open the file in write mode to overwrite
-	FILE* file = fopen("/record.txt","w+");
+	FILE* file = fopen("/Fatherloadrecord.txt","w+");
 	if(file != NULL){
 		//Print the value in the file
 		fprintf(file,"%i\n",score);

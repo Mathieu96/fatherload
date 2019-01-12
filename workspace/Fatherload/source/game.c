@@ -65,7 +65,11 @@ void start_game() {
 	mineral_count = 0;
 	player_score = 0;
 	flying = 0;
-	player_fuel = 500;
+	// For tests, low fuel
+	// player_fuel = 500;
+	// For final version higher starting fuel stock
+	player_fuel = 2500;
+	// Not used for now, drill health
 	player_drill_health = 50;
 
 	Audio_PlayMusic();
@@ -83,7 +87,7 @@ void start_game() {
 	irqEnable(IRQ_TIMER0);
 	irqEnable(IRQ_TIMER1);
 
-	score_display(20, 1, 10, player_score);
+	score_display(20, 5, 10, player_score);
 }
 
 bool hasBeenDrilled(int pos_x, int pos_y) {
@@ -145,8 +149,8 @@ void player_move_down() {
 void player_move_up() {
 	orientation = UP;
 	// Equivalent to fly mode
-	if (hasBeenDrilled(player_x, player_y - 1) && hasBeenDrilled(player_x + 10,
-			player_y - 1)) {
+	if (hasBeenDrilled(player_x, player_y - 2) && hasBeenDrilled(player_x + 10,
+			player_y - 2)) {
 		flying = 1;
 		if (screen_y > 0) {
 			screen_y--;

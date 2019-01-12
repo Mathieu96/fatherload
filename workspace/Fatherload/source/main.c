@@ -83,7 +83,7 @@ int main(void) {
 				refreshMineralSprites();
 
 				if (score_changed) {
-					score_display(20, 1, 10, player_score);
+					score_display(20, 5, 10, player_score);
 					score_changed = 0;
 				}
 
