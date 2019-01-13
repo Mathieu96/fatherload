@@ -149,7 +149,7 @@ void player_move_down() {
 void player_move_up() {
 	orientation = UP;
 	// Equivalent to fly mode
-	if (hasBeenDrilled(player_x, player_y - 2) && hasBeenDrilled(player_x + 10,
+	if (hasBeenDrilled(player_x  + 2, player_y - 2) && hasBeenDrilled(player_x + 10,
 			player_y - 2)) {
 		flying = 1;
 		if (screen_y > 0) {
@@ -255,7 +255,7 @@ void player_pressed_touchscreen() {
 	if (((touch.py >= 0) && (touch.py < 50)) && (touch.px >= 45) && (touch.px
 			<= 85)) {
 		orientation = UP;
-		if (hasBeenDrilled(player_x, player_y - 2) && hasBeenDrilled(player_x
+		if (hasBeenDrilled(player_x  + 2, player_y - 2) && hasBeenDrilled(player_x
 				+ 10, player_y - 2)) {
 			flying = 1;
 			if (screen_y > 0) {
@@ -429,8 +429,8 @@ void update_state() {
 
 
 void player_fall() {
-	if (hasBeenDrilled(player_x, player_y + 16) && hasBeenDrilled(
-			player_x + 10, player_y + 16)) {
+	if (hasBeenDrilled(player_x + 2, player_y + 16) && hasBeenDrilled(
+			player_x + 8, player_y + 16)) {
 		if (screen_y < 512 - 192)
 			screen_y++;
 		if (player_y < 168)

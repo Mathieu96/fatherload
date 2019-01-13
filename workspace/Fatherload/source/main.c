@@ -60,7 +60,7 @@ int main(void) {
 					if(keys & KEY_LEFT)
 						player_move_left();
 
-					if(keys & KEY_UP)
+					if(keys & KEY_UP || keys & KEY_B)
 						player_move_up();
 
 					if (keys & KEY_TOUCH) {
