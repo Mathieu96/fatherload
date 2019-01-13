@@ -197,12 +197,6 @@ void configureSprites() {
 }
 
 void restart_display(){
-	/*int i, j;
-	for(i = 0; i < 24; i++){
-		for(j = 0; j < 32; j++){
-			BG_MAP_RAM(9)[i*32 + j] = 3;
-		}
-	}*/
 	hide_all_minerals();
 
 	REG_DISPCNT = MODE_0_2D | DISPLAY_BG0_ACTIVE;
@@ -230,6 +224,7 @@ void print_start(){
 	// Drawing P
 	for(i = 9; i < 17; i++)
 			BG_MAP_RAM(9)[i*32 + 1] = 1;
+
 	BG_MAP_RAM(9)[9*32 + 5] = 1;
 	BG_MAP_RAM(9)[9*32 + 2] = 1;
 	BG_MAP_RAM(9)[9*32 + 3] = 1;

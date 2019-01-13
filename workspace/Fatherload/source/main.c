@@ -19,20 +19,24 @@ int main(void) {
 	fatInitDefault();
 	u16 keys;
 	do {
-		// set the player and screen starting coordinates
+		// Starting screen
 		showInitImage();
 		while(1){
 			swiWaitForVBlank();
 			scanKeys();
 			keys = keysDown();
+			// any key touched allows to go to the game
 			if((keys & KEY_START) || (keys & KEY_A) || (keys & KEY_B) ||
 			   (keys & KEY_R) || (keys & KEY_L) || (keys & KEY_TOUCH) ||
 			   (keys & KEY_SELECT) || (keys & KEY_UP) || (keys & KEY_DOWN) ||
 			   (keys & KEY_LEFT) || (keys & KEY_RIGHT))
 				break;
 		}
+		// Initialize the game
 		init_game();
+		// Set all the variables to the starting step
 		start_game();
+		// Reads the previous maximum score and prints it (0 if no previous score)
 		readMaxScore();
 		while(1){
 			swiWaitForVBlank();
@@ -105,7 +109,7 @@ int main(void) {
 			writeMaxScore(player_score);
 
 		player_fuel = 0;
-		print_fuel(20, 10, 12);
+		print_fuel(20, 10, 8);
 		// restart part
 		free(mineralMap);
 		hide_all_minerals();

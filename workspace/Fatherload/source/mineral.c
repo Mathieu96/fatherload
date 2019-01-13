@@ -21,7 +21,7 @@ void initMinerals(){
 		mineralMap[i].type = DIAMOND;
 		mineralMap[i].n = i;
 		do {
-			mineralMap[i].x = (rand()%512 - 16);
+			mineralMap[i].x = (rand()%512 - 32) + 16;
 			mineralMap[i].y = (rand()%(512-384-16-8)) + 384;
 		}while(!(isMineralPlaceValid(mineralMap[i].x, mineralMap[i].y, i)));
 

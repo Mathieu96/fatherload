@@ -255,8 +255,8 @@ void player_pressed_touchscreen() {
 	if (((touch.py >= 0) && (touch.py < 50)) && (touch.px >= 45) && (touch.px
 			<= 85)) {
 		orientation = UP;
-		if (hasBeenDrilled(player_x, player_y - 1) && hasBeenDrilled(player_x
-				+ 10, player_y - 1)) {
+		if (hasBeenDrilled(player_x, player_y - 2) && hasBeenDrilled(player_x
+				+ 10, player_y - 2)) {
 			flying = 1;
 			if (screen_y > 0) {
 				screen_y--;
@@ -402,8 +402,8 @@ void addToAudioEffectQueue(soundEffectType sf){
 }
 
 void update_state() {
-	int position_y = player_y + screen_y;
-	int position_x = player_x + screen_x;
+	int position_y = player_y + screen_y + ((orientation == LEFT || orientation == RIGHT)?2:0);
+	int position_x = player_x + screen_x + ((orientation == DOWN || orientation == UP)?2:0);
 
 	if (position_y > 112 + 15) {
 		int base = (((position_y) > 255) ? 2 : 0) + (position_x) / 256;
@@ -418,10 +418,8 @@ void update_state() {
 			//TODO: Fix when store is implemented, just sell right away for now
 			sellItemFromInventory(mineral);
 			addToAudioEffectQueue(COIN);
-			//Audio_PlaySoundEX(SFX_COIN_PICKUP);
 		} else {
 			addToAudioEffectQueue(DRILL);
-			//Audio_PlaySoundEX(SFX_BULLDOZER);
 		}
 	}
 	drilling = false;

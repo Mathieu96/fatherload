@@ -31,7 +31,7 @@ void timer0_ISR() {
 
 void timer1_ISR() {
 	flying = 0;
-	print_fuel(20, 10, 12);
+	print_fuel(20, 10, 8);
 
 	if (audioCycles == 0 && nextSF != NONE) {
 		currentSF = nextSF;
