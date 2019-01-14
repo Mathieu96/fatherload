@@ -20,9 +20,10 @@ void Audio_PlaySoundEX(int i) {
 	//Set the rate to the default one (1024)
 	sound.rate = 1024;
 	//Set the volume to the maximum (range 0...255)
-	sound.volume = 80;
 	if (i == SFX_COIN_PICKUP)
 		sound.volume = 255;
+	else
+		sound.volume = 120;
 
 	//Play the effect using the sound structure
 	mmEffectEx(&sound);

@@ -12,6 +12,7 @@ int player_y;
 int screen_x;
 int screen_y;
 int flying;
+bool gameOverTimer;
 
 int mineral_count = 0;
 
@@ -78,6 +79,7 @@ void start_game() {
 	//set the objects coordinates
 	initMinerals();
 
+	gameOverTimer = false;
 	restart_timer();
 	irqEnable(IRQ_TIMER0);
 	irqEnable(IRQ_TIMER1);
@@ -434,8 +436,8 @@ void player_fall() {
 }
 
 int gameOverState(){
-
-	irqDisable(IRQ_TIMER0);
+	gameOverTimer = true;
+	overSec = 0;
 	irqDisable(IRQ_TIMER1);
 	mmPause();
 	Audio_PlaySoundEX(SFX_TIRE_SCREECH);
@@ -460,5 +462,8 @@ int gameOverState(){
 		}else if (keys & KEY_B) {
 			return 0;
 		}
+		// If wait more than 60 seconds, quit
+		if(overSec >= 60)
+			return 0;
 	}
 }

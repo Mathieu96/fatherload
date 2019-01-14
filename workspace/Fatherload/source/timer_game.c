@@ -7,7 +7,7 @@
 #include "graphics_sub.h"
 #include "game.h"
 
-int msec, sec, min;
+int msec, sec, min, overSec;
 int audioCycles = 0;
 soundEffectType currentSF;
 
@@ -32,8 +32,11 @@ void timer0_ISR() {
 		msec += 10;
 	else {
 		msec = 0;
-		if (sec < 60)
+		if (sec < 60){
 			sec++;
+			if(gameOverTimer)
+				overSec++;
+		}
 		else {
 			sec = 0;
 			if (min < 60)

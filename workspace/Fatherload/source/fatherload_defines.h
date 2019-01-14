@@ -82,7 +82,9 @@ extern int player_x, player_y, screen_x, screen_y;
 
 extern int mineral_count;
 
-extern int min, sec, msec;
+// overSec is the counter to shutdown the NDS if waiting too long the answer of the user
+extern int min, sec, msec, overSec;
+extern bool gameOverTimer;
 
 typedef enum {NONE, COIN, DRILL} soundEffectType;
 extern soundEffectType currentSF, nextSF;

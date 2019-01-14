@@ -114,7 +114,7 @@ int main(void) {
 		free(mineralMap);
 		hide_all_minerals();
 	} while(gameOverState());
-
+	irqDisable(IRQ_TIMER0);
 	// Shutdown the NDS
 	powerOn(PM_SYSTEM_PWR);
 
