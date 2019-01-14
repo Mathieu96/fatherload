@@ -11,6 +11,22 @@ int msec, sec, min;
 int audioCycles = 0;
 soundEffectType currentSF;
 
+void init_timers(){
+	TIMER_DATA(0) = TIMER_FREQ(100);
+	TIMER0_CR = TIMER_ENABLE | TIMER_DIV_64 | TIMER_IRQ_REQ;
+	irqSet(IRQ_TIMER0, timer0_ISR);
+
+	TIMER_DATA(1) = TIMER_FREQ(10);
+	TIMER1_CR = TIMER_ENABLE | TIMER_DIV_64 | TIMER_IRQ_REQ;
+	irqSet(IRQ_TIMER1, timer1_ISR);
+}
+
+void restart_timer(){
+	msec = 0;
+	sec = 0;
+	min = 0;
+}
+
 void timer0_ISR() {
 	if (msec < 1000)
 		msec += 10;

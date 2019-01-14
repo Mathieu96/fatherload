@@ -46,13 +46,7 @@ void init_game() {
 
 	orientation = RIGHT;
 
-	TIMER_DATA(0) = TIMER_FREQ(100);
-	TIMER0_CR = TIMER_ENABLE | TIMER_DIV_64 | TIMER_IRQ_REQ;
-	irqSet(IRQ_TIMER0, timer0_ISR);
-
-	TIMER_DATA(1) = TIMER_FREQ(10);
-	TIMER1_CR = TIMER_ENABLE | TIMER_DIV_64 | TIMER_IRQ_REQ;
-	irqSet(IRQ_TIMER1, timer1_ISR);
+	init_timers();
 
 	configureSprites();
 }
@@ -84,6 +78,7 @@ void start_game() {
 	//set the objects coordinates
 	initMinerals();
 
+	restart_timer();
 	irqEnable(IRQ_TIMER0);
 	irqEnable(IRQ_TIMER1);
 

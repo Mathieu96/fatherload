@@ -10,6 +10,10 @@
 
 #include "fatherload_defines.h"
 
+void init_timers();
+
+void restart_timer();
+
 void timer0_ISR();
 
 void timer1_ISR();
