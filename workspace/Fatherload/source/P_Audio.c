@@ -1,8 +1,10 @@
 #include "P_Audio.h"
 
 void Audio_Init() {
+
 	//Init the sound library
 	mmInitDefaultMem((mm_addr) soundbank_bin);
+
 	//Load module
 	mmLoad(MOD_ABKHYMN);
 
@@ -13,12 +15,16 @@ void Audio_Init() {
 }
 
 void Audio_PlaySoundEX(int i) {
+
 	//Declare a sound effect
 	mm_sound_effect sound;
+
 	//Set the id of the sound effect with the input parameter
 	sound.id = i;
+
 	//Set the rate to the default one (1024)
 	sound.rate = 1024;
+
 	//Set the volume to the maximum (range 0...255)
 	if (i == SFX_COIN_PICKUP)
 		sound.volume = 255;

@@ -1,5 +1,6 @@
-main.o: /home/nds/files/fatherload/workspace/Fatherload/source/main.c \
-  /home/nds/files/fatherload/workspace/Fatherload/source/game.h \
+main.o:  \
+ /home/nds/files/workspace/fatherload/workspace/Fatherload/source/main.c \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/source/game.h \
   /opt/devkitPro/libnds/include/fat.h \
   /opt/devkitPro/libnds/include/nds/disc_io.h \
   /opt/devkitPro/libnds/include/nds/ndstypes.h \
@@ -50,32 +51,32 @@ main.o: /home/nds/files/fatherload/workspace/Fatherload/source/main.c \
   /opt/devkitPro/libnds/include/nds/arm9/sprite.h \
   /opt/devkitPro/libnds/include/nds/system.h \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
-  /home/nds/files/fatherload/workspace/Fatherload/source/fatherload_defines.h \
-  /home/nds/files/fatherload/workspace/Fatherload/source/P_Audio.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/source/fatherload_defines.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/source/P_Audio.h \
   /opt/devkitPro/libnds/include/maxmod9.h \
   /opt/devkitPro/libnds/include/mm_types.h \
-  /home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/diamond.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerHorizontal.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerVertical.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/amazonite.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/bronze.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/alexxzandrite.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/launcherImage.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/game_over.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/soundbank.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/soundbank_bin.h \
-  /home/nds/files/fatherload/workspace/Fatherload/source/graphics_sub.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/controls.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/numbers_small.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/press_to_begin.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/game_over_sub.h \
-  /home/nds/files/fatherload/workspace/Fatherload/source/timer_game.h \
-  /home/nds/files/fatherload/workspace/Fatherload/source/mineral.h \
-  /home/nds/files/fatherload/workspace/Fatherload/source/P_Score.h
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/source/graphics_main.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/build/FONDS.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/build/diamond.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/build/PlayerHorizontal.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/build/PlayerVertical.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/build/amazonite.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/build/bronze.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/build/alexxzandrite.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/build/launcherImage.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/build/game_over.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/build/soundbank.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/build/soundbank_bin.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/source/graphics_sub.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/build/controls.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/build/numbers_small.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/build/press_to_begin.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/build/game_over_sub.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/source/timer_game.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/source/mineral.h \
+  /home/nds/files/workspace/fatherload/workspace/Fatherload/source/P_Score.h
 
-/home/nds/files/fatherload/workspace/Fatherload/source/game.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/source/game.h:
 
 /opt/devkitPro/libnds/include/fat.h:
 
@@ -177,50 +178,50 @@ main.o: /home/nds/files/fatherload/workspace/Fatherload/source/main.c \
 
 /opt/devkitPro/libnds/include/nds/arm9/decompress.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/source/fatherload_defines.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/source/fatherload_defines.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/source/P_Audio.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/source/P_Audio.h:
 
 /opt/devkitPro/libnds/include/maxmod9.h:
 
 /opt/devkitPro/libnds/include/mm_types.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/source/graphics_main.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/build/FONDS.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/diamond.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/build/diamond.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/PlayerHorizontal.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/build/PlayerHorizontal.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/PlayerVertical.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/build/PlayerVertical.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/amazonite.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/build/amazonite.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/bronze.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/build/bronze.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/alexxzandrite.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/build/alexxzandrite.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/launcherImage.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/build/launcherImage.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/game_over.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/build/game_over.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/soundbank.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/build/soundbank.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/soundbank_bin.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/build/soundbank_bin.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/source/graphics_sub.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/source/graphics_sub.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/controls.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/build/controls.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/numbers_small.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/build/numbers_small.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/press_to_begin.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/build/press_to_begin.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/game_over_sub.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/build/game_over_sub.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/source/timer_game.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/source/timer_game.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/source/mineral.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/source/mineral.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/source/P_Score.h:
+/home/nds/files/workspace/fatherload/workspace/Fatherload/source/P_Score.h:

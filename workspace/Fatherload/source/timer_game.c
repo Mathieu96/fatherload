@@ -34,7 +34,7 @@ void timer0_ISR() {
 		msec = 0;
 		if (sec < 60){
 			sec++;
-			if(gameOverTimer)
+			if(gameOver)
 				overSec++;
 		}
 		else {
@@ -52,6 +52,7 @@ void timer1_ISR() {
 	flying = 0;
 	print_fuel(20, 10, 8);
 
+	// sound effect state machine
 	if (audioCycles == 0 && nextSF != NONE) {
 		currentSF = nextSF;
 		nextSF = NONE;

@@ -1,8 +1,8 @@
 /*
- * graphics_main.c
+ * game.c
  *
  *  Created on: Dec 11, 2018
- *      Author: M
+ *      Author: nds
  */
 
 #include "game.h"
@@ -12,7 +12,7 @@ int player_y;
 int screen_x;
 int screen_y;
 int flying;
-bool gameOverTimer;
+bool gameOver;
 
 int mineral_count = 0;
 
@@ -20,8 +20,12 @@ Mineral *mineralMap;
 
 dir orientation;
 
-u16 *gfx_horizontal, *gfx_vertical, *diamond_pic, *amazonite_pic, *bronze_pic,
-		*alexxzandrite_pic;
+u16 *gfx_horizontal,
+	*gfx_vertical,
+	*diamond_pic,
+	*amazonite_pic,
+	*bronze_pic,
+	*alexxzandrite_pic;
 
 bool start_pressed = false;
 bool drilling = false;
@@ -32,7 +36,6 @@ int player_diamonds = 0;
 int player_amazonite = 0;
 int player_bronze = 0;
 int player_alexxzandrite = 0;
-//TODO: Find reasonnable values for these:
 int player_drill_health;
 int player_fuel;
 
@@ -47,11 +50,11 @@ void starting_game_screen(){
 		scanKeys();
 		keys = keysDown();
 
-		// any key touched allows to go to the game
-		if((keys & KEY_START) || (keys & KEY_A) || (keys & KEY_B) ||
-		   (keys & KEY_R) || (keys & KEY_L) || (keys & KEY_TOUCH) ||
+		// any key clicked allows to go to the game
+		if((keys & KEY_START)  || (keys & KEY_A)  || (keys & KEY_B) ||
+		   (keys & KEY_R) 	   || (keys & KEY_L)  || (keys & KEY_TOUCH) ||
 		   (keys & KEY_SELECT) || (keys & KEY_UP) || (keys & KEY_DOWN) ||
-		   (keys & KEY_LEFT) || (keys & KEY_RIGHT))
+		   (keys & KEY_LEFT)   || (keys & KEY_RIGHT))
 			break;
 	}
 }
@@ -107,8 +110,10 @@ int update_game(){
 		}
 
 		oamUpdate(&oamMain);
+
 		// Show the time since the game began
 		updateChronoDisp(min, sec, msec, 11, 27);
+
 		// Stop the while if the player reaches the number of mineral generated
 		if (mineral_count == N_TOT_MINERALS)
 			return 0;
@@ -126,7 +131,7 @@ void init_game() {
 	Audio_Init();
 
 	config_main_background();
-	//consoleDemoInit();
+
 	init_sub_background();
 
 	orientation = RIGHT;
@@ -144,26 +149,28 @@ void start_game() {
 	mineral_count = 0;
 	player_score = 0;
 	flying = 0;
+
 	// For tests, low fuel
-	 player_fuel = 500;
+	//player_fuel = 500;
 	// For final version higher starting fuel stock
-	//player_fuel = 2500;
+	player_fuel = 2500;
+
 	// Not used for now, drill health
 	player_drill_health = 50;
 
 	Audio_PlayMusic();
 
-	update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, 0, 0,
-			player_x, player_y);
+	update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, 0, 0, player_x, player_y);
 
 	oamUpdate(&oamMain);
+
 	// set the starting backgrounds
 	init_main_bg();
 
 	//set the objects coordinates
 	initMinerals();
 
-	gameOverTimer = false;
+	gameOver = false;
 	restart_timer();
 	irqEnable(IRQ_TIMER0);
 	irqEnable(IRQ_TIMER1);
@@ -189,8 +196,7 @@ void player_move_right() {
 	orientation = RIGHT;
 	flying = 0;
 	if (screen_x < 512 - 256 && !start_pressed) {
-		if (hasBeenDrilled(player_x + 16, player_y) && hasBeenDrilled(player_x
-				+ 16, player_y + 10)) {
+		if (hasBeenDrilled(player_x + 16, player_y) && hasBeenDrilled(player_x + 16, player_y + 10)) {
 			screen_x++;
 			if (player_x < 256 - 16)
 				player_x++;
@@ -203,8 +209,7 @@ void player_move_left() {
 	orientation = LEFT;
 	flying = 0;
 	if (screen_x > 0) {
-		if (hasBeenDrilled(player_x - 1, player_y) && hasBeenDrilled(player_x
-				- 1, player_y + 10)) {
+		if (hasBeenDrilled(player_x - 1, player_y) && hasBeenDrilled(player_x - 1, player_y + 10)) {
 			screen_x--;
 			if (player_x > 0)
 				player_x--;
@@ -217,8 +222,7 @@ void player_move_down() {
 	orientation = DOWN;
 	flying = 0;
 	if (screen_y < 512 - 192) {
-		if (hasBeenDrilled(player_x, player_y + 16) && hasBeenDrilled(player_x
-				+ 10, player_y + 16)) {
+		if (hasBeenDrilled(player_x, player_y + 16) && hasBeenDrilled(player_x + 10, player_y + 16)) {
 			screen_y++;
 			if (player_y < 168)
 				player_y++;
@@ -230,8 +234,7 @@ void player_move_down() {
 void player_move_up() {
 	orientation = UP;
 	// Equivalent to fly mode
-	if (hasBeenDrilled(player_x  + 2, player_y - 2) && hasBeenDrilled(player_x + 10,
-			player_y - 2)) {
+	if (hasBeenDrilled(player_x  + 2, player_y - 2) && hasBeenDrilled(player_x + 10, player_y - 2)) {
 		flying = 1;
 		if (screen_y > 0) {
 			screen_y--;
@@ -301,11 +304,10 @@ void player_pressed_start() {
 		irqDisable(IRQ_TIMER1);
 		mmPause();
 		Audio_PlaySoundEX(SFX_TIRE_SCREECH);
-		load_start_display();
+		load_pause_graphics();
 		start_pressed = 1;
 
-		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 1, PLAYER_VPAL, 0, 0,
-				player_x, player_y);
+		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 1, PLAYER_VPAL, 0, 0, player_x, player_y);
 
 		oamUpdate(&oamMain);
 		swiDelay(11000000); // Delay to avoid going back out of start mode right after
@@ -313,14 +315,12 @@ void player_pressed_start() {
 		mmResume();
 
 		if (orientation == DOWN || orientation == UP)
-			update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, 0,
-					((orientation == DOWN) ? 1 : 0), player_x, player_y);
+			update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, 0, ((orientation == DOWN) ? 1 : 0), player_x, player_y);
 		else
-			update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0, PLAYER_VPAL,
-					((orientation == LEFT) ? 1 : 0), 0, player_x, player_y);
+			update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, ((orientation == LEFT) ? 1 : 0), 0, player_x, player_y);
 
 		oamUpdate(&oamMain);
-		release_start_display();
+		release_pause_graphics();
 		start_pressed = 0;
 		swiDelay(11000000); // Delay to avoid going back into start mode right after
 		irqEnable(IRQ_TIMER0);
@@ -332,85 +332,36 @@ void player_pressed_touchscreen() {
 	touchPosition touch;
 	touchRead(&touch);
 	// UP
-	if (((touch.py >= 0) && (touch.py < 50)) && (touch.px >= 45) && (touch.px
-			<= 85)) {
-		orientation = UP;
-		if (hasBeenDrilled(player_x  + 2, player_y - 2) && hasBeenDrilled(player_x
-				+ 10, player_y - 2)) {
-			flying = 1;
-			if (screen_y > 0) {
-				screen_y--;
-				player_fuel--;
-			}
-
-			if (player_y > 90)
-				player_y--;
-		}
+	if (((touch.py >= 0) && (touch.py < 50)) && (touch.px >= 45) && (touch.px <= 85)) {
+		player_move_up();
 	}
 	// DOWN
-	if (((touch.py >= 75) && (touch.py <= 128)) && (touch.px >= 45)
-			&& (touch.px <= 85)) {
-		if (screen_y < 512 - 192) {
-			orientation = DOWN;
-			flying = 0;
-			if (hasBeenDrilled(player_x, player_y + 16) && hasBeenDrilled(
-					player_x + 10, player_y + 16)) {
-				screen_y++;
-				player_fuel--;
-				if (player_y < 168)
-					player_y++;
-			}
-		}
+	if (((touch.py >= 75) && (touch.py <= 128)) && (touch.px >= 45) && (touch.px <= 85)) {
+		player_move_down();
 	}
 	// LEFT
-	if (((touch.py >= 30) && (touch.py < 90)) && (touch.px >= 2) && (touch.px
-			<= 37)) {
-		if (screen_x > 0) {
-			orientation = LEFT;
-			flying = 0;
-			if (hasBeenDrilled(player_x - 1, player_y) && hasBeenDrilled(
-					player_x - 1, player_y + 10)) {
-				screen_x--;
-				player_fuel--;
-				if (player_x > 0)
-					player_x--;
-			}
-		}
+	if (((touch.py >= 30) && (touch.py < 90)) && (touch.px >= 2) && (touch.px <= 37)) {
+		player_move_left();
 	}
 	// RIGHT
-	if (((touch.py >= 30) && (touch.py < 90)) && (touch.px >= 90) && (touch.px
-			<= 128)) {
-		if (screen_x < 512 - 256) {
-			orientation = RIGHT;
-			flying = 0;
-			if (hasBeenDrilled(player_x + 16, player_y) && hasBeenDrilled(
-					player_x + 16, player_y + 10)) {
-				screen_x++;
-				player_fuel--;
-				if (player_x < 256 - 16)
-					player_x++;
-			}
-		}
+	if (((touch.py >= 30) && (touch.py < 90)) && (touch.px >= 90) && (touch.px <= 128)) {
+		player_move_right();
 	}
 }
 
 void update_vehicle() {
 	switch (orientation) {
 	case RIGHT:
-		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0, PLAYER_HPAL, 0, 0,
-				player_x, player_y);
+		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0, PLAYER_HPAL, 0, 0, player_x, player_y);
 		break;
 	case LEFT:
-		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0, PLAYER_HPAL, 1, 0,
-				player_x, player_y);
+		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0, PLAYER_HPAL, 1, 0, player_x, player_y);
 		break;
 	case UP:
-		update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, 0, 0,
-				player_x, player_y);
+		update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, 0, 0, player_x, player_y);
 		break;
 	case DOWN:
-		update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, 0, 1,
-				player_x, player_y);
+		update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, 0, 1, player_x, player_y);
 		break;
 	}
 }
@@ -495,7 +446,7 @@ void update_state() {
 		mineralType mineral = drillMineralReturnValue(position_x, position_y);
 		if (mineral != DIRT) {
 			addToInventory(mineral);
-			//TODO: Fix when store is implemented, just sell right away for now
+			//TODO: Update this when store is implemented, just sell right away for now
 			sellItemFromInventory(mineral);
 			addToAudioEffectQueue(COIN);
 		} else {
@@ -527,18 +478,18 @@ int gameOverState(){
 
 	player_fuel = 0;
 	print_fuel(20, 10, 8);
+
 	// restart part
 	free(mineralMap);
 	hide_all_minerals();
 
-	gameOverTimer = true;
+	gameOver = true;
 	overSec = 0;
 	irqDisable(IRQ_TIMER1);
 	mmPause();
 	Audio_PlaySoundEX(SFX_TIRE_SCREECH);
 
-	update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 1, PLAYER_VPAL, 0, 0,
-					player_x, player_y);
+	update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 1, PLAYER_VPAL, 0, 0, player_x, player_y);
 
 	oamUpdate(&oamMain);
 

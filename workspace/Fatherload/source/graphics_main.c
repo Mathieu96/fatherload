@@ -69,9 +69,9 @@ void showInitImage(){
 
 	BGCTRL[0] = BG_COLOR_256 | BG_MAP_BASE(0) | BG_TILE_BASE(1) | BG_32x32;
 
-	dmaCopy(launcherImageTiles, BG_TILE_RAM(1) , launcherImageTilesLen);
-	dmaCopy(launcherImageMap,   BG_MAP_RAM(0) , launcherImageMapLen);
-	dmaCopy(launcherImagePal,   BG_PALETTE, launcherImagePalLen);
+	dmaCopy(launcherImageTiles, BG_TILE_RAM(1), launcherImageTilesLen);
+	dmaCopy(launcherImageMap,   BG_MAP_RAM(0),  launcherImageMapLen);
+	dmaCopy(launcherImagePal,   BG_PALETTE,     launcherImagePalLen);
 
 	starting_sub_display();
 }
@@ -83,11 +83,11 @@ void config_main_background(){
 
 	// Init BG1
 	BGCTRL[1] = BG_COLOR_256 | BG_MAP_BASE(9) | BG_TILE_BASE(1) | BG_32x32;
-	dmaCopy(emptyTile, (u8*)BG_TILE_RAM(1), 64);
-	dmaCopy(fondTile, (u8*)BG_TILE_RAM(1) + 1*64, 64);
-	dmaCopy(endTile, (u8*)BG_TILE_RAM(1) + 2*64, 64);
+	dmaCopy(emptyTile,   (u8*)BG_TILE_RAM(1)       , 64);
+	dmaCopy(fondTile,    (u8*)BG_TILE_RAM(1) + 1*64, 64);
+	dmaCopy(endTile,     (u8*)BG_TILE_RAM(1) + 2*64, 64);
 	dmaCopy(troubleTile, (u8*)BG_TILE_RAM(1) + 3*64, 64);
-	dmaCopy(emptyTile, (u8*)BG_TILE_RAM(1) + 4*64, 64);
+	dmaCopy(emptyTile,   (u8*)BG_TILE_RAM(1) + 4*64, 64);
 
 	// Init BG2
 	BGCTRL[2] = BG_COLOR_256 | BG_MAP_BASE(0) | BG_TILE_BASE(1) | BG_64x64;
@@ -95,7 +95,8 @@ void config_main_background(){
 	// Init background 3
 	BGCTRL[3] = BG_COLOR_256 | BG_MAP_BASE(4) | BG_TILE_BASE(2) | BG_64x64;
 	dmaCopy(FONDSTiles, BG_TILE_RAM(2), FONDSTilesLen);
-	dmaCopy(FONDSPal, BG_PALETTE, FONDSPalLen);
+	dmaCopy(FONDSPal,   BG_PALETTE,     FONDSPalLen);
+
 	BG_PALETTE[254] = ARGB16(1,15,15,15);
 	BG_PALETTE[255] = ARGB16(1,21,17,12);
 }
@@ -113,7 +114,7 @@ void init_main_bg(){
 	// Init map of BG2
 	for(i = 0; i < 32; i++){
 		for(j = 0; j < 32; j++){
-			// We want to differenciate the empty tiles of the upper part (above the dirt to dig) to the downer part
+			// We want to differenciate the empty tiles of the upper part (above ground) and below
 			BG_MAP_RAM(0)[i*32 + j] = ((i < 16)?4:0);
 			BG_MAP_RAM(1)[i*32 + j] = ((i < 16)?4:0);
 			BG_MAP_RAM(2)[i*32 + j] = 0;
@@ -128,9 +129,9 @@ void init_main_bg(){
 	}
 
 	for(i=0; i<32; i++){
-		dmaCopy(&FONDSMap[i*64], &BG_MAP_RAM(4)[i*32], 64);
-		dmaCopy(&FONDSMap[i*64 + 32], &BG_MAP_RAM(5)[i*32], 64);
-		dmaCopy(&FONDSMap[(i + 32)*64], &BG_MAP_RAM(6)[i*32], 64);
+		dmaCopy(&FONDSMap[i*64],			 &BG_MAP_RAM(4)[i*32], 64);
+		dmaCopy(&FONDSMap[i*64 + 32],		 &BG_MAP_RAM(5)[i*32], 64);
+		dmaCopy(&FONDSMap[(i + 32)*64], 	 &BG_MAP_RAM(6)[i*32], 64);
 		dmaCopy(&FONDSMap[(i + 32)*64 + 32], &BG_MAP_RAM(7)[i*32], 64);
 	}
 
@@ -184,13 +185,13 @@ void restart_display(){
 	BGCTRL[1] = BG_COLOR_16 | BG_MAP_BASE(0) | BG_TILE_BASE(1) | BG_32x32;
 
 	dmaCopy(game_overTiles, BG_TILE_RAM(1), game_overTilesLen);
-	dmaCopy(game_overMap, BG_MAP_RAM(0), game_overMapLen);
-	dmaCopy(game_overPal, BG_PALETTE, game_overPalLen);
+	dmaCopy(game_overMap,   BG_MAP_RAM(0),  game_overMapLen);
+	dmaCopy(game_overPal,   BG_PALETTE,     game_overPalLen);
 
 	GameOver_sub_display();
 }
 
-void load_start_display(){
+void load_pause_graphics(){
 	int i, j;
 	for(i = 0; i < 24; i++){
 		for(j = 0; j < 32; j++){
@@ -198,15 +199,15 @@ void load_start_display(){
 		}
 	}
 	hide_all_minerals();
-	print_start();
+	print_pause_letters();
 }
 
-void print_start(){
+void print_pause_letters(){
 	int i;
 
 	// Drawing P
 	for(i = 9; i < 17; i++)
-			BG_MAP_RAM(9)[i*32 + 1] = 1;
+		BG_MAP_RAM(9)[i*32 + 1] = 1;
 
 	BG_MAP_RAM(9)[9*32 + 5] = 1;
 	BG_MAP_RAM(9)[9*32 + 2] = 1;
@@ -282,38 +283,10 @@ void print_start(){
 	}
 	for(i = 28; i < 31; i++)
 		BG_MAP_RAM(9)[12*32 + i] = 1;
-/*	// Drawing T
-	for(i = 7; i < 12; i++)
-			BG_MAP_RAM(9)[9*32 + i] = 1;
-		for(i = 9; i < 17; i++)
-			BG_MAP_RAM(9)[i*32 + 9] = 1;
-*/
 
-	/*
-	// Drawing R
-	for(i = 9; i < 17; i++)
-			BG_MAP_RAM(9)[i*32 + 21] = 1;
-	for(i = 1; i < 4; i++)
-		BG_MAP_RAM(9)[(12+i)*32 + 21+i] = 1;
-	BG_MAP_RAM(9)[16*32 + 24] = 1;
-	BG_MAP_RAM(9)[9*32 + 22] = 1;
-	BG_MAP_RAM(9)[9*32 + 23] = 1;
-	BG_MAP_RAM(9)[9*32 + 24] = 1;
-	BG_MAP_RAM(9)[10*32 + 24] = 1;
-	BG_MAP_RAM(9)[11*32 + 24] = 1;
-	BG_MAP_RAM(9)[12*32 + 24] = 1;
-	BG_MAP_RAM(9)[12*32 + 22] = 1;
-	BG_MAP_RAM(9)[12*32 + 23] = 1;
-
-	// Drawing T
-	for(i = 26; i < 31; i++)
-		BG_MAP_RAM(9)[9*32 + i] = 1;
-	for(i = 9; i < 17; i++)
-		BG_MAP_RAM(9)[i*32 + 28] = 1;
-	*/
 }
 
-void release_start_display(){
+void release_pause_graphics(){
 	int i, j;
 	for(i = 0; i < 24; i++){
 		for(j = 0; j < 32; j++){
@@ -324,19 +297,19 @@ void release_start_display(){
 
 void update_sprite(u16* gfx, int spriteID, int hide, int paletteNum, int hFlip, int vFlip, int x, int y){
 	// if hide == 1 set true, otherwise set false
-	oamSet(&oamMain, 	// oam handler
-		spriteID,				// Number of sprite
-		x, y,// Coordinates
-		0,				// Priority
-		paletteNum,				// Palette to use
+	oamSet(&oamMain, 				// oam handler
+		spriteID,					// Number of sprite
+		x, y,						// Coordinates
+		0,							// Priority
+		paletteNum,					// Palette to use
 		SpriteSize_16x16,			// Sprite size
 		SpriteColorFormat_16Color,	// Color format
-		gfx,			// Loaded graphic to display
-		-1,				// Affine rotation to use (-1 none)
-		false,			// Double size if rotating
-		((hide == 1)?true:false),			// Hide this sprite
-		((hFlip == 1)?true:false), ((vFlip == 1)?true:false),	// Horizontal or vertical flip
-		false			// Mosaic
+		gfx,						// Loaded graphic to display
+		-1,							// Affine rotation to use (-1 none)
+		false,						// Double size if rotating
+		((hide == 1)?true:false),	// Hide this sprite
+		((hFlip == 1)?true:false), ((vFlip == 1)?true:false), // Horizontal or vertical flip
+		false						// Mosaic
 		);
 }
 
