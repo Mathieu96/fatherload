@@ -18,8 +18,7 @@
 #include "alexxzandrite.h"
 #include "Game-Over.h"
 #include "launcherImage.h"
-#include "press_to_begin.h"
-
+#include "game_over2.h"
 
 void showInitImage();
 

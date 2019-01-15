@@ -59,10 +59,14 @@ graphics_main.o:  \
   /home/nds/files/fatherload/workspace/Fatherload/build/controls.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/numbers.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/numbers_small.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/press_to_begin.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/game_over2_sub.h \
   /home/nds/files/fatherload/workspace/Fatherload/source/game.h \
-  /home/nds/files/fatherload/workspace/Fatherload/source/P_Score.h \
+  /opt/devkitPro/libnds/include/fat.h \
+  /opt/devkitPro/libnds/include/nds/disc_io.h \
   /home/nds/files/fatherload/workspace/Fatherload/source/mineral.h \
   /home/nds/files/fatherload/workspace/Fatherload/source/timer_game.h \
+  /home/nds/files/fatherload/workspace/Fatherload/source/P_Score.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/diamond.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/PlayerHorizontal.h \
@@ -72,7 +76,7 @@ graphics_main.o:  \
   /home/nds/files/fatherload/workspace/Fatherload/build/alexxzandrite.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/Game-Over.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/launcherImage.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/press_to_begin.h
+  /home/nds/files/fatherload/workspace/Fatherload/build/game_over2.h
 
 /home/nds/files/fatherload/workspace/Fatherload/source/graphics_main.h:
 
@@ -192,13 +196,21 @@ graphics_main.o:  \
 
 /home/nds/files/fatherload/workspace/Fatherload/build/numbers_small.h:
 
+/home/nds/files/fatherload/workspace/Fatherload/build/press_to_begin.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/game_over2_sub.h:
+
 /home/nds/files/fatherload/workspace/Fatherload/source/game.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/source/P_Score.h:
+/opt/devkitPro/libnds/include/fat.h:
+
+/opt/devkitPro/libnds/include/nds/disc_io.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/source/mineral.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/source/timer_game.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/source/P_Score.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/build/FONDS.h:
 
@@ -218,4 +230,4 @@ graphics_main.o:  \
 
 /home/nds/files/fatherload/workspace/Fatherload/build/launcherImage.h:
 
-/home/nds/files/fatherload/workspace/Fatherload/build/press_to_begin.h:
+/home/nds/files/fatherload/workspace/Fatherload/build/game_over2.h:

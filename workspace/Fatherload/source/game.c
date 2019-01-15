@@ -38,6 +38,90 @@ int player_fuel;
 
 soundEffectType nextSF;
 
+void starting_game_screen(){
+	// Starting screen
+	showInitImage();
+	u16 keys;
+	while(1){
+		swiWaitForVBlank();
+		scanKeys();
+		keys = keysDown();
+
+		// any key touched allows to go to the game
+		if((keys & KEY_START) || (keys & KEY_A) || (keys & KEY_B) ||
+		   (keys & KEY_R) || (keys & KEY_L) || (keys & KEY_TOUCH) ||
+		   (keys & KEY_SELECT) || (keys & KEY_UP) || (keys & KEY_DOWN) ||
+		   (keys & KEY_LEFT) || (keys & KEY_RIGHT))
+			break;
+	}
+}
+
+int update_game(){
+	scanKeys();
+
+	u16 keys = keysHeld();
+
+	if(keys & KEY_START)
+		player_pressed_start();
+
+	if (!start_pressed) {
+		if(keys & KEY_A || keys & KEY_Y)
+			player_drills();
+
+		else{
+			if(keys & KEY_DOWN)
+				player_move_down();
+
+			if(keys & KEY_RIGHT)
+				player_move_right();
+
+			if(keys & KEY_LEFT)
+				player_move_left();
+
+			if(keys & KEY_UP || keys & KEY_B)
+				player_move_up();
+
+			if (keys & KEY_TOUCH) {
+				player_pressed_touchscreen();
+			}
+		}
+
+		// move the background 3 => the main background
+		REG_BG3HOFS = screen_x;
+		REG_BG3VOFS = screen_y;
+		// move the background 2 => the digged parts
+		REG_BG2HOFS = screen_x;
+		REG_BG2VOFS = screen_y;
+
+		// update the player's movements
+		update_vehicle();
+
+		// Update the drilled path
+		update_state();
+
+		if(!flying)
+			player_fall();
+
+		refreshMineralSprites();
+
+		if (score_changed) {
+			score_display(20, 5, 10, player_score, 26);
+			score_changed = 0;
+		}
+
+		oamUpdate(&oamMain);
+		// Show the time since the game began
+		updateChronoDisp(min, sec, msec, 11);
+		// Stop the while if the player reaches the number of mineral generated
+		if (mineral_count == N_TOT_MINERALS)
+			return 0;
+
+		if(player_fuel <= 0)
+			return 0;
+	}
+	return 1;
+}
+
 void init_game() {
 	Audio_Init();
 
@@ -61,9 +145,9 @@ void start_game() {
 	player_score = 0;
 	flying = 0;
 	// For tests, low fuel
-	// player_fuel = 500;
+	 player_fuel = 500;
 	// For final version higher starting fuel stock
-	player_fuel = 2500;
+	//player_fuel = 2500;
 	// Not used for now, drill health
 	player_drill_health = 50;
 
@@ -84,7 +168,7 @@ void start_game() {
 	irqEnable(IRQ_TIMER0);
 	irqEnable(IRQ_TIMER1);
 
-	score_display(20, 5, 10, player_score);
+	score_display(20, 5, 10, player_score, 26);
 }
 
 bool hasBeenDrilled(int pos_x, int pos_y) {
@@ -245,7 +329,6 @@ void player_pressed_start() {
 }
 
 void player_pressed_touchscreen() {
-	//TODO: update to new movement/drilling scheme
 	touchPosition touch;
 	touchRead(&touch);
 	// UP
@@ -436,6 +519,18 @@ void player_fall() {
 }
 
 int gameOverState(){
+
+	if(max_score < player_score){
+		max_score = player_score;
+		writeMaxScore(max_score);
+	}
+
+	player_fuel = 0;
+	print_fuel(20, 10, 8);
+	// restart part
+	free(mineralMap);
+	hide_all_minerals();
+
 	gameOverTimer = true;
 	overSec = 0;
 	irqDisable(IRQ_TIMER1);
@@ -456,12 +551,26 @@ int gameOverState(){
 
 		keys = keysDown();
 
-		if(keys & KEY_A){
+		if(keys & KEY_Y){
 			return 1;
 
-		}else if (keys & KEY_B) {
+		}else if (keys & KEY_X) {
 			return 0;
 		}
+
+		if (keys & KEY_TOUCH) {
+			touchPosition touch;
+			touchRead(&touch);
+			if(touch.py >= 63 && touch.py <= 82){
+				// "Yes" button pressed
+				if(touch.px >= 92 && touch.px <= 116)
+					return 1;
+				// "No" button pressed
+				if(touch.px >= 184 && touch.px <= 207)
+					return 0;
+			}
+		}
+
 		// If wait more than 60 seconds, quit
 		if(overSec >= 60)
 			return 0;

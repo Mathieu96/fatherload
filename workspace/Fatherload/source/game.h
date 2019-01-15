@@ -8,11 +8,18 @@
 #ifndef GAME_H_
 #define GAME_H_
 
+#include <fat.h>
+#include <nds.h>
+#include <stdbool.h>
 #include "fatherload_defines.h"
-#include "P_Score.h"
 #include "mineral.h"
 #include "timer_game.h"
 #include "P_Score.h"
+#include "P_Audio.h"
+
+void starting_game_screen();
+
+int update_game();
 
 void init_game();
 

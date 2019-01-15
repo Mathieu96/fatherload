@@ -69,18 +69,11 @@ void showInitImage(){
 
 	BGCTRL[0] = BG_COLOR_256 | BG_MAP_BASE(0) | BG_TILE_BASE(1) | BG_32x32;
 
-	VRAM_C_CR = VRAM_ENABLE | VRAM_C_SUB_BG;
-	REG_DISPCNT_SUB = MODE_3_2D | DISPLAY_BG0_ACTIVE;
-
-	BGCTRL_SUB[0] = BG_TILE_BASE(1) | BG_MAP_BASE(0) | BG_COLOR_256 | BG_32x32;
-
 	dmaCopy(launcherImageTiles, BG_TILE_RAM(1) , launcherImageTilesLen);
 	dmaCopy(launcherImageMap,   BG_MAP_RAM(0) , launcherImageMapLen);
 	dmaCopy(launcherImagePal,   BG_PALETTE, launcherImagePalLen);
-	dmaCopy(press_to_beginTiles, BG_TILE_RAM_SUB(1), press_to_beginTilesLen);
-	dmaCopy(press_to_beginMap, BG_MAP_RAM_SUB(0), press_to_beginMapLen);
-	dmaCopy(press_to_beginPal,   BG_PALETTE_SUB, press_to_beginPalLen);
 
+	starting_sub_display();
 //	swiDelay(100000000);
 }
 
@@ -199,12 +192,14 @@ void configureSprites() {
 void restart_display(){
 	hide_all_minerals();
 
-	REG_DISPCNT = MODE_0_2D | DISPLAY_BG0_ACTIVE;
-	BGCTRL[0] = BG_COLOR_256 | BG_MAP_BASE(0) | BG_TILE_BASE(1) | BG_32x32;
+	REG_DISPCNT = MODE_0_2D | DISPLAY_BG1_ACTIVE;
+	BGCTRL[1] = BG_COLOR_16 | BG_MAP_BASE(0) | BG_TILE_BASE(1) | BG_32x32;
 
-	dmaCopy(Game_OverTiles, BG_TILE_RAM(1), Game_OverTilesLen);
-	dmaCopy(Game_OverMap, BG_MAP_RAM(0), Game_OverMapLen);
-	dmaCopy(Game_OverPal, BG_PALETTE, Game_OverPalLen);
+	dmaCopy(game_over2Tiles, BG_TILE_RAM(1), game_over2TilesLen);
+	dmaCopy(game_over2Map, BG_MAP_RAM(0), game_over2MapLen);
+	dmaCopy(game_over2Pal, BG_PALETTE, game_over2PalLen);
+
+	GameOver_sub_display();
 }
 
 void load_start_display(){
