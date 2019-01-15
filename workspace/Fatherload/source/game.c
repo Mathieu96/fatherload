@@ -138,7 +138,7 @@ void init_game() {
 
 	init_sub_background();
 
-	orientation = RIGHT;
+	orientation = DOWN;
 
 	init_timers();
 
@@ -164,7 +164,7 @@ void start_game() {
 
 	Audio_PlayMusic();
 
-	update_sprite(player_vertical_static, PLAYER_SPRITE_ID, 0, PLAYER_VSPAL, 0, 0,
+	update_sprite(player_vertical_static, PLAYER_SPRITE_ID, 0, PLAYER_VSPAL, 1, 0,
 			player_x, player_y);
 
 	oamUpdate(&oamMain);
@@ -177,6 +177,7 @@ void start_game() {
 
 	gameOver = false;
 	restart_timer();
+	swiDelay(1000000);
 	irqEnable(IRQ_TIMER0);
 	irqEnable(IRQ_TIMER1);
 
