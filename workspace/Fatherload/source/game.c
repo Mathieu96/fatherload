@@ -58,43 +58,31 @@ void starting_game_screen(){
 
 int update_game(){
 	scanKeys();
-	bool moved = false;
 	u16 keys = keysHeld();
 
 	if(keys & KEY_START)
 		player_pressed_start();
 
 	if (!start_pressed) {
-		if(keys & KEY_A || keys & KEY_Y){
+		if(keys & KEY_A || keys & KEY_Y)
 			player_drills();
-			moved = true;
-		}
 
 		else{
-			if(keys & KEY_DOWN){
+			if(keys & KEY_DOWN)
 				player_move_down();
-				moved = true;
-			}
 
-			if(keys & KEY_RIGHT){
+			if(keys & KEY_RIGHT)
 				player_move_right();
-				moved = true;
-			}
 
-			if(keys & KEY_LEFT){
+			if(keys & KEY_LEFT)
 				player_move_left();
-				moved = true;
-			}
 
-			if(keys & KEY_UP || keys & KEY_B){
+			if(keys & KEY_UP || keys & KEY_B)
 				player_move_up();
-				moved = true;
-			}
 
-			if (keys & KEY_TOUCH){
+			if (keys & KEY_TOUCH)
 				player_pressed_touchscreen();
-				moved = true;
-			}
+
 		}
 
 		// move the background 3 => the main background
@@ -129,8 +117,7 @@ int update_game(){
 			return 0;
 	}
 
-	if(moved)
-		refreshMineralSprites();
+	refreshMineralSprites();
 
 	return 1;
 }
