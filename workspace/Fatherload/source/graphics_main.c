@@ -144,8 +144,10 @@ void configureSprites() {
 	oamInit(&oamMain, SpriteMapping_1D_32, false);
 
 	//Allocate space for the graphic to show in the sprite
-	gfx_vertical	= oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
-	gfx_horizontal	= oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
+	player_vertical	= oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
+	player_horizontal	= oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
+	player_vertical_static = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
+	player_horizontal_static = oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
 	diamond_pic		= oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
 	amazonite_pic	= oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
 	bronze_pic     	= oamAllocateGfx(&oamMain, SpriteSize_16x16, SpriteColorFormat_16Color);
@@ -154,11 +156,11 @@ void configureSprites() {
 	//Copy data for the graphic (palette and bitmap)
 	// Horizontal player
 	dmaCopy(PlayerHorizontalPal, &SPRITE_PALETTE[0], PlayerHorizontalPalLen);
-	dmaCopy(PlayerHorizontalTiles, gfx_horizontal, PlayerHorizontalTilesLen);
+	dmaCopy(PlayerHorizontalTiles, player_horizontal, PlayerHorizontalTilesLen);
 
 	// Vertical player
 	dmaCopy(PlayerVerticalPal, &SPRITE_PALETTE[1*16], PlayerVerticalPalLen);
-	dmaCopy(PlayerVerticalTiles, gfx_vertical, PlayerVerticalTilesLen);
+	dmaCopy(PlayerVerticalTiles, player_vertical, PlayerVerticalTilesLen);
 
 	// diamond
 	dmaCopy(diamondPal, &SPRITE_PALETTE[2*16], diamondPalLen);
@@ -175,6 +177,15 @@ void configureSprites() {
 	// alexandrite
 	dmaCopy(alexxzandritePal, &SPRITE_PALETTE[5*16], alexxzandritePalLen);
 	dmaCopy(alexxzandriteTiles, alexxzandrite_pic, alexxzandriteTilesLen);
+
+	// Horizontal static player
+	dmaCopy(PlayerHorizontalStaticPal, &SPRITE_PALETTE[6*16], PlayerHorizontalStaticPalLen);
+	dmaCopy(PlayerHorizontalStaticTiles, player_horizontal_static, PlayerHorizontalStaticTilesLen);
+
+	// Vertical static player
+	dmaCopy(PlayerVerticalStaticPal, &SPRITE_PALETTE[7*16], PlayerVerticalStaticPalLen);
+	dmaCopy(PlayerVerticalStaticTiles, player_vertical_static, PlayerVerticalStaticTilesLen);
+
 }
 
 void restart_display(){

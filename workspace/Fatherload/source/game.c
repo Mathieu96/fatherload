@@ -20,9 +20,11 @@ Mineral *mineralMap;
 
 dir orientation;
 
-u16 *gfx_horizontal, *gfx_vertical, *diamond_pic, *amazonite_pic, *bronze_pic,
-		*alexxzandrite_pic;
+u16 *player_horizontal, *player_vertical, *player_vertical_static, *player_horizontal_static;
 
+u16 *diamond_pic, *amazonite_pic, *bronze_pic, *alexxzandrite_pic;
+
+bool moved;
 bool start_pressed = false;
 bool drilling = false;
 int player_score = 0;
@@ -57,6 +59,7 @@ void starting_game_screen(){
 }
 
 int update_game(){
+	moved = false;
 	scanKeys();
 	u16 keys = keysHeld();
 
@@ -64,25 +67,30 @@ int update_game(){
 		player_pressed_start();
 
 	if (!start_pressed) {
-		if(keys & KEY_A || keys & KEY_Y)
+		if(keys & KEY_A || keys & KEY_Y){
 			player_drills();
+		}
 
 		else{
-			if(keys & KEY_DOWN)
+			if(keys & KEY_DOWN){
 				player_move_down();
+			}
 
-			if(keys & KEY_RIGHT)
+			if(keys & KEY_RIGHT){
 				player_move_right();
+			}
 
-			if(keys & KEY_LEFT)
+			if(keys & KEY_LEFT){
 				player_move_left();
+			}
 
-			if(keys & KEY_UP || keys & KEY_B)
+			if(keys & KEY_UP || keys & KEY_B){
 				player_move_up();
+			}
 
-			if (keys & KEY_TOUCH)
+			if (keys & KEY_TOUCH){
 				player_pressed_touchscreen();
-
+			}
 		}
 
 		// move the background 3 => the main background
@@ -153,7 +161,7 @@ void start_game() {
 
 	Audio_PlayMusic();
 
-	update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, 0, 0,
+	update_sprite(player_vertical_static, PLAYER_SPRITE_ID, 0, PLAYER_VSPAL, 0, 0,
 			player_x, player_y);
 
 	oamUpdate(&oamMain);
@@ -197,6 +205,7 @@ void player_move_right() {
 			player_fuel--;
 		}
 	}
+	moved = true;
 }
 
 void player_move_left() {
@@ -211,6 +220,7 @@ void player_move_left() {
 			player_fuel--;
 		}
 	}
+	moved = true;
 }
 
 void player_move_down() {
@@ -225,6 +235,7 @@ void player_move_down() {
 			player_fuel--;
 		}
 	}
+	moved = true;
 }
 
 void player_move_up() {
@@ -241,6 +252,7 @@ void player_move_up() {
 			player_y--;
 		player_fuel -= 2;
 	}
+	moved = true;
 }
 
 void player_drills() {
@@ -293,6 +305,7 @@ void player_drills() {
 		}
 		break;
 	}
+	moved = true;
 }
 
 void player_pressed_start() {
@@ -304,19 +317,20 @@ void player_pressed_start() {
 		load_start_display();
 		start_pressed = 1;
 
-		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 1, PLAYER_VPAL, 0, 0,
+		update_sprite(player_horizontal, PLAYER_SPRITE_ID, 1, PLAYER_VPAL, 0, 0,
 				player_x, player_y);
 
 		oamUpdate(&oamMain);
 		swiDelay(11000000); // Delay to avoid going back out of start mode right after
-	} else {
+	}
+	else{
 		mmResume();
 
 		if (orientation == DOWN || orientation == UP)
-			update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, 0,
+			update_sprite(player_vertical_static, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, 0,
 					((orientation == DOWN) ? 1 : 0), player_x, player_y);
 		else
-			update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0, PLAYER_VPAL,
+			update_sprite(player_horizontal_static, PLAYER_SPRITE_ID, 0, PLAYER_VPAL,
 					((orientation == LEFT) ? 1 : 0), 0, player_x, player_y);
 
 		oamUpdate(&oamMain);
@@ -332,86 +346,38 @@ void player_pressed_touchscreen() {
 	touchPosition touch;
 	touchRead(&touch);
 	// UP
-	if (((touch.py >= 0) && (touch.py < 50)) && (touch.px >= 45) && (touch.px
-			<= 85)) {
-		orientation = UP;
-		if (hasBeenDrilled(player_x  + 2, player_y - 2) && hasBeenDrilled(player_x
-				+ 10, player_y - 2)) {
-			flying = 1;
-			if (screen_y > 0) {
-				screen_y--;
-				player_fuel--;
-			}
-
-			if (player_y > 90)
-				player_y--;
-		}
+	if (((touch.py >= 0) && (touch.py < 50)) && (touch.px >= 45)
+			&& (touch.px <= 85)){
+		player_move_up();
 	}
 	// DOWN
 	if (((touch.py >= 75) && (touch.py <= 128)) && (touch.px >= 45)
 			&& (touch.px <= 85)) {
-		if (screen_y < 512 - 192) {
-			orientation = DOWN;
-			flying = 0;
-			if (hasBeenDrilled(player_x, player_y + 16) && hasBeenDrilled(
-					player_x + 10, player_y + 16)) {
-				screen_y++;
-				player_fuel--;
-				if (player_y < 168)
-					player_y++;
-			}
-		}
+		player_move_down();
 	}
 	// LEFT
-	if (((touch.py >= 30) && (touch.py < 90)) && (touch.px >= 2) && (touch.px
-			<= 37)) {
-		if (screen_x > 0) {
-			orientation = LEFT;
-			flying = 0;
-			if (hasBeenDrilled(player_x - 1, player_y) && hasBeenDrilled(
-					player_x - 1, player_y + 10)) {
-				screen_x--;
-				player_fuel--;
-				if (player_x > 0)
-					player_x--;
-			}
-		}
+	if (((touch.py >= 30) && (touch.py < 90)) && (touch.px >= 2)
+			&& (touch.px <= 37)) {
+		player_move_left();
 	}
 	// RIGHT
-	if (((touch.py >= 30) && (touch.py < 90)) && (touch.px >= 90) && (touch.px
-			<= 128)) {
-		if (screen_x < 512 - 256) {
-			orientation = RIGHT;
-			flying = 0;
-			if (hasBeenDrilled(player_x + 16, player_y) && hasBeenDrilled(
-					player_x + 16, player_y + 10)) {
-				screen_x++;
-				player_fuel--;
-				if (player_x < 256 - 16)
-					player_x++;
-			}
-		}
+	if (((touch.py >= 30) && (touch.py < 90)) && (touch.px >= 90)
+		   && (touch.px	<= 128)) {
+		player_move_right();
 	}
 }
 
 void update_vehicle() {
 	switch (orientation) {
 	case RIGHT:
-		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0, PLAYER_HPAL, 0, 0,
-				player_x, player_y);
-		break;
 	case LEFT:
-		update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 0, PLAYER_HPAL, 1, 0,
-				player_x, player_y);
-		break;
-	case UP:
-		update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, 0, 0,
-				player_x, player_y);
+		update_sprite((moved)?player_horizontal:player_horizontal_static, PLAYER_SPRITE_ID, 0,
+				PLAYER_HPAL, (orientation==LEFT)?1:0, 0, player_x, player_y);
 		break;
 	case DOWN:
-		update_sprite(gfx_vertical, PLAYER_SPRITE_ID, 0, PLAYER_VPAL, 0, 1,
-				player_x, player_y);
-		break;
+	case UP:
+		update_sprite((moved)?player_vertical:player_vertical_static, PLAYER_SPRITE_ID, 0,
+				PLAYER_VPAL, 0, (orientation==DOWN)?1:0, player_x, player_y);
 	}
 }
 
@@ -537,7 +503,7 @@ int gameOverState(){
 	mmPause();
 	Audio_PlaySoundEX(SFX_TIRE_SCREECH);
 
-	update_sprite(gfx_horizontal, PLAYER_SPRITE_ID, 1, PLAYER_VPAL, 0, 0,
+	update_sprite(player_horizontal, PLAYER_SPRITE_ID, 1, PLAYER_VPAL, 0, 0,
 					player_x, player_y);
 
 	oamUpdate(&oamMain);

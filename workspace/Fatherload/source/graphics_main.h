@@ -13,6 +13,8 @@
 #include "diamond.h"
 #include "PlayerHorizontal.h"
 #include "PlayerVertical.h"
+#include "PlayerHorizontalStatic.h"
+#include "PlayerVerticalStatic.h"
 #include "amazonite.h"
 #include "bronze.h"
 #include "alexxzandrite.h"

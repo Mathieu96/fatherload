@@ -34,6 +34,9 @@ void timer0_ISR() {
 		msec = 0;
 		if (sec < 60){
 			sec++;
+			// player loose fuel if waiting doing nothing
+			if(sec%2 == 0)
+				player_fuel--;
 			if(gameOverTimer)
 				overSec++;
 		}

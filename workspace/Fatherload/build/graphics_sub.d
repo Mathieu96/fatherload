@@ -58,6 +58,8 @@ graphics_sub.o:  \
   /home/nds/files/fatherload/workspace/Fatherload/build/diamond.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/PlayerHorizontal.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/PlayerVertical.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerHorizontalStatic.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/PlayerVerticalStatic.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/amazonite.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/bronze.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/alexxzandrite.h \
@@ -191,6 +193,10 @@ graphics_sub.o:  \
 /home/nds/files/fatherload/workspace/Fatherload/build/PlayerHorizontal.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/build/PlayerVertical.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/PlayerHorizontalStatic.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/PlayerVerticalStatic.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/build/amazonite.h:
 

@@ -43,6 +43,8 @@
 #define AMAZONITE_PAL 3
 #define BRONZE_PAL 4
 #define ALEXX_PAL 5
+#define PLAYER_HSPAL 6
+#define PLAYER_VSPAL 7
 
 #define SPRITE_WIDTH 32
 #define SPRITE_HEIGTH 32
@@ -74,7 +76,7 @@ extern bool drilling;
 
 extern u16* diamond_pic, *amazonite_pic, *bronze_pic, *alexxzandrite_pic;
 
-extern u16 *gfx_horizontal, *gfx_vertical;
+extern u16 *player_horizontal, *player_vertical, *player_vertical_static, *player_horizontal_static;
 
 extern dir orientation;
 
