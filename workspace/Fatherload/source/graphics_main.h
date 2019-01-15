@@ -16,9 +16,8 @@
 #include "amazonite.h"
 #include "bronze.h"
 #include "alexxzandrite.h"
-#include "Game-Over.h"
 #include "launcherImage.h"
-#include "game_over2.h"
+#include "game_over.h"
 
 void showInitImage();
 

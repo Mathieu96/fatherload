@@ -10,17 +10,16 @@
 
 #include "fatherload_defines.h"
 #include "controls.h"
-#include "numbers.h"
 #include "numbers_small.h"
 #include "press_to_begin.h"
-#include "game_over2_sub.h"
+#include "game_over_sub.h"
 
 // Initialization of the backgrounds
 void init_sub_background();
 
 void printDigit(int number, int x, int y, int pal, int base);
 
-void updateChronoDisp(int min, int sec, int msec, int pal);
+void updateChronoDisp(int min, int sec, int msec, int pal, int base);
 
 void score_display(int x, int y, int pal, int score, int base);
 

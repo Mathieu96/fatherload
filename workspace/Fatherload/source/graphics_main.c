@@ -74,17 +74,12 @@ void showInitImage(){
 	dmaCopy(launcherImagePal,   BG_PALETTE, launcherImagePalLen);
 
 	starting_sub_display();
-//	swiDelay(100000000);
 }
 
 void config_main_background(){
-	REG_DISPCNT = MODE_0_2D | DISPLAY_BG0_ACTIVE | DISPLAY_BG1_ACTIVE | DISPLAY_BG2_ACTIVE | DISPLAY_BG3_ACTIVE;
+	REG_DISPCNT = MODE_0_2D | DISPLAY_BG1_ACTIVE | DISPLAY_BG2_ACTIVE | DISPLAY_BG3_ACTIVE;
 	VRAM_A_CR = VRAM_ENABLE | VRAM_A_MAIN_BG;
 	VRAM_B_CR = VRAM_ENABLE | VRAM_B_MAIN_BG;
-
-	// Init BG0
-	BGCTRL[0] = BG_COLOR_256 | BG_MAP_BASE(10) | BG_TILE_BASE(10) | BG_32x32;
-	dmaCopy(Game_OverTiles, BG_TILE_RAM(16), Game_OverTilesLen);
 
 	// Init BG1
 	BGCTRL[1] = BG_COLOR_256 | BG_MAP_BASE(9) | BG_TILE_BASE(1) | BG_32x32;
@@ -107,13 +102,6 @@ void config_main_background(){
 
 void init_main_bg(){
 	int i,j;
-
-	// init the map of BG0
-	for(i = 0; i < 24; i++){
-		for(j = 0; j < 32; j++){
-			BG_MAP_RAM(10)[i*32 + j] = 0;
-		}
-	}
 
 	// init the map of BG1
 	for(i = 0; i < 24; i++){
@@ -195,9 +183,9 @@ void restart_display(){
 	REG_DISPCNT = MODE_0_2D | DISPLAY_BG1_ACTIVE;
 	BGCTRL[1] = BG_COLOR_16 | BG_MAP_BASE(0) | BG_TILE_BASE(1) | BG_32x32;
 
-	dmaCopy(game_over2Tiles, BG_TILE_RAM(1), game_over2TilesLen);
-	dmaCopy(game_over2Map, BG_MAP_RAM(0), game_over2MapLen);
-	dmaCopy(game_over2Pal, BG_PALETTE, game_over2PalLen);
+	dmaCopy(game_overTiles, BG_TILE_RAM(1), game_overTilesLen);
+	dmaCopy(game_overMap, BG_MAP_RAM(0), game_overMapLen);
+	dmaCopy(game_overPal, BG_PALETTE, game_overPalLen);
 
 	GameOver_sub_display();
 }

@@ -58,31 +58,42 @@ void starting_game_screen(){
 
 int update_game(){
 	scanKeys();
-
+	bool moved = false;
 	u16 keys = keysHeld();
 
 	if(keys & KEY_START)
 		player_pressed_start();
 
 	if (!start_pressed) {
-		if(keys & KEY_A || keys & KEY_Y)
+		if(keys & KEY_A || keys & KEY_Y){
 			player_drills();
+			moved = true;
+		}
 
 		else{
-			if(keys & KEY_DOWN)
+			if(keys & KEY_DOWN){
 				player_move_down();
+				moved = true;
+			}
 
-			if(keys & KEY_RIGHT)
+			if(keys & KEY_RIGHT){
 				player_move_right();
+				moved = true;
+			}
 
-			if(keys & KEY_LEFT)
+			if(keys & KEY_LEFT){
 				player_move_left();
+				moved = true;
+			}
 
-			if(keys & KEY_UP || keys & KEY_B)
+			if(keys & KEY_UP || keys & KEY_B){
 				player_move_up();
+				moved = true;
+			}
 
-			if (keys & KEY_TOUCH) {
+			if (keys & KEY_TOUCH){
 				player_pressed_touchscreen();
+				moved = true;
 			}
 		}
 
@@ -102,8 +113,6 @@ int update_game(){
 		if(!flying)
 			player_fall();
 
-		refreshMineralSprites();
-
 		if (score_changed) {
 			score_display(20, 5, 10, player_score, 26);
 			score_changed = 0;
@@ -111,7 +120,7 @@ int update_game(){
 
 		oamUpdate(&oamMain);
 		// Show the time since the game began
-		updateChronoDisp(min, sec, msec, 11);
+		updateChronoDisp(min, sec, msec, 11, 27);
 		// Stop the while if the player reaches the number of mineral generated
 		if (mineral_count == N_TOT_MINERALS)
 			return 0;
@@ -119,6 +128,10 @@ int update_game(){
 		if(player_fuel <= 0)
 			return 0;
 	}
+
+	if(moved)
+		refreshMineralSprites();
+
 	return 1;
 }
 
@@ -561,12 +574,12 @@ int gameOverState(){
 		if (keys & KEY_TOUCH) {
 			touchPosition touch;
 			touchRead(&touch);
-			if(touch.py >= 63 && touch.py <= 82){
+			if(touch.py >= 10 && touch.py <= 90){
 				// "Yes" button pressed
-				if(touch.px >= 92 && touch.px <= 116)
+				if(touch.px >= 22 && touch.px <= 115)
 					return 1;
 				// "No" button pressed
-				if(touch.px >= 184 && touch.px <= 207)
+				if(touch.px >= 146 && touch.px <= 240)
 					return 0;
 			}
 		}

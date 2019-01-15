@@ -1,6 +1,6 @@
 /*
- * Template Nintendo DS
- * May 2011
+ * Fatherload Nintendo DS
+ * January 2019
  */
 
 #include "game.h"
@@ -8,7 +8,6 @@
 int main(void) {
 	srand(time(NULL));
 	fatInitDefault();
-	u16 keys;
 	do {
 		// Send to the starting game state
 		starting_game_screen();
