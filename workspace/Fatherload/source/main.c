@@ -14,10 +14,13 @@ int main(void) {
 
 		// Initialize the game
 		init_game();
+
 		// Set all the variables to the starting step
 		start_game();
+
 		// Reads the previous maximum score and prints it (0 if no previous score)
 		readMaxScore();
+
 		while(1){
 			swiWaitForVBlank();
 
@@ -28,7 +31,9 @@ int main(void) {
 			swiWaitForVBlank(); // slow down the game
 		}
 	} while(gameOverState());
+
 	irqDisable(IRQ_TIMER0);
+
 	// Shutdown the NDS
 	powerOn(PM_SYSTEM_PWR);
 

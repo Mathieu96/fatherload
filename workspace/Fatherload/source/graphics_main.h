@@ -30,11 +30,11 @@ void init_main_bg();
 
 void configureSprites();
 
-void load_start_display();
+void load_pause_graphics();
 
-void print_start();
+void print_pause_letters();
 
-void release_start_display();
+void release_pause_graphics();
 
 void restart_display();
 

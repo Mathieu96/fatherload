@@ -35,9 +35,8 @@ void timer0_ISR() {
 		if (sec < 60){
 			sec++;
 			// player loose fuel if waiting doing nothing
-			if(sec%2 == 0)
-				player_fuel--;
-			if(gameOverTimer)
+			player_fuel--;
+			if(gameOver)
 				overSec++;
 		}
 		else {
@@ -55,6 +54,7 @@ void timer1_ISR() {
 	flying = 0;
 	print_fuel(20, 10, 8);
 
+	// sound effect state machine
 	if (audioCycles == 0 && nextSF != NONE) {
 		currentSF = nextSF;
 		nextSF = NONE;

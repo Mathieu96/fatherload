@@ -1,5 +1,5 @@
 /*
- * graphics_main.h
+ * fatherload_defines.h
  *
  *  Created on: Dec 11, 2018
  *      Author: nds
@@ -86,7 +86,7 @@ extern int mineral_count;
 
 // overSec is the counter to shutdown the NDS if waiting too long the answer of the user
 extern int min, sec, msec, overSec;
-extern bool gameOverTimer;
+extern bool gameOver;
 
 typedef enum {NONE, COIN, DRILL} soundEffectType;
 extern soundEffectType currentSF, nextSF;
