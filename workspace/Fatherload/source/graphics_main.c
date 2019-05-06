@@ -360,3 +360,110 @@ void drilling_path(int base, int x, int y){
 		}
 	}
 }
+
+void store_main_display(){
+	int i, j;
+	for(i = 0; i < 24; i++){
+		for(j = 0; j < 32; j++){
+			BG_MAP_RAM(9)[i*32 + j] = 3;
+		}
+	}
+
+	// Drawing S
+	BG_MAP_RAM(9)[9*32 + 5] = 1;
+	BG_MAP_RAM(9)[9*32 + 4] = 1;
+	BG_MAP_RAM(9)[9*32 + 3] = 1;
+	BG_MAP_RAM(9)[9*32 + 2] = 1;
+	BG_MAP_RAM(9)[9*32 + 1] = 1;
+	BG_MAP_RAM(9)[10*32 + 1] = 1;
+	BG_MAP_RAM(9)[11*32 + 1] = 1;
+	BG_MAP_RAM(9)[12*32 + 1] = 1;
+	BG_MAP_RAM(9)[12*32 + 2] = 1;
+	BG_MAP_RAM(9)[12*32 + 3] = 1;
+	BG_MAP_RAM(9)[12*32 + 4] = 1;
+	BG_MAP_RAM(9)[12*32 + 5] = 1;
+	BG_MAP_RAM(9)[13*32 + 5] = 1;
+	BG_MAP_RAM(9)[14*32 + 5] = 1;
+	BG_MAP_RAM(9)[15*32 + 5] = 1;
+	BG_MAP_RAM(9)[16*32 + 5] = 1;
+	BG_MAP_RAM(9)[16*32 + 4] = 1;
+	BG_MAP_RAM(9)[16*32 + 3] = 1;
+	BG_MAP_RAM(9)[16*32 + 2] = 1;
+	BG_MAP_RAM(9)[16*32 + 1] = 1;
+
+	// Drawing T
+	for(i = 9; i < 17; i++)
+		BG_MAP_RAM(9)[i*32 + 9] = 1;
+	for(i = 7; i < 12; i++)
+		BG_MAP_RAM(9)[9*32 + i] = 1;
+
+	// Drawing O
+		// Up of O
+	BG_MAP_RAM(9)[9*32 + 16] = 1;
+	BG_MAP_RAM(9)[9*32 + 15] = 1;
+	BG_MAP_RAM(9)[9*32 + 17] = 1;
+	BG_MAP_RAM(9)[10*32 + 15] = 1;
+	BG_MAP_RAM(9)[10*32 + 14] = 1;
+	BG_MAP_RAM(9)[10*32 + 17] = 1;
+	BG_MAP_RAM(9)[10*32 + 18] = 1;
+	BG_MAP_RAM(9)[11*32 + 18] = 1;
+	BG_MAP_RAM(9)[11*32 + 19] = 1;
+	BG_MAP_RAM(9)[11*32 + 14] = 1;
+	BG_MAP_RAM(9)[11*32 + 13] = 1;
+
+		// Middle of O
+	BG_MAP_RAM(9)[12*32 + 14] = 1;
+	BG_MAP_RAM(9)[12*32 + 13] = 1;
+	BG_MAP_RAM(9)[12*32 + 18] = 1;
+	BG_MAP_RAM(9)[12*32 + 19] = 1;
+	BG_MAP_RAM(9)[13*32 + 14] = 1;
+	BG_MAP_RAM(9)[13*32 + 13] = 1;
+	BG_MAP_RAM(9)[13*32 + 18] = 1;
+	BG_MAP_RAM(9)[13*32 + 19] = 1;
+
+		// Down of O
+	BG_MAP_RAM(9)[16*32 + 16] = 1;
+	BG_MAP_RAM(9)[16*32 + 15] = 1;
+	BG_MAP_RAM(9)[16*32 + 17] = 1;
+	BG_MAP_RAM(9)[15*32 + 15] = 1;
+	BG_MAP_RAM(9)[15*32 + 14] = 1;
+	BG_MAP_RAM(9)[15*32 + 17] = 1;
+	BG_MAP_RAM(9)[15*32 + 18] = 1;
+	BG_MAP_RAM(9)[14*32 + 18] = 1;
+	BG_MAP_RAM(9)[14*32 + 19] = 1;
+	BG_MAP_RAM(9)[14*32 + 14] = 1;
+	BG_MAP_RAM(9)[14*32 + 13] = 1;
+
+	// Drawing R
+	for(i = 9; i < 17; i++)
+		BG_MAP_RAM(9)[i*32 + 21] = 1;
+
+	BG_MAP_RAM(9)[9*32 + 22] = 1;
+	BG_MAP_RAM(9)[9*32 + 23] = 1;
+	BG_MAP_RAM(9)[9*32 + 24] = 1;
+	BG_MAP_RAM(9)[9*32 + 25] = 1;
+	BG_MAP_RAM(9)[10*32 + 25] = 1;
+	BG_MAP_RAM(9)[11*32 + 25] = 1;
+	BG_MAP_RAM(9)[12*32 + 25] = 1;
+	BG_MAP_RAM(9)[12*32 + 24] = 1;
+	BG_MAP_RAM(9)[12*32 + 23] = 1;
+	BG_MAP_RAM(9)[12*32 + 22] = 1;
+
+	for(i = 1; i < 4; i++){
+		BG_MAP_RAM(9)[(i+12)*32 + 21+i] = 1;
+		BG_MAP_RAM(9)[(i+12)*32 + 22+i] = 1;
+	}
+
+	BG_MAP_RAM(9)[16*32 + 25] = 1;
+
+	// Drawing E
+	for(i = 9; i < 17; i++)
+		BG_MAP_RAM(9)[i*32 + 27] = 1;
+	for(i = 28; i < 32; i++){
+		BG_MAP_RAM(9)[9*32 + i] = 1;
+		BG_MAP_RAM(9)[16*32 + i] = 1;
+	}
+	for(i = 28; i < 31; i++)
+		BG_MAP_RAM(9)[12*32 + i] = 1;
+
+}

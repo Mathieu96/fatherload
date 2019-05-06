@@ -12,9 +12,13 @@ int player_y;
 int screen_x;
 int screen_y;
 int flying;
+int sell_mode, buy_mode;
 bool gameOver;
 
 int mineral_count = 0;
+
+int fuel_price;
+int drill_price;
 
 Mineral *mineralMap;
 
@@ -62,10 +66,70 @@ int update_game(){
 	scanKeys();
 	u16 keys = keysHeld();
 
-	if(keys & KEY_START)
+	// Drilling play
+	if(keys & KEY_START && (!sell_mode) && (!buy_mode))
 		player_pressed_start();
 
-	if (!start_pressed) {
+	// Store play
+	if(((keys & KEY_L)) && (!start_pressed)){
+		if(on_store_location() && !sell_mode){
+			sell_mode = 1;
+			buy_mode = 0;
+			store_sub_display_sell();
+			store_main_display();
+			irqDisable(IRQ_TIMER0);
+			irqDisable(IRQ_TIMER1);
+			swiDelay(11000000);
+		}
+		else {
+			if(sell_mode){
+				sell_mode = 0;
+				game_sub_resume();
+				release_pause_graphics();
+				display_mineral(BRONZE);
+				display_mineral(AMAZONITE);
+				display_mineral(DIAMOND);
+				display_mineral(ALEXXZANDRITE);
+				swiDelay(11000000);
+				score_display(20, 1, 9, player_score, 26);
+				irqEnable(IRQ_TIMER0);
+				irqEnable(IRQ_TIMER1);
+			}
+		}
+	}
+
+	if((keys & KEY_R) && (!start_pressed)){
+		if(on_store_location() && !buy_mode){
+			buy_mode = 1;
+			sell_mode = 0;
+			store_sub_display_buy();
+			store_main_display();
+			irqDisable(IRQ_TIMER0);
+			irqDisable(IRQ_TIMER1);
+			swiDelay(11000000);
+		}
+		else{
+			if(buy_mode){
+				buy_mode = 0;
+				display_mineral(BRONZE);
+				display_mineral(AMAZONITE);
+				display_mineral(DIAMOND);
+				display_mineral(ALEXXZANDRITE);
+				swiDelay(11000000);
+				score_display(20, 1, 9, player_score, 26);
+				irqEnable(IRQ_TIMER0);
+				irqEnable(IRQ_TIMER1);
+			}
+		}
+	}
+
+	if(sell_mode)
+		store_sell();
+
+	if(buy_mode)
+		store_buy();
+	// Moving play
+	if (!start_pressed && !sell_mode && !buy_mode) {
 		if(keys & KEY_A || keys & KEY_Y){
 			player_drills();
 		}
@@ -108,11 +172,6 @@ int update_game(){
 		if(!flying)
 			player_fall();
 
-		if (score_changed) {
-			score_display(20, 5, 10, player_score, 26);
-			score_changed = 0;
-		}
-
 		oamUpdate(&oamMain);
 
 		// Show the time since the game began
@@ -143,6 +202,11 @@ void init_game() {
 	init_timers();
 
 	configureSprites();
+
+	player_bronze = 0;
+	player_amazonite = 0;
+	player_diamonds = 0;
+	player_alexxzandrite = 0;
 }
 
 void start_game() {
@@ -153,14 +217,16 @@ void start_game() {
 	mineral_count = 0;
 	player_score = 0;
 	flying = 0;
+	fuel_price = 100;
+	drill_price = 200;
 
 	// For tests, low fuel
 	//player_fuel = 500;
 	// For final version higher starting fuel stock
-	player_fuel = 2500;
+	player_fuel = 500;
 
 	// Not used for now, drill health
-	player_drill_health = 50;
+	player_drill_health = 100;
 
 	Audio_PlayMusic();
 
@@ -181,7 +247,11 @@ void start_game() {
 	irqEnable(IRQ_TIMER0);
 	irqEnable(IRQ_TIMER1);
 
-	score_display(20, 5, 10, player_score, 26);
+	score_display(20, 5, 9, player_score, 26);
+	display_mineral(BRONZE);
+	display_mineral(AMAZONITE);
+	display_mineral(DIAMOND);
+	display_mineral(ALEXXZANDRITE);
 }
 
 bool hasBeenDrilled(int pos_x, int pos_y) {
@@ -215,9 +285,12 @@ void player_move_right() {
 void player_move_left() {
 	orientation = LEFT;
 	flying = 0;
+
 	if (screen_x > 0) {
+
 		if (hasBeenDrilled(player_x - 1, player_y) && hasBeenDrilled(player_x - 1, player_y + 10)) {
 			screen_x--;
+
 			if (player_x > 0)
 				player_x--;
 			player_fuel--;
@@ -229,9 +302,12 @@ void player_move_left() {
 void player_move_down() {
 	orientation = DOWN;
 	flying = 0;
+
 	if (screen_y < 512 - 192) {
+
 		if (hasBeenDrilled(player_x, player_y + 16) && hasBeenDrilled(player_x + 10, player_y + 16)) {
 			screen_y++;
+
 			if (player_y < 168)
 				player_y++;
 			player_fuel--;
@@ -245,6 +321,7 @@ void player_move_up() {
 	// Equivalent to fly mode
 	if (hasBeenDrilled(player_x  + 2, player_y - 2) && hasBeenDrilled(player_x + 10, player_y - 2)) {
 		flying = 1;
+
 		if (screen_y > 0) {
 			screen_y--;
 		}
@@ -259,52 +336,58 @@ void player_move_up() {
 void player_drills() {
 	// Not -1 or +1, the size in pixels of the sprite is 16x 16, the beginning is on the top left so offset of
 	// 16 for right and down, for up and left the offsets are needed because at the same time we create new blocks of drilled parts
-	switch (orientation) {
-	case RIGHT:
-		if (screen_x < 512 - 256) {
-			screen_x++;
-			if (player_x < 256 - 16) {
-				player_x++;
+	if(player_drill_health > 0){
+		switch (orientation) {
+		case RIGHT:
+			if (screen_x < 512 - 256) {
+				screen_x++;
+				if (player_x < 256 - 16) {
+					player_x++;
+				}
+				if(!(hasBeenDrilled(player_x + 16, player_y) && hasBeenDrilled(player_x + 16, player_y + 10)))
+					player_drill_health--;
+				player_fuel -= 2;
+				drilling = true;
 			}
-			player_drill_health--;
-			player_fuel -= 2;
-			drilling = true;
-		}
-		break;
-	case LEFT:
-		if (screen_x > 0) {
-			screen_x--;
-			if (player_x > 0) {
-				player_x--;
+			break;
+		case LEFT:
+			if (screen_x > 0) {
+				screen_x--;
+				if (player_x > 0) {
+					player_x--;
+				}
+				if(!(hasBeenDrilled(player_x - 1, player_y) && hasBeenDrilled(player_x - 1, player_y + 10)))
+					player_drill_health--;
+				player_fuel -= 2;
+				drilling = true;
 			}
-			player_drill_health--;
-			player_fuel -= 2;
-			drilling = true;
-		}
-		break;
-	case DOWN:
-		if (screen_y < 512 - 192) {
-			screen_y++;
-			if (player_y < 168) {
-				player_y++;
+			break;
+		case DOWN:
+			if (screen_y < 512 - 192) {
+				screen_y++;
+				if (player_y < 168) {
+					player_y++;
+				}
+				if(!(hasBeenDrilled(player_x, player_y + 16) && hasBeenDrilled(player_x + 10, player_y + 16)))
+					player_drill_health--;
+				player_fuel -= 2;
+				drilling = true;
 			}
-			player_drill_health--;
-			player_fuel -= 2;
-			drilling = true;
-		}
-		break;
-	case UP:
-		if (screen_y > 0) {
-			screen_y--;
-			if (player_y > 112) {
-				player_y--;
+			break;
+		case UP:
+			if (screen_y > 0) {
+				screen_y--;
+				if (player_y > 112) {
+					player_y--;
+				}
+				flying = 1;
+				if(!(hasBeenDrilled(player_x  + 2, player_y - 2) && hasBeenDrilled(player_x + 10, player_y - 2)))
+					player_drill_health--;
+				player_fuel -= 4;
+				drilling = true;
 			}
-			flying = 1;
-			player_drill_health--;
-			player_fuel -= 4;
-			drilling = true;
+			break;
 		}
-		break;
 	}
 	moved = true;
 }
@@ -375,25 +458,26 @@ void update_vehicle() {
 	case UP:
 		update_sprite((moved)?player_vertical:player_vertical_static, PLAYER_SPRITE_ID, 0,
 				PLAYER_VPAL, 0, (orientation==DOWN)?1:0, player_x, player_y);
+		break;
 	}
 }
 
 void addToInventory(mineralType mineral) {
 	switch (mineral) {
-	case DIAMOND:
-		player_diamonds++;
-		break;
-	case AMAZONITE:
-		player_amazonite++;
-		break;
-	case BRONZE:
-		player_bronze++;
-		break;
-	case ALEXXZANDRITE:
-		player_alexxzandrite++;
-		break;
-	default:
-		break;
+		case DIAMOND:
+			player_diamonds++;
+			break;
+		case AMAZONITE:
+			player_amazonite++;
+			break;
+		case BRONZE:
+			player_bronze++;
+			break;
+		case ALEXXZANDRITE:
+			player_alexxzandrite++;
+			break;
+		default:
+			break;
 	}
 }
 
@@ -420,7 +504,7 @@ void sellItemFromInventory(mineralType mineral) {
 	case ALEXXZANDRITE:
 		if (player_alexxzandrite > 0) {
 			player_alexxzandrite--;
-			updateScore(SCORE_ALEXANDRITE);
+			updateScore(SCORE_ALEXXZANDRITE);
 		}
 		break;
 	default:
@@ -428,6 +512,9 @@ void sellItemFromInventory(mineralType mineral) {
 	}
 	if (mineral != DIRT)
 		score_changed = 1;
+	score_display(10, 1, 9, player_score, 26);
+	display_mineral(mineral);
+	swiDelay(11000000);
 }
 
 void addToAudioEffectQueue(soundEffectType sf){
@@ -454,14 +541,34 @@ void update_state() {
 		int y = ((position_y) % 256) / 8;
 		drilling_path(base, x, y);
 	}
+
 	if (drilling) {
 		mineralType mineral = drillMineralReturnValue(position_x, position_y);
 		if (mineral != DIRT) {
 			addToInventory(mineral);
-			//TODO: Update this when store is implemented, just sell right away for now
-			sellItemFromInventory(mineral);
+			//{DIRT, DRILLED, DIAMOND, AMAZONITE, BRONZE, ALEXXZANDRITE}
+			// Drill damaged by the mineral
+			switch(mineral){
+			case BRONZE:
+				player_drill_health--;
+				break;
+			case AMAZONITE:
+				player_drill_health -= 2;
+				break;
+			case DIAMOND:
+				player_drill_health -= 3;
+				break;
+			case ALEXXZANDRITE:
+				player_drill_health -= 4;
+				break;
+			default:
+				break;
+			}
+			display_mineral(mineral);
 			addToAudioEffectQueue(COIN);
-		} else {
+		}
+
+		else {
 			addToAudioEffectQueue(DRILL);
 		}
 	}
@@ -517,7 +624,9 @@ int gameOverState(){
 		if(keys & KEY_Y){
 			return 1;
 
-		}else if (keys & KEY_X) {
+		}
+
+		if (keys & KEY_X) {
 			return 0;
 		}
 
@@ -533,9 +642,54 @@ int gameOverState(){
 					return 0;
 			}
 		}
-
 		// If wait more than 60 seconds, quit
 		if(overSec >= 60)
 			return 0;
 	}
+}
+
+int on_store_location(){
+	return ( (player_x + screen_x > 415) && (player_x + screen_x < 495) &&
+			 (player_y + screen_y > 60) && (player_y + screen_y < 120) ) ? 1:0;
+}
+
+void store_sell(){
+	scanKeys();
+	u16 keys = keysHeld();
+
+	if((keys & KEY_A)){
+		if(player_bronze > 0)
+			sellItemFromInventory(BRONZE);
+	}
+	if((keys & KEY_B)){
+		if(player_amazonite > 0)
+			sellItemFromInventory(AMAZONITE);
+	}
+	if((keys & KEY_Y)){
+		if(player_diamonds > 0)
+			sellItemFromInventory(DIAMOND);
+	}
+	if((keys & KEY_X)){
+		if(player_alexxzandrite > 0)
+			sellItemFromInventory(ALEXXZANDRITE);
+	}
+
+	// TODO: add touchscreen
+}
+
+void store_buy(){
+	scanKeys();
+	u16 keys = keysHeld();
+
+	// Buying gas
+	if((keys & KEY_A) && (player_score >= fuel_price)){
+		player_score -= fuel_price;
+		player_fuel += FUEL_RECHARGE;
+		// TODO: increase gas price
+	}
+	if((keys & KEY_B) && (player_score >= drill_price)){
+		player_score -= drill_price;
+		player_drill_health += DRILL_HEAL;
+	}
+	// TODO: add touchscreen
 }

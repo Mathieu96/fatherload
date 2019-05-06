@@ -14,11 +14,11 @@ void updateScore(int score)
 	}
 
 	//Display the score
-	score_display(20, 5, 10, player_score, 26);
-	//Update highest score
-	if(player_score > max_score){
-		score_display(20, 1, 9, player_score, 26);
-	}
+//	score_display(20, 5, 10, player_score, 26);
+//	//Update highest score
+//	if(player_score > max_score){
+//		score_display(20, 1, 9, player_score, 26);
+//	}
 }
 
 void readMaxScore(){

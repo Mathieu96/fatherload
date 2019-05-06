@@ -42,4 +42,8 @@ void update_sprite(u16* gfx, int spriteID, int hide, int paletteNum, int hFlip, 
 
 void drilling_path(int base, int x, int y);
 
+void store_main_display();
+
+void print_prices_store();
+
 #endif /* GRAPHICS_MAIN_H_ */

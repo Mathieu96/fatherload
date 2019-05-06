@@ -27,7 +27,7 @@
 #define SCORE_DIAMONDS 1000
 #define SCORE_AMAZONITE 500
 #define SCORE_BRONZE 10
-#define SCORE_ALEXANDRITE 5000
+#define SCORE_ALEXXZANDRITE 5000
 
 // specification for the minerals
 #define N_DIAMOND 10
@@ -48,6 +48,9 @@
 
 #define SPRITE_WIDTH 32
 #define SPRITE_HEIGTH 32
+
+#define FUEL_RECHARGE 50
+#define DRILL_HEAL 50
 
 typedef enum {DIRT, DRILLED, DIAMOND, AMAZONITE, BRONZE, ALEXXZANDRITE} mineralType;
 
@@ -73,6 +76,9 @@ extern int max_score;
 extern int score_changed;
 extern int flying;
 extern bool drilling;
+
+extern int sell_mode, buy_mode;
+extern int fuel_price, drill_price;
 
 extern u16* diamond_pic, *amazonite_pic, *bronze_pic, *alexxzandrite_pic;
 

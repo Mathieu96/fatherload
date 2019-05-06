@@ -47,4 +47,10 @@ void player_fall();
 
 int gameOverState();
 
+int on_store_location();
+
+void store_sell();
+
+void store_buy();
+
 #endif /* GRAPHICS_MAIN_H_ */

@@ -76,7 +76,9 @@ graphics_sub.o:  \
   /home/nds/files/fatherload/workspace/Fatherload/build/controls.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/numbers_small.h \
   /home/nds/files/fatherload/workspace/Fatherload/build/press_to_begin.h \
-  /home/nds/files/fatherload/workspace/Fatherload/build/game_over_sub.h
+  /home/nds/files/fatherload/workspace/Fatherload/build/game_over_sub.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/store_sub_display_sell.h \
+  /home/nds/files/fatherload/workspace/Fatherload/build/store_sub_display_buy.h
 
 /home/nds/files/fatherload/workspace/Fatherload/source/graphics_sub.h:
 
@@ -231,3 +233,7 @@ graphics_sub.o:  \
 /home/nds/files/fatherload/workspace/Fatherload/build/press_to_begin.h:
 
 /home/nds/files/fatherload/workspace/Fatherload/build/game_over_sub.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/store_sub_display_sell.h:
+
+/home/nds/files/fatherload/workspace/Fatherload/build/store_sub_display_buy.h:

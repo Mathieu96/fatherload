@@ -52,7 +52,8 @@ void timer0_ISR() {
 
 void timer1_ISR() {
 	flying = 0;
-	print_fuel(20, 10, 8);
+	print_fuel(20, 5, 12);
+	print_drill_health(20, 9, 12);
 
 	// sound effect state machine
 	if (audioCycles == 0 && nextSF != NONE) {
@@ -76,6 +77,4 @@ void timer1_ISR() {
 			audioCycles--;
 		break;
 	}
-
-
 }
