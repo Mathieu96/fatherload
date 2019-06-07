@@ -226,10 +226,10 @@ void start_game() {
 	// For tests, low fuel
 	//player_fuel = 500;
 	// For final version higher starting fuel stock
-	player_fuel = 500;
+	player_fuel = 2500;
 
 	// Not used for now, drill health
-	player_drill_health = 100;
+	player_drill_health = 500;
 
 	Audio_PlayMusic();
 
@@ -511,11 +511,9 @@ void sellItemFromInventory(mineralType mineral) {
 	default:
 		break;
 	}
-	if (mineral != DIRT)
-		score_changed = 1;
+
 	score_display(10, 1, 9, player_score, 26);
 	display_mineral(mineral);
-//	swiDelay(11000000);
 }
 
 void addToAudioEffectQueue(soundEffectType sf){
@@ -678,13 +676,16 @@ void store_sell(u16 keys){
 void store_buy(u16 keys){
 	// Buying gas
 	if((keys & KEY_A) && (player_score >= fuel_price)){
-		player_score -= fuel_price;
+		updateScore(-(fuel_price));
 		player_fuel += FUEL_RECHARGE;
 		// TODO: increase gas price
 	}
 	if((keys & KEY_B) && (player_score >= drill_price)){
-		player_score -= drill_price;
+		updateScore(-(drill_price));
 		player_drill_health += DRILL_HEAL;
 	}
+
 	// TODO: add touchscreen
+
+	score_display(10, 1, 9, player_score, 26);
 }
