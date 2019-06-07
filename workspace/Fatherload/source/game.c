@@ -674,15 +674,22 @@ void store_sell(u16 keys){
 }
 
 void store_buy(u16 keys){
+	score_display(4, 12, (player_score > fuel_price) ? 9:10, fuel_price, 26);
+	score_display(4, 20, (player_score > drill_price) ? 9:10, drill_price, 26);
 	// Buying gas
 	if((keys & KEY_A) && (player_score >= fuel_price)){
 		updateScore(-(fuel_price));
 		player_fuel += FUEL_RECHARGE;
-		// TODO: increase gas price
+
+		// Fuel price increase by 10% at each new buy
+		fuel_price += fuel_price * 0.1;
 	}
 	if((keys & KEY_B) && (player_score >= drill_price)){
 		updateScore(-(drill_price));
 		player_drill_health += DRILL_HEAL;
+
+		// Drill price increase by 5% at each new buy
+		drill_price += drill_price * 0.05;
 	}
 
 	// TODO: add touchscreen

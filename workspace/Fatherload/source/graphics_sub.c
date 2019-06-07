@@ -302,9 +302,6 @@ void store_sub_display_buy(){
 
 	score_display(10, 1, (player_score > 0) ? 9:10, player_score, 26);
 
-	score_display(4, 12, (player_score > fuel_price) ? 9:10, fuel_price, 26);
-	score_display(4, 20, (player_score > drill_price) ? 9:10, drill_price, 26);
-
 	int i, x, temp1, temp2;
 	x = 6;
 	temp1 = FUEL_RECHARGE;
