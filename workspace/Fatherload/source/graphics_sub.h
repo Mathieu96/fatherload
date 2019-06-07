@@ -21,7 +21,7 @@ void init_sub_background();
 
 void printDigit(int number, int x, int y, int pal, int base);
 
-void updateChronoDisp(int min, int sec, int msec, int pal, int base);
+void updateChronoDisp(int min, int sec, int msec, int pal, int base, int isGameOver);
 
 void score_display(int x, int y, int pal, int score, int base);
 

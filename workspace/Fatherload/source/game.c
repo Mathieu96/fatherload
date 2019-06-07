@@ -64,14 +64,17 @@ void starting_game_screen(){
 int update_game(){
 	moved = false;
 	scanKeys();
+	// Variable for movment keys
 	u16 keys = keysHeld();
+	// Variable for start, store and buy modes
+	u16 keys2 = keysDown();
 
 	// Drilling play
-	if(keys & KEY_START && (!sell_mode) && (!buy_mode))
+	if(keys2 & KEY_START && (!sell_mode) && (!buy_mode))
 		player_pressed_start();
 
 	// Store play
-	if(((keys & KEY_L)) && (!start_pressed)){
+	if(((keys2 & KEY_L)) && (!start_pressed)){
 		if(on_store_location() && !sell_mode){
 			sell_mode = 1;
 			buy_mode = 0;
@@ -79,8 +82,8 @@ int update_game(){
 			store_main_display();
 			irqDisable(IRQ_TIMER0);
 			irqDisable(IRQ_TIMER1);
-			swiDelay(11000000);
 		}
+		// If we press again L in Sell mode it quits the store
 		else {
 			if(sell_mode){
 				sell_mode = 0;
@@ -90,7 +93,6 @@ int update_game(){
 				display_mineral(AMAZONITE);
 				display_mineral(DIAMOND);
 				display_mineral(ALEXXZANDRITE);
-				swiDelay(11000000);
 				score_display(20, 1, 9, player_score, 26);
 				irqEnable(IRQ_TIMER0);
 				irqEnable(IRQ_TIMER1);
@@ -98,7 +100,7 @@ int update_game(){
 		}
 	}
 
-	if((keys & KEY_R) && (!start_pressed)){
+	if((keys2 & KEY_R) && (!start_pressed)){
 		if(on_store_location() && !buy_mode){
 			buy_mode = 1;
 			sell_mode = 0;
@@ -106,16 +108,17 @@ int update_game(){
 			store_main_display();
 			irqDisable(IRQ_TIMER0);
 			irqDisable(IRQ_TIMER1);
-			swiDelay(11000000);
 		}
+		// If we press again R in Buy mode it quits the store
 		else{
 			if(buy_mode){
 				buy_mode = 0;
+				game_sub_resume();
+				release_pause_graphics();
 				display_mineral(BRONZE);
 				display_mineral(AMAZONITE);
 				display_mineral(DIAMOND);
 				display_mineral(ALEXXZANDRITE);
-				swiDelay(11000000);
 				score_display(20, 1, 9, player_score, 26);
 				irqEnable(IRQ_TIMER0);
 				irqEnable(IRQ_TIMER1);
@@ -124,10 +127,10 @@ int update_game(){
 	}
 
 	if(sell_mode)
-		store_sell();
+		store_sell(keys2);
 
 	if(buy_mode)
-		store_buy();
+		store_buy(keys2);
 	// Moving play
 	if (!start_pressed && !sell_mode && !buy_mode) {
 		if(keys & KEY_A || keys & KEY_Y){
@@ -175,7 +178,7 @@ int update_game(){
 		oamUpdate(&oamMain);
 
 		// Show the time since the game began
-		updateChronoDisp(min, sec, msec, 11, 27);
+		updateChronoDisp(min, sec, msec, 11, 27, 0);
 
 		// Stop the while if the player reaches the number of mineral generated
 		if (mineral_count == N_TOT_MINERALS)
@@ -405,7 +408,6 @@ void player_pressed_start() {
 				player_x, player_y);
 
 		oamUpdate(&oamMain);
-		swiDelay(11000000); // Delay to avoid going back out of start mode right after
 	}
 	else{
 		mmResume();
@@ -420,7 +422,6 @@ void player_pressed_start() {
 		oamUpdate(&oamMain);
 		release_pause_graphics();
 		start_pressed = 0;
-		swiDelay(11000000); // Delay to avoid going back into start mode right after
 		irqEnable(IRQ_TIMER0);
 		irqEnable(IRQ_TIMER1);
 	}
@@ -514,7 +515,7 @@ void sellItemFromInventory(mineralType mineral) {
 		score_changed = 1;
 	score_display(10, 1, 9, player_score, 26);
 	display_mineral(mineral);
-	swiDelay(11000000);
+//	swiDelay(11000000);
 }
 
 void addToAudioEffectQueue(soundEffectType sf){
@@ -653,10 +654,7 @@ int on_store_location(){
 			 (player_y + screen_y > 60) && (player_y + screen_y < 120) ) ? 1:0;
 }
 
-void store_sell(){
-	scanKeys();
-	u16 keys = keysHeld();
-
+void store_sell(u16 keys){
 	if((keys & KEY_A)){
 		if(player_bronze > 0)
 			sellItemFromInventory(BRONZE);
@@ -677,10 +675,7 @@ void store_sell(){
 	// TODO: add touchscreen
 }
 
-void store_buy(){
-	scanKeys();
-	u16 keys = keysHeld();
-
+void store_buy(u16 keys){
 	// Buying gas
 	if((keys & KEY_A) && (player_score >= fuel_price)){
 		player_score -= fuel_price;

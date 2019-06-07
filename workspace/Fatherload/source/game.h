@@ -49,8 +49,8 @@ int gameOverState();
 
 int on_store_location();
 
-void store_sell();
+void store_sell(u16 keys);
 
-void store_buy();
+void store_buy(u16 keys);
 
 #endif /* GRAPHICS_MAIN_H_ */

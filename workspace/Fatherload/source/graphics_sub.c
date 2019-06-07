@@ -77,29 +77,38 @@ void printDigit(int number, int x, int y, int pal, int base) {
 					BG_MAP_RAM_SUB(base)[(i + y) * 32 + j + x] = ((u16) (i * 2 + j + 2) + 8 * number) | TILE_PALETTE(pal);
 }
 
-void updateChronoDisp(int min, int sec, int msec, int pal, int base) {
+void updateChronoDisp(int min, int sec, int msec, int pal, int base, int isGameOver) {
 	int i, j;
-
-	printDigit((int) min / 10, 14, 14, pal, base);
-	printDigit((int) min % 10, 16, 14, pal, base);
+	int x, y;
+	if(!isGameOver){
+		x = 14;
+		y = 14;
+	}
+	else{
+		x = 1;
+		y = 20;
+	}
+	printDigit((int) min / 10, x, y, pal, base); x += 2;
+	printDigit((int) min % 10, x, y, pal, base); x += 2;
 
 	for (i = 0; i < 3; i++) {
 		for (j = 0; j < 2; j++) {
-			BG_MAP_RAM_SUB(base)[(i + 14) * 32 + j + 18] = ((u16) (i * 2 + j + 2) + 8 * 10) | TILE_PALETTE(pal);
+			BG_MAP_RAM_SUB(base)[(i + y) * 32 + j + x] = ((u16) (i * 2 + j + 2) + 8 * 10) | TILE_PALETTE(pal);
 		}
 	}
-	printDigit((int) sec / 10, 20, 14, pal, base);
-	printDigit((int) sec % 10, 22, 14, pal, base);
+	x += 2;
+	printDigit((int) sec / 10, x, y, pal, base); x += 2;
+	printDigit((int) sec % 10, x, y, pal, base); x += 2;
 
 	for (i = 0; i < 3; i++) {
 		for (j = 0; j < 2; j++) {
-			BG_MAP_RAM_SUB(base)[(i + 15) * 32 + j + 24] = ((u16) (i * 2 + j + 8) + 8 * 10) | TILE_PALETTE(pal);
+			BG_MAP_RAM_SUB(base)[(i + y+2) * 32 + j + x] = ((u16) (i * 2 + j + 8) + 8 * 10) | TILE_PALETTE(pal);
 		}
 	}
-
-	printDigit((int) msec / 100, 		25, 14, pal, base);
-	printDigit((int) (msec % 100) / 10, 27, 14, pal, base);
-	printDigit((int) msec % 10, 		29, 14, pal, base);
+	x++;
+	printDigit((int) msec / 100, x, y, pal, base); x += 2;
+	printDigit((int) (msec % 100) / 10, x, y, pal, base); x += 2;
+	printDigit((int) msec % 10, x, y, pal, base);
 }
 
 void score_display(int x, int y, int pal, int score, int base){
@@ -193,7 +202,7 @@ void GameOver_sub_display(){
 
 	BG_PALETTE_SUB[17] = ARGB16(1,31,0,0);
 	BG_PALETTE_SUB[33] = ARGB16(1,0,31,0);
-	BG_PALETTE_SUB[49] = ARGB16(1,0,0,31);
+	BG_PALETTE_SUB[49] = ARGB16(1,31,31,31);
 
 	int i,j;
 
@@ -210,7 +219,7 @@ void GameOver_sub_display(){
 	score_display(20, 20, 2, player_score, 1);
 
 	// Finish chrono
-	updateChronoDisp(min, sec, msec, 3, 1);
+	updateChronoDisp(min, sec, msec, 3, 1, 1);
 }
 
 void starting_sub_display(){
