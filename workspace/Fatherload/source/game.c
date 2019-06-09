@@ -694,6 +694,8 @@ void store_buy(u16 keys){
 		drill_price += drill_price * 0.05;
 	}
 
+	print_fuel(20, 8, 12);
+	print_drill_health(20, 16, 12);
 	// TODO: add touchscreen
 
 	score_display(10, 1, 9, player_score, 26);

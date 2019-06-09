@@ -114,7 +114,8 @@ void updateChronoDisp(int min, int sec, int msec, int pal, int base, int isGameO
 void score_display(int x, int y, int pal, int score, int base){
 	int i;
 	int temp = score;
-	for (i = 10000; i > 0; i /= 10) {
+	x = x - 2;
+	for (i = 100000; i > 0; i /= 10) {
 		x += 2;
 		printDigit(temp / i, x, y, pal, base);
 		temp = temp % i;
@@ -186,6 +187,7 @@ void display_mineral(mineralType mineral){
 		break;
 	}
 }
+
 void GameOver_sub_display(){
 	REG_DISPCNT_SUB = MODE_0_2D | DISPLAY_BG0_ACTIVE | DISPLAY_BG1_ACTIVE;
 	BGCTRL_SUB[0] = BG_COLOR_16 | BG_MAP_BASE(1) | BG_TILE_BASE(2) | BG_32x32;
