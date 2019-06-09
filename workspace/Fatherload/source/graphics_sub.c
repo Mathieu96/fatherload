@@ -216,7 +216,7 @@ void GameOver_sub_display(){
 	score_display(20, 16, 1, max_score, 1);
 
 	// Score display
-	score_display(20, 20, 2, player_score, 1);
+	score_display(20, 20, 2, cumulative_score, 1);
 
 	// Finish chrono
 	updateChronoDisp(min, sec, msec, 3, 1, 1);

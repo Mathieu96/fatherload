@@ -6,19 +6,16 @@ int max_score = 0;
 
 void updateScore(int score)
 {
-	if(player_score < 9999999){
+	if(player_score < 9999999 || cumulative_score < 9999999){
 		player_score += score;
-		if(player_score > 9999999)
+		if(score > 0)
+			cumulative_score += score;
+		if(player_score > 9999999 || cumulative_score > 9999999){
 			player_score = 9999999;
+			cumulative_score = 9999999;
+		}
 		score_changed = 1;
 	}
-
-	//Display the score
-//	score_display(20, 5, 10, player_score, 26);
-//	//Update highest score
-//	if(player_score > max_score){
-//		score_display(20, 1, 9, player_score, 26);
-//	}
 }
 
 void readMaxScore(){
@@ -32,7 +29,7 @@ void readMaxScore(){
 		fclose(file);
 		printf("%d\n", max_score);
 	}
-	score_display(20, 1, 9, max_score, 26);
+	//score_display(20, 1, 9, max_score, 26);
 }
 
 void writeMaxScore(int score)

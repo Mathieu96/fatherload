@@ -76,6 +76,7 @@ extern int max_score;
 extern int score_changed;
 extern int flying;
 extern bool drilling;
+extern int cumulative_score;
 
 extern int sell_mode, buy_mode;
 extern int fuel_price, drill_price;

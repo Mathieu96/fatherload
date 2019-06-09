@@ -32,6 +32,7 @@ bool moved;
 bool start_pressed = false;
 bool drilling = false;
 int player_score = 0;
+int cumulative_score = 0;
 int score_changed = 0;
 
 int player_diamonds = 0;
@@ -219,6 +220,7 @@ void start_game() {
 	screen_y = 0;
 	mineral_count = 0;
 	player_score = 0;
+	cumulative_score = 0;
 	flying = 0;
 	fuel_price = 100;
 	drill_price = 200;
@@ -250,7 +252,7 @@ void start_game() {
 	irqEnable(IRQ_TIMER0);
 	irqEnable(IRQ_TIMER1);
 
-	score_display(20, 5, 9, player_score, 26);
+	score_display(20, 1, 9, player_score, 26);
 	display_mineral(BRONZE);
 	display_mineral(AMAZONITE);
 	display_mineral(DIAMOND);
@@ -589,8 +591,8 @@ void player_fall() {
 
 int gameOverState(){
 
-	if(max_score < player_score){
-		max_score = player_score;
+	if(max_score < cumulative_score){
+		max_score = cumulative_score;
 		writeMaxScore(max_score);
 	}
 
